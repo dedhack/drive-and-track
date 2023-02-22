@@ -6,6 +6,7 @@ const pool = require("../db");
 const createUser = async (req, res) => {
   try {
     // try to check if user already exists
+    // FIXME: see if there is a better way
     const checkUser = await pool.query(
       "SELECT * FROM users WHERE username = $1",
       [req.body.username]
@@ -26,4 +27,42 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser };
+// Login user
+const loginUser = async (req, res) => {
+  try {
+    // Check if user exists
+    const user = await pool.query("SELECT * FROM users WHERE username = $1", [
+      req.body.username,
+    ]);
+    if (user.rows.length === 0) {
+      res
+        .status(400)
+        .json({ status: "error", message: "username/password issue" });
+    }
+
+    // check what is returned in user
+    // res.json(user);
+
+    // Check if password is correct
+    const result = await bcrypt.compare(
+      req.body.password,
+      user.rows[0].password
+    );
+    if (!result) {
+      return res
+        .status(401)
+        .json({ status: "error", message: "username/password issue" });
+    }
+
+    // creating paylod
+
+    // create access token
+
+    // create refresh token
+  } catch (error) {
+    console.log("POST /users/login", error);
+    res.status(400).json({ status: "error", message: error });
+  }
+};
+
+module.exports = { createUser, loginUser };
