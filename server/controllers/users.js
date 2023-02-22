@@ -54,15 +54,23 @@ const loginUser = async (req, res) => {
         .json({ status: "error", message: "username/password issue" });
     }
 
-    // creating paylod
+    // TODO:creating paylod
 
-    // create access token
+    // TODO:create access token
 
-    // create refresh token
+    // TODO:create refresh token
   } catch (error) {
     console.log("POST /users/login", error);
     res.status(400).json({ status: "error", message: error });
   }
 };
 
-module.exports = { createUser, loginUser };
+// TODO: Logout user
+
+const logout = async (req, res) => {};
+
+// TODO: Update password
+
+const updatePassword = async (req, res) => {};
+
+module.exports = { createUser, loginUser, logout, updatePassword };
