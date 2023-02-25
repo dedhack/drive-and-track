@@ -55,10 +55,26 @@ const loginUser = async (req, res) => {
     }
 
     // TODO:creating payload
+    const payload = {
+      id: user.rows[0].id,
+      email: user.rows[0].email,
+    };
 
-    // TODO:create access token
+    // create access token
+    const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
+      expiresIn: "20m",
+      jwtid: payload.id,
+    });
 
-    // TODO:create refresh token
+    // create refresh token
+    const refresh = jwt.sign(payload, process.env.REFRESH_SECRET, {
+      expiresIn: "30D",
+      jwtid: payload.id, // only express requires you to create the id.
+    });
+
+    const response = { access, refresh };
+    // const response = typeof payload.id;
+    res.json(response);
   } catch (error) {
     console.log("POST /users/login", error);
     res.status(400).json({ status: "error", message: error });
@@ -78,7 +94,7 @@ const updatePassword = async (req, res) => {
       "UPDATE users SET password = $1 WHERE id = $2 RETURNING username",
       [password, req.body.id]
     );
-    res.json({ status: "success", message: "user has been updated" });
+    res.json({ status: "success", message: "user password has been updated" });
   } catch (error) {
     console.log("PATCH /users/update", error);
     res.status(400).json({ status: "error", message: error.message });
