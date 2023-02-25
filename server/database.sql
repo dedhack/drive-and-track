@@ -25,6 +25,7 @@ INSERT INTO users(
 -- | id                                   | username | email          | password                                                     | is_admin |
 -- | ------------------------------------ | -------- | -------------- | ------------------------------------------------------------ | -------- |
 -- | 679460b7-84f8-44be-bb1b-50d3a50c04cc | admin    | admin@test.com | $2b$12$BiiEix7cBBacXbNOkR3QReraMM0RPiMeo0ozBOrCYCE1ByFLYQRfW | 0        |
+-- | 5d7f10e0-01cc-4dda-9c7a-5e667b6d0aef | test     | test@test.com  | $2b$12$vv6hJ83YzMhFp3QA/PL6oOf9A5ingl6ojE4gPXvu3xA2AiTTsiy5O | 0        |
 
 -- Create table for vehicles
 CREATE TABLE vehicles(
