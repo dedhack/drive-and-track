@@ -54,7 +54,7 @@ const loginUser = async (req, res) => {
         .json({ status: "error", message: "username/password issue" });
     }
 
-    // TODO:creating payload
+    // creating payload
     const payload = {
       id: user.rows[0].id,
       email: user.rows[0].email,
@@ -82,7 +82,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-// TODO: Refresh token
+//  Refresh token
 const refreshToken = async (req, res) => {
   try {
     const decoded = jwt.verify(req.body.refresh, process.env.REFRESH_SECRET);
@@ -112,7 +112,7 @@ const logoutUser = async (req, res) => {
   } catch (error) {}
 };
 
-// TODO: Update password
+//  Update password
 const updatePassword = async (req, res) => {
   try {
     const password = await bcrypt.hash(req.body.password, 12);
@@ -128,8 +128,8 @@ const updatePassword = async (req, res) => {
   }
 };
 
-// TODO: Delete User
-
+//  Delete User
+// TODO: need to throw a response if user not authenticated
 const deleteUser = async (req, res) => {
   try {
     const user = await pool.query("DELETE FROM users WHERE id = $1", [
