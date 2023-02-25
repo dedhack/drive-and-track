@@ -8,6 +8,7 @@ const {
   updatePassword,
   deleteUser,
   getAllUsers,
+  refreshToken,
 } = require("../controllers/users");
 
 router.put("/create", createUser);
@@ -16,5 +17,6 @@ router.post("/logout", logoutUser); // require auth
 router.patch("/update", auth, updatePassword); // require auth
 router.delete("/delete", auth, deleteUser); // require auth
 router.get("/allusers", auth, getAllUsers);
+router.post("/refresh", refreshToken);
 
 module.exports = router;

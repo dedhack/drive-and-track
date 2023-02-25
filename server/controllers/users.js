@@ -82,9 +82,35 @@ const loginUser = async (req, res) => {
   }
 };
 
+// TODO: Refresh token
+const refreshToken = async (req, res) => {
+  try {
+    const decoded = jwt.verify(req.body.refresh, process.env.REFRESH_SECRET);
+
+    const payload = {
+      id: decoded.id,
+      email: decoded.email,
+      is_Admin: decoded.is_Admin,
+    };
+
+    // create access token
+    const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
+      expiresIn: "20m",
+      jwtid: payload.id,
+    });
+    const response = { access }; // don't have to do for refresh, once refresh is created and will be valid for 30 days
+  } catch (error) {
+    console.log("POST /users/refresh", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
+
 // TODO: Logout user
 
-const logoutUser = async (req, res) => {};
+const logoutUser = async (req, res) => {
+  try {
+  } catch (error) {}
+};
 
 // TODO: Update password
 const updatePassword = async (req, res) => {
@@ -142,4 +168,5 @@ module.exports = {
   updatePassword,
   deleteUser,
   getAllUsers,
+  refreshToken,
 };
