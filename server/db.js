@@ -6,7 +6,7 @@ const pool = new Pool({
   password: process.env.DB_PASS, // to .env?
   host: "localhost",
   port: 5432, // to .env?
-  database: "django", // to modify
+  database: "proj4", // to modify
 });
 
 module.exports = pool;
