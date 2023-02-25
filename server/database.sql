@@ -4,7 +4,7 @@ CREATE TABLE users(
     id uuid DEFAULT uuid_generate_v4(),
     username VARCHAR(30) NOT NULL,
     email VARCHAR(30) NOT NULL,
-    password VARCHAR(30) NOT NULL,
+    password TEXT NOT NULL,
     is_Admin INT DEFAULT 0,
     PRIMARY KEY (id)
 );

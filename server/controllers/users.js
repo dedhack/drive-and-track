@@ -54,7 +54,7 @@ const loginUser = async (req, res) => {
         .json({ status: "error", message: "username/password issue" });
     }
 
-    // TODO:creating paylod
+    // TODO:creating payload
 
     // TODO:create access token
 
@@ -67,10 +67,42 @@ const loginUser = async (req, res) => {
 
 // TODO: Logout user
 
-const logout = async (req, res) => {};
+const logoutUser = async (req, res) => {};
 
 // TODO: Update password
+const updatePassword = async (req, res) => {
+  try {
+    const password = await bcrypt.hash(req.body.password, 12);
 
-const updatePassword = async (req, res) => {};
+    const user = await pool.query(
+      "UPDATE users SET password = $1 WHERE id = $2 RETURNING username",
+      [password, req.body.id]
+    );
+    res.json({ status: "success", message: "user has been updated" });
+  } catch (error) {
+    console.log("PATCH /users/update", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
 
-module.exports = { createUser, loginUser, logout, updatePassword };
+// TODO: Delete User
+
+const deleteUser = async (req, res) => {
+  try {
+    const user = await pool.query("DELETE FROM users WHERE id = $1", [
+      req.body.id,
+    ]);
+    res.json({ status: "success", message: "user has been deleted" });
+  } catch (error) {
+    console.log("DELETE /users/:id", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
+
+module.exports = {
+  createUser,
+  loginUser,
+  logoutUser,
+  updatePassword,
+  deleteUser,
+};
