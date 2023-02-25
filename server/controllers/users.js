@@ -58,6 +58,7 @@ const loginUser = async (req, res) => {
     const payload = {
       id: user.rows[0].id,
       email: user.rows[0].email,
+      is_Admin: user.rows[0].is_admin,
     };
 
     // create access token
@@ -115,10 +116,30 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// get all users
+
+const getAllUsers = async (req, res) => {
+  try {
+    // check if user is admin
+    const decoded = jwt.verify(req.body.access, process.env.ACCESS_SECRET);
+    console.log(decoded.is_Admin);
+    if (!decoded.is_Admin) {
+      return res.json({ status: "error", message: "not authorized" });
+    }
+
+    const users = await pool.query("SELECT * FROM users");
+    res.json(users.rows);
+  } catch (error) {
+    console.log("GET /users/allusers", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   loginUser,
   logoutUser,
   updatePassword,
   deleteUser,
+  getAllUsers,
 };
