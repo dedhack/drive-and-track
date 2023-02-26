@@ -31,7 +31,9 @@ const createVehicle = async (req, res) => {
     );
 
     // res.json(newVehicle.rows[0]); // FIXME: remove this line, for testing only
-    res.json({ status: "success", message: "vehicle has been added" });
+    res
+      .status(200)
+      .json({ status: "success", message: "vehicle has been added" });
   } catch (error) {
     console.log("PUT /vehicles/create", error);
     res.status(400).json({ status: "error", message: error.message });
@@ -51,10 +53,12 @@ const getAllVehicles = async (req, res) => {
     // return an empty response if no vehicles found i.e. user hasn't created any vehicles
     if (allVehicles.rows.length === 0) {
       console.log("GET /vehicles/allvehicles no vehicles found");
-      return res.json({ status: "success", message: "no vehicles found" });
+      return res
+        .status(200)
+        .json({ status: "success", message: "no vehicles found" });
     }
 
-    res.json(allVehicles.rows);
+    res.status(200).json(allVehicles.rows);
   } catch (error) {
     console.log("GET /vehicles/allvehicles", error);
     res.status(400).json({ status: "error", message: error.message });
@@ -71,7 +75,7 @@ const getVehicleById = async (req, res) => {
       "SELECT * FROM vehicles INNER JOIN vehicle_logs ON vehicles.veh_id = vehicle_logs.veh_id WHERE vehicles.veh_id = $1",
       [veh_id]
     );
-    res.json(vehicle.rows);
+    res.status(200).json(vehicle.rows);
   } catch (error) {
     console.log("GET /vehicles/vehicle", error);
     res.status(400).json({ status: "error", message: error.message });
@@ -110,7 +114,9 @@ const updateVehicle = async (req, res) => {
       [veh_desc, make, model, year, vin, ins_pol, veh_id]
     );
 
-    res.json({ status: "success", message: "vehicle has been updated" });
+    res
+      .status(200)
+      .json({ status: "success", message: "vehicle has been updated" });
   } catch (error) {
     console.log("PATCH /vehicles/update", error);
     res.status(400).json({ status: "error", message: error.message });
@@ -132,7 +138,9 @@ const deleteVehicle = async (req, res) => {
       [veh_id]
     );
 
-    res.json({ status: "success", message: "vehicle has been deleted" });
+    res
+      .status(200)
+      .json({ status: "success", message: "vehicle has been deleted" });
   } catch (error) {
     console.log("DELETE /vehicles/delete", error);
     res.status(400).json({ status: "error", message: error.message });

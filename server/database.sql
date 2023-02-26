@@ -71,4 +71,21 @@ INSERT INTO vehicles(
 -- | ------------------------------------ | -------- | -------- | ------------------------------------ |
 -- | c3e75ff9-b8e4-4b7b-82d5-2f80f102104b | Toyota   | 40.00    | 679460b7-84f8-44be-bb1b-50d3a50c04cc |
 
--- Insert vehicle log
+
+
+-- Create refuel_logs table
+CREATE TABLE refuel_logs(
+    refuel_id uuid DEFAULT uuid_generate_v4(),
+    veh_id uuid NOT NULL,
+    datetime DATE DEFAULT CURRENT_DATE,
+    odometer NUMERIC(10,1) NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+    location VARCHAR(30) NOT NULL,
+    fuel_grade VARCHAR(30) NOT NULL,
+    fuel_amount NUMERIC(10,2) NOT NULL,
+    is_full INT NOT NULL,
+    PRIMARY KEY(refuel_id),
+    CONSTRAINT fk_veh_id
+        FOREIGN KEY(veh_id)
+        REFERENCES vehicles(veh_id)
+)
