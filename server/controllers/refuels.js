@@ -56,7 +56,40 @@ const getAllRefuels = async (req, res) => {
 };
 
 // update refuel log
-const updateRefuelLog = async (req, res) => {};
+const updateRefuelLog = async (req, res) => {
+  try {
+    // destructure incoming data
+    const {
+      refuel_id,
+      datetime,
+      odometer,
+      price,
+      location,
+      fuel_grade,
+      fuel_amount,
+      is_full,
+    } = req.body;
+
+    const updatedFuelLog = await pool.query(
+      "UPDATE refuel_logs SET datetime = $1, odometer = $2, price = $3, location = $4, fuel_grade = $5, fuel_amount = $6, is_full = $7 WHERE refuel_id = $8 RETURNING *",
+      [
+        datetime,
+        odometer,
+        price,
+        location,
+        fuel_grade,
+        fuel_amount,
+        is_full,
+        refuel_id,
+      ]
+    );
+    // console.log(updatedFuelLog.rows[0])
+    res.status(200).json({ status: "success", message: "refuel log updated" });
+  } catch (error) {
+    console.log("PATCH /refuels/update", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
 
 // delete refuel log
 const deleteRefuelLog = async (req, res) => {};
