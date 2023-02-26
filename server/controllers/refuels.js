@@ -69,6 +69,17 @@ const updateRefuelLog = async (req, res) => {
       fuel_amount,
       is_full,
     } = req.body;
+    // check if refuel log exists
+    const refuelLog = await pool.query(
+      "SELECT * FROM refuel_logs WHERE refuel_id = $1",
+      [refuel_id]
+    );
+
+    if (refuelLog.rows.length === 0) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "refuel log does not exist" });
+    }
 
     const updatedFuelLog = await pool.query(
       "UPDATE refuel_logs SET datetime = $1, odometer = $2, price = $3, location = $4, fuel_grade = $5, fuel_amount = $6, is_full = $7 WHERE refuel_id = $8 RETURNING *",
@@ -92,7 +103,34 @@ const updateRefuelLog = async (req, res) => {
 };
 
 // delete refuel log
-const deleteRefuelLog = async (req, res) => {};
+const deleteRefuelLog = async (req, res) => {
+  try {
+    // destructure incoming data
+    const { refuel_id } = req.body;
+
+    // check if refuel log exists
+    const refuelLog = await pool.query(
+      "SELECT * FROM refuel_logs WHERE refuel_id = $1",
+      [refuel_id]
+    );
+
+    if (refuelLog.rows.length === 0) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "refuel log does not exist" });
+    }
+
+    const deletedFuelLog = await pool.query(
+      "DELETE FROM refuel_logs WHERE refuel_id = $1 RETURNING *",
+      [refuel_id]
+    );
+    // console.log(deletedFuelLog.rows[0])
+    res.status(200).json({ status: "success", message: "refuel log deleted" });
+  } catch (error) {
+    console.log("DELETE /refuels/delete", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
 
 module.exports = {
   createRefuelLog,
