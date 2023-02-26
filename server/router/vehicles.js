@@ -14,7 +14,7 @@ const {
 
 router.put("/create", createVehicle);
 router.get("/allvehicles", getAllVehicles);
-router.get("/vehicle/:id", getVehicleById); //info for particular vehicle
+router.get("/vehiclebyid", getVehicleById); //info for particular vehicle
 router.patch("/update/:id", updateVehicle);
 router.delete("/delete/:id", deleteVehicle);
 

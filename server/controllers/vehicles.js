@@ -42,7 +42,7 @@ const createVehicle = async (req, res) => {
 const getAllVehicles = async (req, res) => {
   try {
     // select vehicles belonging to user based on user_id
-    const user_id = req.body.user_id;
+    const { user_id } = req.body;
 
     const allVehicles = await pool.query(
       "SELECT * FROM vehicles INNER JOIN vehicle_logs ON vehicles.veh_id = vehicle_logs.veh_id WHERE vehicles.user_id = $1",
@@ -62,7 +62,19 @@ const getAllVehicles = async (req, res) => {
 };
 
 // Get vehicle by id
-const getVehicleById = async (req, res) => {};
+const getVehicleById = async (req, res) => {
+  try {
+    const veh_id = req.body.veh_id;
+    const vehicle = await pool.query(
+      "SELECT * FROM vehicles INNER JOIN vehicle_logs ON vehicles.veh_id = vehicle_logs.veh_id WHERE vehicles.veh_id = $1",
+      [veh_id]
+    );
+    res.json(vehicle.rows);
+  } catch (error) {
+    console.log("GET /vehicles/vehicle", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
 
 // Update vehicle
 const updateVehicle = async (req, res) => {};
