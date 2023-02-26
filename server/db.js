@@ -1,5 +1,5 @@
 const Pool = require("pg").Pool;
-require("dotenv").config();
+// require("dotenv").config(); // TODO: not necessary
 
 const pool = new Pool({
   user: process.env.USER, // to .env?
