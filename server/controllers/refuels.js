@@ -16,6 +16,17 @@ const createRefuelLog = async (req, res) => {
       is_full,
     } = req.body;
 
+    // check if valid veh_id
+    const vehicle = await pool.query(
+      "SELECT * FROM vehicles WHERE veh_id = $1",
+      [veh_id]
+    );
+    if (vehicle.rows.length === 0) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "vehicle does not exist" });
+    }
+
     const newFuelLog = await pool.query(
       "INSERT INTO refuel_logs (veh_id, datetime, odometer, price, location, fuel_grade, fuel_amount, is_full) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
       [
@@ -43,6 +54,18 @@ const getAllRefuels = async (req, res) => {
     // select refuels belonging to user based on user_id and veh_id
     // TODO: do i really need to ensure valid user_id to be secure?
     const { veh_id } = req.body;
+
+    // check if vehicle exists
+    const vehicle = await pool.query(
+      "SELECT * FROM vehicles WHERE veh_id = $1",
+      [veh_id]
+    );
+    if (vehicle.rows.length === 0) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "vehicle does not exist" });
+    }
+
     const allRefuels = await pool.query(
       "SELECT * FROM refuel_logs INNER JOIN vehicles ON refuel_logs.veh_id = vehicles.veh_id WHERE vehicles.veh_id = $1",
       [veh_id]
