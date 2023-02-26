@@ -41,11 +41,14 @@ const createRefuelLog = async (req, res) => {
 const getAllRefuels = async (req, res) => {
   try {
     // select refuels belonging to user based on user_id and veh_id
-    const { user_id, veh_id } = req.body;
+    // TODO: do i really need to ensure valid user_id to be secure?
+    const { veh_id } = req.body;
     const allRefuels = await pool.query(
-      "SELECT * FROM refuel_logs INNER JOIN vehicles ON refuel_logs.veh_id = vehicles.veh_id WHERE vehicles.user_id = $1 AND vehicles.veh_id = $2 ",
-      [user_id, veh_id]
+      "SELECT * FROM refuel_logs INNER JOIN vehicles ON refuel_logs.veh_id = vehicles.veh_id WHERE vehicles.veh_id = $1",
+      [veh_id]
     );
+
+    res.status(200).json(allRefuels.rows);
   } catch (error) {
     console.log("GET /refuels/allrefuels", error);
     res.status(400).json({ status: "error", message: error.message });
