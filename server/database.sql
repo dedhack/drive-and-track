@@ -88,4 +88,97 @@ CREATE TABLE refuel_logs(
     CONSTRAINT fk_veh_id
         FOREIGN KEY(veh_id)
         REFERENCES vehicles(veh_id)
-)
+);
+
+CREATE TABLE service_type(
+    type_id SERIAL PRIMARY KEY,
+    type_name VARCHAR(30) NOT NULL
+);
+
+
+CREATE TABLE service_logs(
+    service_id uuid DEFAULT uuid_generate_v4(),
+    veh_id uuid NOT NULL REFERENCES vehicles(veh_id),
+    datetime DATE DEFAULT CURRENT_DATE,
+    odometer NUMERIC(10,1) NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+    location VARCHAR(30) NOT NULL,
+    service_type INT NOT NULL REFERENCES service_type(type_id),
+    service_desc TEXT NOT NULL,
+    PRIMARY KEY(service_id)
+    -- CONSTRAINT fk_veh_id, service_type
+    --     FOREIGN KEY(veh_id, service_type)
+    --     REFERENCES vehicles(veh_id), service_type(type_name)
+);
+
+-- Insert service type
+INSERT INTO service_type(
+    type_name
+) VALUES (
+    'Air filter'
+), (
+    'Air conditioning'
+), (
+    'Battery'
+), (
+    'Belting'
+), (
+    'BodyChassis'
+), (
+    'Brake Fluid'
+), (
+    'Brake Pad'
+), (
+    'Brakes replacement'
+), (
+    'Cabin Air Filter'
+), (
+    'Chain and Sprocket'
+), (
+    'Clutch Fluid'
+), (
+    'Clutch System'
+), (
+    'Cooling System'
+), (
+    'Engine Repair'
+), (
+    'Exhaust System'
+), (
+    'Fuel Filter'
+), (
+    'Fuel Pump'
+), (
+    'Gear Oil'
+), (
+    'Glass/Mirrors'
+), (
+    'Heating System'
+), (
+    'Horn'
+), (
+    'Inspection'
+);
+
+Air filter
+Air conditioning
+Battery
+Belting
+BodyChassis
+Brake Fluid
+Brake Pad
+Brakes replacement
+Cabin Air Filter
+Chain and Sprocket
+Clutch Fluid
+Clutch System
+Cooling System
+Engine Repair
+Exhaust System
+Fuel Filter
+Fuel Pump
+Gear Oil
+Glass/Mirrors
+Heating System
+Horn
+Inspection
