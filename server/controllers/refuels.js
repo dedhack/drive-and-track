@@ -1,5 +1,7 @@
 const pool = require("../db");
 
+// TODO: Pending to include image file upload
+
 //////////////////////////
 // 1. create refuel log
 const createRefuelLog = async (req, res) => {

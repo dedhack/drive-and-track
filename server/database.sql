@@ -92,7 +92,7 @@ CREATE TABLE refuel_logs(
 
 CREATE TABLE service_type(
     type_id SERIAL PRIMARY KEY,
-    type_name VARCHAR(30) NOT NULL
+    type_name VARCHAR(30) UNIQUE NOT NULL
 );
 
 
@@ -158,27 +158,103 @@ INSERT INTO service_type(
     'Horn'
 ), (
     'Inspection'
+), (
+    'Labor Cost'
+), (
+    'Lights'
+), (
+    'New Tires'
+), (
+    'Oil Change'
+), (
+    'Oil Filter'
+), (
+    'Radiator'
+), (
+    'Rollers'
+), (
+    'Rotate Tires'
+), (
+    'Seat Belt'
+), (
+    'Spark Plugs'
+), (
+    'Steering System'
+), (
+    'Suspension System'
+), (
+    'Technical Control'
+), (
+    'Tire Pressure'
+), (
+    'Transmission Fluid'
+), (
+    'Wheel Alignment'
+), (
+    'Windshield Wipers'
+), (
+    'Others'
 );
 
-Air filter
-Air conditioning
-Battery
-Belting
-BodyChassis
-Brake Fluid
-Brake Pad
-Brakes replacement
-Cabin Air Filter
-Chain and Sprocket
-Clutch Fluid
-Clutch System
-Cooling System
-Engine Repair
-Exhaust System
-Fuel Filter
-Fuel Pump
-Gear Oil
-Glass/Mirrors
-Heating System
-Horn
-Inspection
+
+Labour Cost
+Lights
+New Tires
+Oil Change
+Oil Filter
+Radiator
+Rollers
+Rotate Tires
+Seat Belt
+Spark Plugs
+Steering System
+Suspension System
+Technical Control
+Tire Pressure
+Transmission Fluid
+Wheel Alignment
+Windshield Wipers
+Others
+
+| type_id | type_name          |
+| ------- | ------------------ |
+| 1       | Air filter         |
+| 2       | Air conditioning   |
+| 3       | Battery            |
+| 4       | Belting            |
+| 5       | BodyChassis        |
+| 6       | Brake Fluid        |
+| 7       | Brake Pad          |
+| 8       | Brakes replacement |
+| 9       | Cabin Air Filter   |
+| 10      | Chain and Sprocket |
+| 11      | Clutch Fluid       |
+| 12      | Clutch System      |
+| 13      | Cooling System     |
+| 14      | Engine Repair      |
+| 15      | Exhaust System     |
+| 16      | Fuel Filter        |
+| 17      | Fuel Pump          |
+| 18      | Gear Oil           |
+| 19      | Glass/Mirrors      |
+| 20      | Heating System     |
+| 21      | Horn               |
+| 22      | Inspection         |
+| 23      | Labor Cost         |
+| 24      | Lights             |
+| 25      | New Tires          |
+| 26      | Oil Change         |
+| 27      | Oil Filter         |
+| 28      | Radiator           |
+| 29      | Rollers            |
+| 30      | Rotate Tires       |
+| 31      | Seat Belt          |
+| 32      | Spark Plugs        |
+| 33      | Steering System    |
+| 34      | Suspension System  |
+| 35      | Technical Control  |
+| 36      | Tire Pressure      |
+| 37      | Transmission Fluid |
+| 38      | Wheel Alignment    |
+| 39      | Windshield Wipers  |
+| 40      | Others             |

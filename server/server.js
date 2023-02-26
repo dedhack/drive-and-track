@@ -12,10 +12,12 @@ app.use(express.urlencoded({ extended: true }));
 const users = require("./router/users");
 const vehicles = require("./router/vehicles");
 const refuels = require("./router/refuels");
+const services = require("./router/services");
 
 app.use("/users", users);
 app.use("/vehicles", vehicles);
 app.use("/refuels", refuels);
+app.use("/services", services);
 
 const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {

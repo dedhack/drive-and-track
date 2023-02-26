@@ -22,3 +22,14 @@
     "vin": "123",
     "ins_pol": "456"
 }
+
+-- Create service log entry
+{
+    "veh_id": "dc792216-bf37-4c5a-857e-0add90a87087",
+    "datetime": "2023-02-22",
+    "odometer": "59990",
+    "price": "110",
+    "location": "Kaki Bukit",
+    "service_type": "26",
+    "service_desc": "did an oil change"    
+}
