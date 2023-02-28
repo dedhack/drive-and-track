@@ -15,10 +15,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-const theme = createTheme();
+const theme = createTheme(); //TODO: TO remove if not intending to use
 
 const schema = z.object({
-  email: z.string().email().max(30),
+  username: z.string().min(5).max(30),
   password: z.string().min(8).max(30),
 });
 
@@ -34,7 +34,7 @@ const LoginForm = () => {
   const handleFormSubmit = (formData) => {
     console.log(formData);
   };
-  console.log(errors);
+  //   console.log(errors);
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,21 +63,21 @@ const LoginForm = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              autoComplete="username"
               autoFocus
-              error={errors.email ? true : false}
-              {...register("email", {
+              error={errors.username ? true : false}
+              {...register("username", {
                 required: true,
                 max: 30,
                 maxLength: 30,
-                pattern: /^\S+@\S+$/i,
+                // pattern: /^\S+@\S+$/i,
               })}
             />
-            {errors.email?.message && (
+            {errors.username?.message && (
               <Typography variant="body" color="error">
-                Invalid email
+                Invalid username. Min 5 characters long
               </Typography>
             )}
             <TextField
@@ -95,7 +95,7 @@ const LoginForm = () => {
                 // pattern: /^\S+@\S+$/i,
               })}
             />
-            {errors.email?.message && (
+            {errors.password?.message && (
               <Typography variant="body" color="error">
                 Password minium 8 characters long
               </Typography>

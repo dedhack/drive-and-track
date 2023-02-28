@@ -1,0 +1,501 @@
+{
+	"info": {
+		"_postman_id": "8070d53e-e4fe-42ba-a138-9dfa2b614a5a",
+		"name": "Project 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/test",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"test\",\n    \"email\": \"test@test.com\",\n    \"password\": \"12345678\",\n    \"is_Admin\": \"0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/create",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"",
+									"pm.globals.set(\"access\", response.access);",
+									"pm.globals.set(\"refresh\", response.refresh);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"f73b620d-009c-4743-8491-4a84df484c36\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users (auth)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"access\" : \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI0MTdlMTIwLTg1NWUtNDFkYS1hYTQxLWE2YWRmOWEyMDNmNiIsImVtYWlsIjoiYWRtaW5AdGVzdC5jb20iLCJpc19BZG1pbiI6MSwiaWF0IjoxNjc3MzMzMDUyLCJleHAiOjE2NzczMzQyNTIsImp0aSI6ImI0MTdlMTIwLTg1NWUtNDFkYS1hYTQxLWE2YWRmOWEyMDNmNiJ9.9pa4AkrFtIsa1wMGqzHm9jMpgQDqMHerHRCasJ2CplI\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/allusers",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"allusers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"f73b620d-009c-4743-8491-4a84df484c36\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/delete",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vehicles",
+			"item": [
+				{
+					"name": "create vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"veh_name\": \"toyota vios\",\n    \"capacity\": \"40\",\n    \"user_id\": \"679460b7-84f8-44be-bb1b-50d3a50c04cc\",\n    \"veh_desc\": \"red\",\n    \"make\": \"toyota\",\n    \"model\": \"vios\",\n    \"year\": \"2004\",\n    \"vin\": \"123\",\n    \"ins_pol\": \"456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/vehicles/create",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all vehicles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"679460b7-84f8-44be-bb1b-50d3a50c04cc\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/vehicles/allvehicles",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles",
+								"allvehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific vehicle log",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"veh_id\": \"dc792216-bf37-4c5a-857e-0add90a8708b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/vehicles/vehiclebyid",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles",
+								"vehiclebyid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle by Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"veh_id\" : \"dc792216-bf37-4c5a-857e-0add90a87087\",\n    \"veh_name\": \"toyota vios 2\",\n    \"capacity\": \"40\",\n    \"user_id\": \"679460b7-84f8-44be-bb1b-50d3a50c04cc\",\n    \"veh_desc\": \"blue\",\n    \"make\": \"toyota\",\n    \"model\": \"vios\",\n    \"year\": \"2010\",\n    \"vin\": \"123\",\n    \"ins_pol\": \"456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/vehicles/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"veh_id\" : \"14d806eb-9421-4abf-9aee-050a6d0d2bfa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/vehicles/delete",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "refuel",
+			"item": [
+				{
+					"name": "Refuel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"veh_id\": \"dc792216-bf37-4c5a-857e-0add90a87087\",\n    \"datetime\": \"2023-02-20\",\n    \"odometer\": \"59980\",\n    \"price\": \"40\",\n    \"location\": \"Bedok\",\n    \"fuel_grade\": \"95\",\n    \"fuel_amount\": \"20\",\n    \"is_full\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/refuels/create",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"refuels",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all refuels based on veh id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"veh_id\": \"dc792216-bf37-4c5a-857e-0add90a87087\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/refuels/allrefuels",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"refuels",
+								"allrefuels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refuel_id\":\"3091e294-988c-47da-9502-02a95f6c89a8\",\n    \"datetime\":\"2023-02-25\",\n    \"odometer\":\"60000\",\n    \"price\":\"40\",\n    \"location\":\"Tampines\",\n    \"fuel_grade\":\"95\",\n    \"fuel_amount\":\"20\",\n    \"is_full\":\"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/refuels/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"refuels",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refuel_id\":\"3091e294-988c-47da-9502-02a95f6c89a8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/refuels/delete",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"refuels",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "services",
+			"item": [
+				{
+					"name": "create service log",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"veh_id\": \"dc792216-bf37-4c5a-857e-0add90a87087\",\n    \"datetime\": \"2023-02-22\",\n    \"odometer\": \"59990\",\n    \"price\": \"110\",\n    \"location\": \"Kaki Bukit\",\n    \"service_type\": \"26\",\n    \"service_desc\": \"did an oil change\"    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/services/create",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"services",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
