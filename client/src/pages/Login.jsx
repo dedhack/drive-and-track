@@ -54,6 +54,7 @@ const Login = () => {
       // setAccessToken(data.accessToken); //TODO: try to use zustand
       // setRefreshToken(data.refreshToken);
       setAuth(data);
+      localStorage.setItem("refresh", data.refresh);
       navigate(from, { replace: true });
     }
     setLoading(false);
