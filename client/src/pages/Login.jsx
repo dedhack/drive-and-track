@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { loginUser } from "../apis/usersAPI";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Label, TextInput, Button, Alert, Spinner } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
-
+import { useAppStore } from "../stores/appStore";
+import useAuth from "../hooks/useAuth";
 // form validation schema using yup
 const schema = yup
   .object()
@@ -20,6 +21,15 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  //TODO: try to use zustand
+  // const setAccessToken = useAppStore((state) => state.setAccessToken);
+  // const setRefreshToken = useAppStore((state) => state.setRefreshToken);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const { setAuth } = useAuth();
 
   // form validation using react-hook-form
   const {
@@ -41,6 +51,10 @@ const Login = () => {
     }
     if (data) {
       setSuccess(true);
+      // setAccessToken(data.accessToken); //TODO: try to use zustand
+      // setRefreshToken(data.refreshToken);
+      setAuth(data);
+      navigate(from, { replace: true });
     }
     setLoading(false);
     console.log("data2: ", data);

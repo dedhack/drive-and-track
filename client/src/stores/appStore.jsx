@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
-const useAppStore = create((set) => ({
+export const useAppStore = create((set) => ({
   accessToken: null,
+  refreshToken: null,
   setAccessToken: (accessToken) => set({ accessToken }),
+  setRefreshToken: (refreshToken) => set({ refreshToken }),
 }));

@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { registerUser } from "../apis/usersAPI";
 import { NavLink } from "react-router-dom";
+
 // form validation schema using yup
 const schema = yup
   .object()
