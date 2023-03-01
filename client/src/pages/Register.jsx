@@ -1,37 +1,27 @@
 import { useState } from "react";
+import { Label, TextInput, Button, Alert, Spinner } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { loginUser } from "../apis/usersAPI";
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { Label, TextInput, Button, Alert, Spinner } from "flowbite-react";
-import { HiInformationCircle } from "react-icons/hi";
-import { useAppStore } from "../stores/appStore";
-import useAuth from "../hooks/useAuth";
+import { registerUser } from "../apis/usersAPI";
+import { NavLink } from "react-router-dom";
+
 // form validation schema using yup
 const schema = yup
   .object()
   .shape({
     username: yup.string().min(5).max(30).required(),
+    email: yup.string().email().required(),
     password: yup.string().min(8).max(30).required(),
   })
   .required();
 
-const Login = () => {
+const Register = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  //TODO: try to use zustand
-  // const setAccessToken = useAppStore((state) => state.setAccessToken);
-  // const setRefreshToken = useAppStore((state) => state.setRefreshToken);
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-  const { setAuth } = useAuth();
-
-  // form validation using react-hook-form
   const {
     register,
     handleSubmit,
@@ -42,23 +32,25 @@ const Login = () => {
 
   const onSubmit = async (formData) => {
     setLoading(true);
+    // reset error/success state
     setError(null);
     setSuccess(null);
-    console.log(formData);
-    const [data, error] = await loginUser(formData);
+    // console.log("form data: ", formData);
+
+    const [data, error] = await registerUser(formData);
     if (error) {
       setError(true);
     }
     if (data) {
       setSuccess(true);
-      // setAccessToken(data.accessToken); //TODO: try to use zustand
-      // setRefreshToken(data.refreshToken);
-      setAuth(data);
-      navigate(from, { replace: true });
+      // console.log("data.message: ", data.message);
     }
     setLoading(false);
     console.log("data2: ", data);
     console.log("error2: ", error);
+    // console.log("response: ", data ? data : error.response.data.message);
+    // if successful
+    // data.status -> "sucess"
   };
 
   return (
@@ -67,15 +59,20 @@ const Login = () => {
         {error && (
           <Alert color="failure" icon={HiInformationCircle}>
             <span>
-              <span className="font-medium">Login Error!</span> Please try
-              again.
+              <span className="font-medium">Registration Error!</span>{" "}
+              Username/email previously used.
             </span>
           </Alert>
         )}
         {success && (
-          <Alert color="success">
+          <Alert
+            color="success"
+            // onDismiss={() => {
+            //   setSuccess(null);
+            // }}
+          >
             <span>
-              <span className="font-medium">Success!</span> Logging in...
+              <span className="font-medium">Success!</span> User has been added.
             </span>
           </Alert>
         )}
@@ -94,7 +91,19 @@ const Login = () => {
               {errors.username?.message}
             </p>
           </div>
-
+          <div>
+            <div className="mb-2 block">
+              <Label value="Email" />
+            </div>
+            <TextInput
+              type="email"
+              placeholder="drive@drive.com"
+              required={true}
+              shadow={true}
+              {...register("email")}
+            />
+            <p className="text-center text-red-600">{errors.email?.message}</p>
+          </div>
           <div>
             <div className="mb-2 block">
               <Label value="Password" />
@@ -117,17 +126,15 @@ const Login = () => {
                 <span className="pl-3">Loading...</span>
               </>
             ) : (
-              "Login"
+              "Register new account"
             )}
           </Button>
         </form>
 
-        <NavLink className="" to="/register">
-          Register
-        </NavLink>
+        <NavLink to="/login">Login</NavLink>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

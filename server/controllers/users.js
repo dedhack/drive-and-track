@@ -63,7 +63,7 @@ const loginUser = async (req, res) => {
 
     // create access token
     const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
-      expiresIn: "20m",
+      expiresIn: 30,
       jwtid: payload.id,
     });
 
@@ -95,10 +95,12 @@ const refreshToken = async (req, res) => {
 
     // create access token
     const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
-      expiresIn: "20m",
+      expiresIn: 10,
       jwtid: payload.id,
     });
     const response = { access }; // don't have to do for refresh, once refresh is created and will be valid for 30 days
+
+    res.json(response);
   } catch (error) {
     console.log("POST /users/refresh", error);
     res.status(400).json({ status: "error", message: error.message });

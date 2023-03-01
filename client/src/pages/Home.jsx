@@ -1,10 +1,12 @@
 import React from "react";
-import AppBar from "../components/Home/MenuAppBar";
-
+import { useAppStore } from "../stores/appStore";
 const Home = () => {
+  const accessToken = useAppStore((state) => state.accessToken);
+
   return (
     <div>
-      <AppBar />
+      Home
+      {accessToken && <div>Logged in</div>}
     </div>
   );
 };
