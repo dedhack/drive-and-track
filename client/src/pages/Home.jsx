@@ -1,12 +1,7 @@
 import React from "react";
-import AppBar from "../components/Home/MenuAppBar";
 
 const Home = () => {
-  return (
-    <div>
-      <AppBar />
-    </div>
-  );
+  return <div>Home</div>;
 };
 
 export default Home;
