@@ -22,3 +22,12 @@ export const loginUser = async (data) => {
     return [null, error];
   }
 };
+
+export const refreshToken = async (data) => {
+  try {
+    const response = await axiosClient.post("users/refresh", data);
+    return [response.data, null];
+  } catch (error) {
+    return [null, error];
+  }
+};

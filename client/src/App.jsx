@@ -21,6 +21,7 @@ function App() {
             <Route path="/main" element={<Main />} />
           </Route>
         </Route>
+        {/* error page route */}
       </Routes>
     </div>
   );
