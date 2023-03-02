@@ -14,11 +14,14 @@ function App() {
     <div className="h-screen bg-gradient-to-r from-slate-300 to-slate-500">
       <Routes>
         <Route path="/" element={<Layout />}>
+          {/* <Route path="/" element={<Navigate replace to="/login" />}> */}
           {/* <Route path="/home" element={<Home />} /> */}
+          <Route path="/home" element={<Home />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route element={<RequireAuth />}>
-            <Route path="/main" element={<Main />} />
+            {/* <Route path="/home" element={<Home />} /> */}
           </Route>
         </Route>
         {/* error page route */}

@@ -55,7 +55,8 @@ const Login = () => {
       // setRefreshToken(data.refreshToken);
       setAuth(data);
       localStorage.setItem("refresh", data.refresh);
-      navigate(from, { replace: true });
+      // navigate(from, { replace: true });
+      navigate("/home", { replace: true });
     }
     setLoading(false);
     console.log("data2: ", data);
