@@ -4,6 +4,7 @@ const axiosClient = axios.create({
   baseURL: "http://localhost:5001/",
 });
 
+// create user
 export const registerUser = async (data) => {
   try {
     const response = await axiosClient.put("users/create", data);
@@ -14,6 +15,7 @@ export const registerUser = async (data) => {
   }
 };
 
+// login user
 export const loginUser = async (data) => {
   try {
     const response = await axiosClient.post("users/login", data);
@@ -23,6 +25,7 @@ export const loginUser = async (data) => {
   }
 };
 
+// refresh token
 export const refreshToken = async (data) => {
   try {
     const response = await axiosClient.post("users/refresh", data);
@@ -31,3 +34,9 @@ export const refreshToken = async (data) => {
     return [null, error];
   }
 };
+
+// update user password
+export const updatePassword = async (data) => {};
+
+// delete user
+export const deleteUser = async (data) => {};
