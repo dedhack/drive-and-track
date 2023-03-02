@@ -1,4 +1,16 @@
+import { Avatar } from "flowbite-react";
 import React, { useState } from "react";
+
+import {
+  FaCarAlt,
+  FaGasPump,
+  FaSignOutAlt,
+  FaHome,
+  FaScrewdriver,
+  FaChartPie,
+  FaUserCircle,
+} from "react-icons/fa";
+import UserAvatar from "./UserAvatar";
 
 const Side = () => {
   // const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +47,10 @@ const Side = () => {
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <ul className="space-y-2">
+            <li>
+              <UserAvatar />
+            </li>
+
             <li>
               <a
                 href="#"

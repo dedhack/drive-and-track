@@ -11,8 +11,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout";
 import RequireAuth from "./components/RequireAuth";
-import SideBar2 from "./components/SideBar2";
-// import ProfileCard from "./components/ProfileCard";
 import Side from "./components/Side";
 
 function App() {
@@ -22,11 +20,13 @@ function App() {
     <div className="h-screen bg-stone-900">
       {/* <Drop />
       <ProfileCard /> */}
-      {/* <Side /> */}
+      <Side />
 
       {auth.access && <Side />}
 
       <Routes>
+        <Route path="/home" element={<Home />} />
+
         {!auth.access ? (
           <Route path="/" element={<Navigate replace to="/login" />} />
         ) : (
@@ -41,7 +41,7 @@ function App() {
 
         {/* Protected routes */}
         <Route element={<RequireAuth />}>
-          <Route path="/home" element={<Home />} />
+          {/* <Route path="/home" element={<Home />} /> */}
         </Route>
         {/* error page route */}
       </Routes>
