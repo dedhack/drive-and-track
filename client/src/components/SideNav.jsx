@@ -10,17 +10,21 @@ import {
 } from "react-icons/hi";
 import { Sidebar } from "flowbite-react";
 import { FcAutomotive } from "react-icons/fc";
+import { NavLink } from "react-router-dom";
 
 const SideNav = () => {
   return (
-    <div className="h-screen">
-      <Sidebar>
-        <Sidebar.Logo href="#">Flowbite</Sidebar.Logo>
+    <div className="h-screen w-10">
+      <Sidebar className="w-fit h-screen">
+        <NavLink to={"/home"}>
+          <Sidebar.Logo className="">
+            <FcAutomotive className="inline-block" />
+            Drive & Track
+          </Sidebar.Logo>
+        </NavLink>
+
         <Sidebar.Items>
           <Sidebar.ItemGroup className="bg-transparent">
-            <Sidebar.Item href="#" icon={FcAutomotive}>
-              Drive Track
-            </Sidebar.Item>
             <Sidebar.Item href="#" icon={HiChartPie}>
               Dashboard
             </Sidebar.Item>

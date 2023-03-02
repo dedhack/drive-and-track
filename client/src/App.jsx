@@ -10,18 +10,21 @@ import Register from "./pages/Register";
 import Layout from "./pages/Layout";
 import useAuth from "./hooks/useAuth";
 import Logout from "./pages/Logout";
+import SideNav from "./components/SideNav";
+import SideBar2 from "./components/SideBar2";
 
 function App() {
   const { auth } = useAuth();
   return (
-    <div className="h-screen bg-gradient-to-r from-stone-700 to-stone-900">
+    <div className="h-screen bg-stone-900">
+      {auth.access && <SideBar2 />}
+
       <Routes>
         {!auth.access ? (
           <Route path="/" element={<Navigate replace to="/login" />} />
         ) : (
           <Route element={<RequireAuth />}></Route>
         )}
-
         {/* <Route path="/home" element={<Home />} /> */}
         {/* <Route path="/home" element={<Home />} /> */}
 

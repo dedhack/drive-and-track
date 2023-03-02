@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, Spinner } from "flowbite-react";
 
-const LoadingButton = () => {
+const LoadingButton = ({ text }) => {
   return (
     <div className="">
       <Button>
         <Spinner />
-        <span className="pl-3">Loading...</span>
+        <span className="pl-3">{text}</span>
       </Button>
     </div>
   );

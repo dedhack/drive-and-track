@@ -1,24 +1,25 @@
 import React, { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoadingButton from "../components/LoadingButton";
 
 const Logout = () => {
   const { auth, logout } = useAuth();
+  const navigate = useNavigate();
 
+  const redirect = () => {
+    setTimeout(() => {
+      navigate("/login", { replace: true });
+    }, 3000);
+  };
   useEffect(() => {
     logout();
-    if (!auth?.access) {
-      setTimeout("logged out...", 5000);
-      <Navigate to="/login" replace />;
-    }
+    redirect();
   }, []);
 
   return (
     <div className="flex justify-center">
-      Logout
-      <LoadingButton />
-      {/* {!auth?.access ? (setTimeout("logged out...", 5000); <Navigate to="/login" replace />) : null} */}
+      <LoadingButton text="Logging out..." />
     </div>
   );
 };
