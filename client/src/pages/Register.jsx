@@ -55,7 +55,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="w-96 mt-10 p-5 border border-stone-500 rounded-lg bg-slate-100">
+      <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-stone-300">
         {error && (
           <Alert color="failure" icon={HiInformationCircle}>
             <span>
@@ -83,6 +83,7 @@ const Register = () => {
             </div>
             <TextInput
               type="text"
+              placeholder="fastfurious94"
               required={true}
               shadow={true}
               {...register("username")}
@@ -130,8 +131,14 @@ const Register = () => {
             )}
           </Button>
         </form>
-
-        <NavLink to="/login">Login</NavLink>
+        <div className="text-center mt-5">
+          <NavLink
+            className="font-medium text-stone-900 hover:underline animate-pulse"
+            to="/login"
+          >
+            To Login Page
+          </NavLink>
+        </div>
       </div>
     </div>
   );
