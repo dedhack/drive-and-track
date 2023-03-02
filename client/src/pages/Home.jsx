@@ -2,6 +2,8 @@ import React from "react";
 import { useAppStore } from "../stores/appStore";
 import { useJwt } from "react-jwt";
 import useAuth from "../hooks/useAuth";
+import SideNav from "../components/SideNav";
+
 const Home = () => {
   const { auth } = useAuth();
   const { decodedToken, isExpired } = useJwt(auth.access);
@@ -9,7 +11,8 @@ const Home = () => {
 
   return (
     <div>
-      {decodedToken && <div>Access token info : {decodedToken.is_Admin}</div>}
+      {/* {decodedToken && <div>Access token info : {decodedToken.is_Admin}</div>} */}
+      <SideNav />
     </div>
   );
 };

@@ -65,7 +65,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="w-96 mt-10 p-5 border border-stone-500 rounded-lg bg-slate-100">
+      <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-stone-300">
         {error && (
           <Alert color="failure" icon={HiInformationCircle}>
             <span>
@@ -124,9 +124,14 @@ const Login = () => {
           </Button>
         </form>
 
-        <NavLink className="" to="/register">
-          Register
-        </NavLink>
+        <div className="text-center mt-5">
+          <NavLink
+            className="font-medium text-stone-900 hover:underline animate-pulse"
+            to="/register"
+          >
+            Register
+          </NavLink>
+        </div>
       </div>
     </div>
   );
