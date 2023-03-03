@@ -6,8 +6,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
       query: (credentials) => ({
         url: "/users/login",
         method: "POST",
-        body: credentials,
+        // body: credentials,
+        body: { ...credentials },
       }),
     }),
   }),
 });
+
+export const { useLoginMutation } = authApiSlice;

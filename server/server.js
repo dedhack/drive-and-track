@@ -19,6 +19,11 @@ app.use("/vehicles", vehicles);
 app.use("/refuels", refuels);
 app.use("/services", services);
 
+// create a test route to check if server is running
+app.get("/test", (req, res) => {
+  res.send({ message: "Hello World!" });
+});
+
 const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
