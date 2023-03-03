@@ -9,11 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "daisyui": "^2.51.3",
     "date-fns": "^2.29.3",
     "flowbite": "^1.6.3",
     "flowbite-react": "^0.3.8",
+    "immer": "^9.0.19",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-daisyui": "^3.0.3",
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
+    "zustand": "^4.3.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

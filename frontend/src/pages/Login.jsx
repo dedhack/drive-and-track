@@ -6,8 +6,9 @@ import { loginUser } from "../apis/usersAPI";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Label, TextInput, Button, Alert, Spinner } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
-// import { useAppStore } from "../stores/appStore";
 import useAuth from "../hooks/useAuth";
+import { useUser } from "../hooks/store";
+
 // form validation schema using yup
 const schema = yup
   .object()
@@ -23,9 +24,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   //TODO: try to use zustand
-  // const setAccessToken = useAppStore((state) => state.setAccessToken);
-  // const setRefreshToken = useAppStore((state) => state.setRefreshToken);
-
+  const setAccessToken = useUser((state) => state.setAccessToken);
+  const zuAccessToken = useUser((state) => state.accessToken);
   //FIXME:  uncomment later
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,14 +52,20 @@ const Login = () => {
     }
     if (data) {
       setSuccess(true);
-      // setAccessToken(data.accessToken); //TODO: try to use zustand
-      // setRefreshToken(data.refreshToken);
+      console.log("zustand before state: ", useUser.getState().accessToken);
+      setAccessToken(data.access);
       setAuth(data);
+      // useUser.getState();
+      console.log("zustand get state: ", useUser.getState());
       localStorage.setItem("refresh", data.refresh);
-      // navigate(from, { replace: true });
+
       navigate("/home", { replace: true });
+
+      // navigate(from, { replace: true });
+      // navigate("/home", { replace: true });
     }
     setLoading(false);
+    // console.log("zustand: ", useUser.getState());
     console.log("data2: ", data);
     console.log("error2: ", error);
   };

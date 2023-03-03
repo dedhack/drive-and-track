@@ -13,29 +13,31 @@ import Logout from "./pages/Logout";
 import RequireAuth from "./components/RequireAuth";
 import Side from "./components/Side";
 
+import { useUser } from "./hooks/store";
+
 function App() {
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
+  const auth = useUser((state) => state.accessToken);
 
   return (
     <div className="h-screen bg-stone-900">
       {/* <Drop />
       <ProfileCard /> */}
-      <Side />
-
-      {auth.access && <Side />}
 
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
 
-        {!auth.access ? (
+        {!auth ? (
           <Route path="/" element={<Navigate replace to="/login" />} />
         ) : (
-          <Route element={<RequireAuth />}></Route>
+          <Route element={<RequireAuth />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/logout" element={<Logout />} />
+          </Route>
         )}
         {/* <Route path="/home" element={<Home />} /> */}
         {/* <Route path="/home" element={<Home />} /> */}
 
-        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
 
