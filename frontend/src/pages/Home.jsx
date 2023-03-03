@@ -2,7 +2,7 @@ import React from "react";
 // import { useAppStore } from "../stores/appStore";
 import { useJwt } from "react-jwt";
 import useAuth from "../hooks/useAuth";
-
+import Side from "../components/Side";
 const Home = () => {
   const { auth } = useAuth();
   //   const { decodedToken, isExpired } = useJwt(auth.access);
@@ -18,6 +18,8 @@ const Home = () => {
 
   return (
     <>
+      <Side />
+
       <div className="h-full p-4 sm:ml-64 bg-stone-900">
         <div className="flex items-center justify-center h-20 mb-4 rounded bg-gray-50 dark:bg-gray-800">
           <p className="text-2xl text-gray-400 dark:text-gray-500">VEHICLE</p>

@@ -20,7 +20,6 @@ function App() {
     <div className="h-screen bg-stone-900">
       {/* <Drop />
       <ProfileCard /> */}
-      <Side />
 
       {auth.access && <Side />}
 

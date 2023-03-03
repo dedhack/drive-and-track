@@ -6,8 +6,8 @@ import { loginUser } from "../apis/usersAPI";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Label, TextInput, Button, Alert, Spinner } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
-// import { useAppStore } from "../stores/appStore";
 import useAuth from "../hooks/useAuth";
+
 // form validation schema using yup
 const schema = yup
   .object()
