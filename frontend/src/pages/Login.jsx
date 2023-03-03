@@ -25,7 +25,6 @@ const Login = () => {
 
   //TODO: try to use zustand
   const setAccessToken = useUser((state) => state.setAccessToken);
-  const zuAccessToken = useUser((state) => state.accessToken);
   //FIXME:  uncomment later
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,17 +54,11 @@ const Login = () => {
       console.log("zustand before state: ", useUser.getState().accessToken);
       setAccessToken(data.access);
       setAuth(data);
-      // useUser.getState();
       console.log("zustand get state: ", useUser.getState());
       localStorage.setItem("refresh", data.refresh);
-
       navigate("/home", { replace: true });
-
-      // navigate(from, { replace: true });
-      // navigate("/home", { replace: true });
     }
     setLoading(false);
-    // console.log("zustand: ", useUser.getState());
     console.log("data2: ", data);
     console.log("error2: ", error);
   };

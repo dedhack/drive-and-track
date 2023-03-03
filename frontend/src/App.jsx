@@ -20,31 +20,25 @@ function App() {
   const auth = useUser((state) => state.accessToken);
 
   return (
-    <div className="h-screen bg-stone-900">
+    <div className="">
       {/* <Drop />
       <ProfileCard /> */}
 
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route path="/home" element={<Home />} />
 
         {!auth ? (
           <Route path="/" element={<Navigate replace to="/login" />} />
         ) : (
           <Route element={<RequireAuth />}>
-            <Route path="/home" element={<Home />} />
+            {/* Protected routes inside here */}
             <Route path="/logout" element={<Logout />} />
           </Route>
         )}
-        {/* <Route path="/home" element={<Home />} /> */}
-        {/* <Route path="/home" element={<Home />} /> */}
 
-        <Route path="/register" element={<Register />} />
-        <Route path="/logout" element={<Logout />} />
-
-        {/* Protected routes */}
-        <Route element={<RequireAuth />}>
-          {/* <Route path="/home" element={<Home />} /> */}
-        </Route>
         {/* error page route */}
       </Routes>
     </div>
