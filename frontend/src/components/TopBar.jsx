@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useJwt } from "react-jwt";
 import { useUser } from "../hooks/store";
 import useAuth from "../hooks/useAuth";
+import FuelModal from "./FuelModal";
 const TopBar = () => {
+  const [visible, setVisible] = useState(false);
+
   return (
     <>
       <div className="navbar bg-base-300">
@@ -116,9 +119,8 @@ const TopBar = () => {
               className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <button onClick={() => console.log("Add Fuel")}>
-                  Add Fuel
-                </button>
+                {/* <button onClick={() => console.log("Add Fuel")}> */}
+                <button onClick={() => setVisible(!visible)}>Add Fuel</button>
               </li>
               <li>
                 <button onClick={() => console.log("Add Maintenance")}>
@@ -128,6 +130,7 @@ const TopBar = () => {
             </ul>
           </div>
         </div>
+        <FuelModal visible={visible} setVisible={setVisible} />
       </div>
     </>
   );
