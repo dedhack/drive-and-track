@@ -46,20 +46,31 @@ const FuelMaintDisplay = () => {
     content = <p>Error</p>;
   } else if (maintData) {
     content = maintData.map((maint) => (
-      <div key={maint.maint_id}>
-        <p>maintenance date: {maint.datetime}</p>
-        <p>maintenance odometer: {maint.odometer}</p>
-        <p>maintenance price: {maint.price}</p>
-      </div>
+      <tr>
+        <th>{maint.datetime}</th>
+        <th>{maint.odometer} km</th>
+        <th>${maint.price}</th>
+      </tr>
     ));
   }
 
   return (
     <div>
-      <h1>Fuel</h1>
-      {refuelContent}
-      <h1>Maintenance</h1>
-      {content}
+      {/* <h1>Fuel</h1> */}
+      {/* {refuelContent} */}
+      {/* <h1>Maintenance</h1> */}
+      <div className="overflow-x-auto">
+        <table className="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Odometer</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>{content}</tbody>
+        </table>
+      </div>
     </div>
   );
 };
