@@ -15,6 +15,12 @@ import Side from "./components/Side";
 
 import { useUser } from "./hooks/store";
 import TopBar from "./components/TopBar";
+import Vehicles from "./pages/Vehicles";
+import Fuel from "./pages/Fuel";
+import Maintenance from "./pages/Maintenance";
+import Charts from "./pages/Charts";
+import FuelCharts from "./pages/FuelCharts";
+import MaintenanceCharts from "./pages/MaintenanceCharts";
 
 function App() {
   const { auth } = useAuth();
@@ -32,6 +38,12 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/home" element={<Home />} />
+        <Route path="/vehicles" element={<Vehicles />} />
+        <Route path="/fuel" element={<Fuel />} />
+        <Route path="/maintenance" element={<Maintenance />} />
+        <Route path="/charts" element={<Charts />} />
+        <Route path="/fuel-charts" element={<FuelCharts />} />
+        <Route path="/maintenance-charts" element={<MaintenanceCharts />} />
 
         {!auth ? (
           <Route path="/" element={<Navigate replace to="/login" />} />
