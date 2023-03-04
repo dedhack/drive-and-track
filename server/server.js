@@ -21,7 +21,7 @@ app.use("/services", services);
 
 // test route
 app.get("/test", (req, res) => {
-  res.send("Hello World!");
+  res.json({ message: "Hello from server!" });
 });
 
 const PORT = process.env.PORT || 5002;

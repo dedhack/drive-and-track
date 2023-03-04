@@ -16,15 +16,8 @@ export const createVehicle = async (data) => {
 // TODO: below are generics HTTP requests that needs to be edited
 
 // get vehicles belonging to user. Require "user_id" as data to be passed
-export const getVehicles = async (data) => {
-  // try {
-  //   const response = await axiosClient.get("vehicles/allvehicles", data);
-  //   return response.data;
-  // } catch (error) {
-  //   return error;
-  // }
-
-  const response = await axiosClient.get("vehicles/allvehicles", data);
+export const getVehicles = async (userData) => {
+  const response = await axiosClient.post("vehicles/allvehicles", userData);
   return response.data;
 };
 
