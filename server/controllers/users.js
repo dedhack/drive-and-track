@@ -59,6 +59,7 @@ const loginUser = async (req, res) => {
       id: user.rows[0].id,
       email: user.rows[0].email,
       is_Admin: user.rows[0].is_admin,
+      username: user.rows[0].username,
     };
 
     // create access token

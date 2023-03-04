@@ -157,9 +157,46 @@ const deleteRefuelLog = async (req, res) => {
   }
 };
 
+// get all refuels logs and service logs for particular vehicle
+const getAllLogs = async (req, res) => {
+  try {
+    // select refuels belonging to user based on user_id and veh_id
+    const { veh_id } = req.body;
+
+    // check if vehicle exists
+    const vehicle = await pool.query(
+      "SELECT * FROM vehicles WHERE veh_id = $1",
+      [veh_id]
+    );
+    if (vehicle.rows.length === 0) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "vehicle does not exist" });
+    }
+
+    const allRefuels = await pool.query(
+      "SELECT * FROM refuel_logs INNER JOIN vehicles ON refuel_logs.veh_id = vehicles.veh_id WHERE vehicles.veh_id = $1",
+      [veh_id]
+    );
+
+    const allServices = await pool.query(
+      "SELECT * FROM service_logs INNER JOIN vehicles ON service_logs.veh_id = vehicles.veh_id WHERE vehicles.veh_id = $1",
+      [veh_id]
+    );
+
+    res
+      .status(200)
+      .json({ refuels: allRefuels.rows, services: allServices.rows });
+  } catch (error) {
+    console.log("GET /refuels/allrefuels", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
+
 module.exports = {
   createRefuelLog,
   getAllRefuels,
   updateRefuelLog,
   deleteRefuelLog,
+  getAllLogs,
 };

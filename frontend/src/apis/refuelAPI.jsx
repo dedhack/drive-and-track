@@ -1,12 +1,13 @@
 import axios from "axios";
-
-const axiosClient = axios.create({
-  baseURL: "http://localhost:5001/",
-});
+import { axiosClient } from "./usersAPI";
 
 export const createRefuel = async (data) => {};
 
-export const getRefuels = async (data) => {};
+// refuel takes in a veh_id
+export const getRefuels = async (refuel) => {
+  const response = await axiosClient.get("refuels/allrefuels", refuel);
+  return response.data;
+};
 
 export const deleteRefuel = async (data) => {};
 

@@ -14,15 +14,18 @@ import RequireAuth from "./components/RequireAuth";
 import Side from "./components/Side";
 
 import { useUser } from "./hooks/store";
+import TopBar from "./components/TopBar";
 
 function App() {
-  // const { auth } = useAuth();
-  const auth = useUser((state) => state.accessToken);
+  const { auth } = useAuth();
+  // const auth = useUser((state) => state.accessToken);
 
   return (
     <div className="">
       {/* <Drop />
       <ProfileCard /> */}
+      {/* {auth ? <TopBar /> : ""} */}
+      <TopBar />
 
       <Routes>
         <Route path="/login" element={<Login />} />

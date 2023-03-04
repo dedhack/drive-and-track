@@ -8,6 +8,7 @@ import { Label, TextInput, Button, Alert, Spinner } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
 import useAuth from "../hooks/useAuth";
 import { useUser } from "../hooks/store";
+import { useJwt, decodeToken } from "react-jwt";
 
 // form validation schema using yup
 const schema = yup
@@ -25,11 +26,12 @@ const Login = () => {
 
   //TODO: try to use zustand
   const setAccessToken = useUser((state) => state.setAccessToken);
+  // const setEmail = useUser((state) => state.setEmail);
+  // const setUserId = useUser((state) => state.setUserId);
+  // const setIsAdmin = useUser((state) => state.setIsAdmin);
   //FIXME:  uncomment later
   const navigate = useNavigate();
-  const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
-  const { setAuth } = useAuth();
+  const { setAuth, setEmail, setUsername, setUser_id, setIsAdmin } = useAuth(); // TODO: to change to using zustand in future
 
   // form validation using react-hook-form
   const {
@@ -53,12 +55,28 @@ const Login = () => {
       setSuccess(true);
       console.log("zustand before state: ", useUser.getState().accessToken);
       setAccessToken(data.access);
-      setAuth(data);
+      setAuth(data); // useContext hook
       console.log("zustand get state: ", useUser.getState());
       localStorage.setItem("refresh", data.refresh);
+
+      // decode token
+      const decodedToken = decodeToken(data.access);
+      console.log("decodedToken: ", decodedToken);
+      // setEmail(decodedToken.email);
+      // setUserId(decodedToken.user_id);
+      // setIsAdmin(decodedToken.is_admin);
+      // console.log("zustand decoded state: ", useUser.getState());
+
+      // useAuth hook
+      setEmail(decodedToken.email);
+      setUsername(decodedToken.username);
+      setUser_id(decodedToken.id);
+      setIsAdmin(decodedToken.is_Admin);
+
       navigate("/home", { replace: true });
     }
     setLoading(false);
+    //TODO: add error handling message on display
     console.log("data2: ", data);
     console.log("error2: ", error);
   };

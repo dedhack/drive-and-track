@@ -5,6 +5,11 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
+  // const [decodedToken, setDecodedToken] = useState({});
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [user_id, setUser_id] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const logout = () => {
     setAuth({});
@@ -14,7 +19,21 @@ export const AuthProvider = ({ children }) => {
   // const { decodedToken, isExpired } = useJwt(auth.refresh);
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, logout }}>
+    <AuthContext.Provider
+      value={{
+        auth,
+        setAuth,
+        logout,
+        username,
+        setUsername,
+        email,
+        setEmail,
+        user_id,
+        setUser_id,
+        isAdmin,
+        setIsAdmin,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
