@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [user_id, setUser_id] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState(0);
 
   const logout = () => {
     setAuth({});
@@ -32,6 +33,8 @@ export const AuthProvider = ({ children }) => {
         setUser_id,
         isAdmin,
         setIsAdmin,
+        selectedVehicle,
+        setSelectedVehicle,
       }}
     >
       {children}

@@ -2,43 +2,37 @@ import React, { useEffect, useState } from "react";
 import { useUser } from "../../hooks/store";
 import { getVehicles } from "../../apis/vehiclesAPI";
 import useAuth from "../../hooks/useAuth";
-import { useQuery, QueryClient } from "react-query";
+import { useQuery } from "react-query";
 
 const DisplayVehicles = () => {
-  const { user_id } = useAuth();
-  const [selected, setSelected] = useState(0);
-  //   const queryClient = new QueryClient();
+  const { user_id, selectedVehicle } = useAuth();
+  const [selected, setSelected] = useState(null);
 
-  // FIXME: think need to put onsuccess to invalidate query client
-  //   {
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries(USERS_KEY);
-  //     }
-  //   }
   const {
     data: vehiclesData,
     isLoading,
     isError,
-    isFetched,
-  } = useQuery(
-    ["vehicles"],
-    async () => await getVehicles({ user_id: user_id })
-  );
+  } = useQuery(["vehicles"], () => getVehicles({ user_id }), {
+    // enabled option is used to prevent the query from running on initial render
+    // prevent the query from running if user_id is falsy
+    enabled: !!user_id,
+  });
 
-  // conditional logic rendering here:
-  let content;
+  useEffect(() => {
+    if (vehiclesData?.length > 0) {
+      setSelected(vehiclesData);
+    }
+  }, [vehiclesData]);
+
+  let content = null;
   if (isLoading) {
-    content = <p key={isLoading}>Loading...</p>;
+    content = <p>Loading...</p>;
   } else if (isError) {
-    content = <p key={isError}>Error</p>;
-  } else if (vehiclesData) {
-    const vehicle = vehiclesData[selected];
-    // content = <div>{vehicle.veh_name}</div>;
+    content = <p>Error</p>;
+  } else if (selected) {
+    const vehicle = selected[selectedVehicle];
     content = (
-      <div
-        key={selected}
-        className="flex items-center justify-between h-28 mb-4 rounded bg-gray-50 dark:bg-gray-800"
-      >
+      <div className="flex items-center justify-between h-28 mb-4 rounded bg-gray-50 dark:bg-gray-800">
         <div className="flex-1 p-4 text-center">
           vehicle name: {vehicle.veh_name}
         </div>
@@ -48,15 +42,9 @@ const DisplayVehicles = () => {
         <div className="flex-1 p-4 text-center">
           vehicle model: {vehicle.model}
         </div>
-        {/* <button className="btn btn-outline btn-primary">toggle</button> */}
       </div>
     );
-    console.log(vehiclesData[0]);
   }
-
-  //   if (isFetched) {
-  //     setSelected(queryClient.getQueryCache(["vehicles"]));
-  //   }
 
   return <div>{content}</div>;
 };

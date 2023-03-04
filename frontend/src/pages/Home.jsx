@@ -10,6 +10,7 @@ import { useQuery, useQueryClient } from "react-query";
 // import { getVehicles } from "../apis/vehiclesAPI";
 import { axiosClient } from "../apis/usersAPI";
 import DisplayVehicles from "../components/vehicles/DisplayVehicles";
+import FuelMaintDisplay from "../components/home/FuelMaintDisplay";
 
 const Home = () => {
   // fetch user refuels
@@ -22,6 +23,7 @@ const Home = () => {
   return (
     <div>
       <HomeContent />
+      <FuelMaintDisplay />
       {/* {vehiclesData ? (
         vehiclesData.map((vehicle) => <p key={vehicle.id}>{vehicle.make}</p>)
       ) : (
