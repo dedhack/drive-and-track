@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosClient = axios.create({
+export const axiosClient = axios.create({
   baseURL: "http://localhost:5001/",
 });
 
@@ -15,7 +15,7 @@ export const registerUser = async (data) => {
   }
 };
 
-// login user
+// login user-
 export const loginUser = async (data) => {
   try {
     const response = await axiosClient.post("users/login", data);

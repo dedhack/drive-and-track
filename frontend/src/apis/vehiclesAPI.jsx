@@ -5,17 +5,6 @@ const axiosClient = axios.create({
 });
 
 export const createVehicle = async (data) => {
-  // expected data format:
-  // "veh_name": "toyota vios",
-  // "capacity": "40",
-  // "user_id": "679460b7-84f8-44be-bb1b-50d3a50c04cc",
-  // "veh_desc": "red",
-  // "make": "toyota",
-  // "model": "vios",
-  // "year": "2004",
-  // "vin": "123",
-  // "ins_pol": "456"
-
   try {
     const response = await axiosClient.put("vehicles/create", data);
     return [response.data, null];
@@ -26,13 +15,17 @@ export const createVehicle = async (data) => {
 
 // TODO: below are generics HTTP requests that needs to be edited
 
+// get vehicles belonging to user. Require "user_id" as data to be passed
 export const getVehicles = async (data) => {
-  try {
-    const response = await axiosClient.get("vehicles", data);
-    return [response.data, null];
-  } catch (error) {
-    return [null, error];
-  }
+  // try {
+  //   const response = await axiosClient.get("vehicles/allvehicles", data);
+  //   return response.data;
+  // } catch (error) {
+  //   return error;
+  // }
+
+  const response = await axiosClient.get("vehicles/allvehicles", data);
+  return response.data;
 };
 
 // for specific vehicle log
