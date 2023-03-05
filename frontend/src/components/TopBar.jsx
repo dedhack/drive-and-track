@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { useJwt } from "react-jwt";
 import useAuth from "../hooks/useAuth";
 import FuelModal from "./modals/FuelModal";
+import VehicleModal from "./modals/VehicleModal";
 
 const TopBar = () => {
-  const [visible, setVisible] = useState(false);
+  const [fuelVisible, setFuelVisible] = useState(false);
+  const [vehicleVisible, setVehicleVisible] = useState(false);
   const { selectedVehicle, vehicles } = useAuth();
   const [vehName, setVehName] = useState("");
 
@@ -133,8 +135,15 @@ const TopBar = () => {
               className="dropdown-content menu p-2 shadow bg-primary-focus text-white rounded-box w-52"
             >
               <li>
+                <button onClick={() => setVehicleVisible(!vehicleVisible)}>
+                  Add Vehicle
+                </button>
+              </li>
+              <li>
                 {/* <button onClick={() => console.log("Add Fuel")}> */}
-                <button onClick={() => setVisible(!visible)}>Add Fuel</button>
+                <button onClick={() => setFuelVisible(!fuelVisible)}>
+                  Add Fuel
+                </button>
               </li>
               <li>
                 <button onClick={() => console.log("Add Maintenance")}>
@@ -144,7 +153,8 @@ const TopBar = () => {
             </ul>
           </div>
         </div>
-        <FuelModal visible={visible} setVisible={setVisible} />
+        <FuelModal visible={fuelVisible} setVisible={setFuelVisible} />
+        <VehicleModal visible={vehicleVisible} setVisible={setVehicleVisible} />
       </div>
     </>
   );
