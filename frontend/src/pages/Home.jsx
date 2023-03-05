@@ -17,7 +17,7 @@ const Home = () => {
   const fetchVehicles = async () => {
     const [data, error] = await getVehicles({ user_id: user_id });
 
-    if (data) {
+    if (Array.isArray(data)) {
       setVehicles(data);
     }
     // console.log(vehicles);
@@ -33,7 +33,7 @@ const Home = () => {
   };
 
   let content = null;
-  if (vehicles && !selectedVehicle) {
+  if (vehicles !== null && !selectedVehicle) {
     // console.log("vehicles: ", vehicles);
     content = vehicles.map((vehicle, index) => {
       return (
@@ -65,6 +65,8 @@ const Home = () => {
         </div>
       </div>
     );
+  } else {
+    content = <div>no vehicles</div>;
   }
 
   return (

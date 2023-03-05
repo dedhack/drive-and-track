@@ -190,9 +190,7 @@ const VehicleModal = ({ visible, setVisible }) => {
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">
-                    Description
-                  </span>
+                  <span className="label-text">Description</span>
                 </label>
                 <input
                   type="text"

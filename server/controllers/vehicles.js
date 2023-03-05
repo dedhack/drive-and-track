@@ -129,18 +129,21 @@ const deleteVehicle = async (req, res) => {
     // TODO: include verification that user is the owner of vehicle and authorized to update
 
     const { veh_id } = req.body;
-    const deleteVehiclelog = await pool.query(
-      "DELETE FROM vehicle_logs WHERE veh_id = $1",
-      [veh_id]
-    );
-    const deleteVehicle = await pool.query(
+    // const deleteVehiclelog = await pool.query(
+    //   "DELETE FROM vehicle_logs WHERE veh_id = $1",
+    //   [veh_id]
+    // );
+    // const deleteVehicle = await pool.query(
+    //   "DELETE FROM vehicles WHERE veh_id = $1",
+    //   [veh_id]
+    // );
+
+    const deleteVehicleLog = await pool.query(
       "DELETE FROM vehicles WHERE veh_id = $1",
       [veh_id]
     );
 
-    res
-      .status(200)
-      .json({ status: "success", message: "vehicle has been deleted" });
+    res.status(200).json({ status: "success", message: deleteVehicleLog });
   } catch (error) {
     console.log("DELETE /vehicles/delete", error);
     res.status(400).json({ status: "error", message: error.message });
