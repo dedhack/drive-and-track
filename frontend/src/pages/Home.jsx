@@ -29,10 +29,12 @@ const Home = () => {
     fetchVehicles();
   }, []);
 
-  const handleToggle = (veh_id) => () => {
-    console.log("veh_id: ", veh_id);
-    setSelectedVehicle(veh_id);
-  };
+  //FIXME: unused. now we control this only in the vehicles page
+  //TODO: how about redirecting to vehicles page, and if no vehicles selected, unable to go to other pages?
+  // const handleToggle = (veh_id) => () => {
+  //   console.log("veh_id: ", veh_id);
+  //   setSelectedVehicle(veh_id);
+  // };
 
   let content = null;
   if (vehicles && selectedVehicle !== null) {

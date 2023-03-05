@@ -30,6 +30,13 @@ const createVehicle = async (req, res) => {
       [newVehicle.rows[0].veh_id, veh_desc, make, model, year, vin, ins_pol]
     );
 
+    if (newVehicleLogs.rows.length === 0) {
+      console.log("PUT /vehicles/create no vehicles found");
+      return res
+        .status(404)
+        .json({ status: "error", message: "Failed to create new vehicle" });
+    }
+
     // res.json(newVehicle.rows[0]); // FIXME: remove this line, for testing only
     res
       .status(200)
@@ -143,19 +150,18 @@ const deleteVehicle = async (req, res) => {
     // TODO: include verification that user is the owner of vehicle and authorized to update
 
     const { veh_id } = req.body;
-    // const deleteVehiclelog = await pool.query(
-    //   "DELETE FROM vehicle_logs WHERE veh_id = $1",
-    //   [veh_id]
-    // );
-    // const deleteVehicle = await pool.query(
-    //   "DELETE FROM vehicles WHERE veh_id = $1",
-    //   [veh_id]
-    // );
 
     const deleteVehicleLog = await pool.query(
-      "DELETE FROM vehicles WHERE veh_id = $1",
+      "DELETE FROM vehicles WHERE veh_id = $1 RETURNING *",
       [veh_id]
     );
+
+    if (deleteVehicleLog.rows.length === 0) {
+      console.log("DELETE /vehicles/delete no vehicles found");
+      return res
+        .status(404)
+        .json({ status: "error", message: "no matching vehicle found" });
+    }
 
     res.status(200).json({ status: "success", message: deleteVehicleLog });
   } catch (error) {

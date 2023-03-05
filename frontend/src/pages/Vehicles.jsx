@@ -5,7 +5,6 @@ import VehicleModal from "../components/modals/VehicleModal";
 
 const Vehicles = () => {
   const {
-    username,
     user_id,
     vehicles,
     setVehicles,
