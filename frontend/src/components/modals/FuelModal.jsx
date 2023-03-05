@@ -88,10 +88,10 @@ const FuelModal = ({
                   type="text"
                   placeholder="1000"
                   className="input input-bordered w-full"
-                  {...register("Odometer")}
+                  {...register("odometer")}
                 />
                 <p className="text-center text-red-600">
-                  {errors.Odometer?.message}
+                  {errors.odometer?.message}
                 </p>
               </div>
               <div className="mb-2 block">
