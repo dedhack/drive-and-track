@@ -4,8 +4,8 @@ import useAuth from "../hooks/useAuth";
 import { getVehicles } from "../apis/vehiclesAPI";
 
 const Vehicles = () => {
-  const { user_id, selectedVehicle } = useAuth();
-  const [selected, setSelected] = useState(null);
+  const { user_id, selectedVehicle, setSelectedVehicle, setVehicles } =
+    useAuth();
 
   const {
     data: vehiclesData,
@@ -17,37 +17,45 @@ const Vehicles = () => {
     enabled: !!user_id,
   });
 
-  useEffect(() => {
-    if (vehiclesData?.length > 0) {
-      setSelected(vehiclesData);
-    }
-  }, [vehiclesData]);
+  // useEffect(() => {
+  //   if (vehiclesData?.length > 0) {
+  //     setVehicles(vehiclesData);
+  //     setSelectedVehicle(vehiclesData[0].veh_id);
+  //   }
+  // }, [vehiclesData]);
 
   let content = null;
   if (isLoading) {
     content = <p>Loading...</p>;
   } else if (isError) {
     content = <p>Error</p>;
-  } else if (selected) {
+  } else if (vehiclesData) {
     // const vehicle = selected[selectedVehicle];
-    content = vehiclesData.map((vehicle) => (
-      <>
-        <div className="card w-full bg-primary text-primary-content">
-          <div className="card-body rounded-xl dark:bg-gray-800 ">
-            <h2 className="card-title">{vehicle.veh_name}</h2>
-            <p>
-              <span className="font-bold">Make: </span>
-              {vehicle.make}
-            </p>
-            <p>
-              <span className="font-bold">Model:</span> {vehicle.model}
-            </p>
-            <div className="card-actions justify-end">
-              <button className="btn">Edit</button>
-            </div>
+    content = vehiclesData.map((vehicle, index) => (
+      <div
+        key={vehicle.veh_id}
+        className="card w-full bg-primary text-primary-content"
+      >
+        <div className="card-body rounded-xl dark:bg-gray-800 ">
+          <h2 className="card-title">{vehicle.veh_name}</h2>
+          <p>
+            <span className="font-bold">Make: </span>
+            {vehicle.make}
+          </p>
+          <p>
+            <span className="font-bold">Model:</span> {vehicle.model}
+          </p>
+          <div className="card-actions justify-end">
+            <button className="btn">Edit</button>
+            <button
+              className="btn"
+              onClick={() => setSelectedVehicle(vehicle.veh_id)}
+            >
+              Select Vehicle
+            </button>
           </div>
         </div>
-      </>
+      </div>
     ));
 
     return (
