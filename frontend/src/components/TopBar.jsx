@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useJwt } from "react-jwt";
 import useAuth from "../hooks/useAuth";
@@ -6,6 +6,18 @@ import FuelModal from "./modals/FuelModal";
 
 const TopBar = () => {
   const [visible, setVisible] = useState(false);
+  const { selectedVehicle, vehicles } = useAuth();
+  const [vehName, setVehName] = useState("");
+
+  useEffect(() => {
+    if (selectedVehicle) {
+      vehicles.forEach((vehicle) => {
+        if (vehicle.veh_id === selectedVehicle) {
+          setVehName(vehicle.veh_name);
+        }
+      });
+    }
+  }, [selectedVehicle]);
 
   return (
     <>
@@ -111,6 +123,7 @@ const TopBar = () => {
         </div>
         <div className="navbar-end">
           {/* <Link className="btn">+</Link> */}
+          <p className="px-10">{vehName}</p>
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-primary m-1">
               +
