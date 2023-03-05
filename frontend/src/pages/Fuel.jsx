@@ -34,10 +34,14 @@ const Fuel = () => {
             key={index}
             className="flex flex-row m-4 bg-slate-100 justify-around w-full"
           >
-            <div className=" p-4 text-center">date: {fuel.datetime}</div>
-            <div className="p-4 text-center">odometer: {fuel.odometer}</div>
-            <div className="p-4 text-center">price: {fuel.price}</div>
-            <div className="p-4 text-center">total: {fuel.fuel_amount}</div>
+            <div className="p-4 text-center">date: {fuel.datetime}</div>
+            <div className="p-4 text-center">odometer: {fuel.odometer} km</div>
+            <div className="p-4 text-center">price: ${fuel.price}</div>
+            <div className="p-4 text-center">Litres: {fuel.fuel_amount}L</div>
+            <div>
+              <button className="btn">Update</button>
+              <button className="btn">Delete</button>
+            </div>
           </div>
         </>
       );

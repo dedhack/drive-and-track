@@ -152,7 +152,11 @@ const TopBar = () => {
             </ul>
           </div>
         </div>
-        <FuelModal visible={fuelVisible} setVisible={setFuelVisible} />
+        <FuelModal
+          visible={fuelVisible}
+          setVisible={setFuelVisible}
+          type={"Create"}
+        />
         <VehicleModal
           visible={vehicleVisible}
           setVisible={setVehicleVisible}
