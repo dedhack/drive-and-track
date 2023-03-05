@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../Spinner";
 import ErrAlert from "../ErrAlert";
+import { createVehicle } from "../../apis/vehiclesAPI";
 
 const schema = yup.object().shape({
   veh_name: yup.string().min(3).max(30).required(),
@@ -16,6 +17,7 @@ const schema = yup.object().shape({
   vin: yup.string().min(3).max(30),
   ins_pol: yup.string().min(3).max(30),
   capacity: yup.number().min(1).required(),
+  veh_desc: yup.string().min(3).max(30),
 });
 
 const VehicleModal = ({ visible, setVisible }) => {
@@ -27,13 +29,30 @@ const VehicleModal = ({ visible, setVisible }) => {
     resolver: yupResolver(schema),
   });
 
+  const { user_id } = useAuth();
+
   // FETCHING STUFF
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (formData) => {
+    setLoading(true);
+    console.log("data: ", formData);
+    const payload = { ...formData, user_id: user_id };
+    console.log("payload: ", payload);
+    const [data, error] = await createVehicle(payload);
+
+    if (data) {
+      setSuccess("Vehicle created successfully");
+      setVisible(false);
+    }
+    if (error) {
+      setError(error.response.data.message);
+    }
     console.log("data: ", data);
+    console.log("error: ", error);
+    setLoading(false);
   };
 
   return (
@@ -164,6 +183,22 @@ const VehicleModal = ({ visible, setVisible }) => {
                   placeholder="AXA"
                   className="input input-bordered w-full"
                   {...register("ins_pol")}
+                />
+                <p className="text-center text-red-600">
+                  {errors.ins_pol?.message}
+                </p>
+              </div>
+              <div className="mb-2 block">
+                <label className="label">
+                  <span className="label-text">
+                    Description
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Fav car"
+                  className="input input-bordered w-full"
+                  {...register("veh_desc")}
                 />
                 <p className="text-center text-red-600">
                   {errors.ins_pol?.message}
