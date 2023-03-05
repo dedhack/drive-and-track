@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { getVehicles, deleteVehicleLog } from "../apis/vehiclesAPI";
+import VehicleModal from "../components/modals/VehicleModal";
 
 const Vehicles = () => {
   const {
@@ -12,6 +13,7 @@ const Vehicles = () => {
     setSelectedVehicle,
     setVehName,
   } = useAuth();
+  const [vehicleVisible, setVehicleVisible] = useState(false);
 
   // need an anonymous function to set the state
   const handleToggle = (veh_id) => () => {
@@ -19,7 +21,7 @@ const Vehicles = () => {
     setSelectedVehicle(veh_id);
   };
 
-  const handleUpdate = (veh_id) => {};
+  const handleUpdate = (veh_id) => async () => {};
 
   const handleDelete = (veh_id) => async () => {
     const [data, error] = await deleteVehicleLog({ veh_id: veh_id });
@@ -54,7 +56,10 @@ const Vehicles = () => {
               <button className="btn" onClick={handleToggle(vehicle.veh_id)}>
                 Select
               </button>
-              <button className="btn" onClick={handleUpdate(vehicle.veh_id)}>
+              <button
+                className="btn"
+                onClick={() => setVehicleVisible(!vehicleVisible)}
+              >
                 Update
               </button>
               <button className="btn" onClick={handleDelete(vehicle.veh_id)}>
@@ -72,6 +77,11 @@ const Vehicles = () => {
       Your Vehicles:
       <div className="flex flex-col items-center justify-between mb-4">
         {content}
+        <VehicleModal
+          visible={vehicleVisible}
+          setVisible={setVehicleVisible}
+          type={"Update"}
+        />
       </div>
     </div>
   );

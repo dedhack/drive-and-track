@@ -20,7 +20,7 @@ const schema = yup.object().shape({
   veh_desc: yup.string().min(3).max(30),
 });
 
-const VehicleModal = ({ visible, setVisible }) => {
+const VehicleModal = ({ visible, setVisible, type }) => {
   const {
     register,
     handleSubmit,
@@ -49,7 +49,11 @@ const VehicleModal = ({ visible, setVisible }) => {
     console.log("data: ", formData);
     const payload = { ...formData, user_id: user_id };
     console.log("payload: ", payload);
+    // if type === "Register"
     const [data, error] = await createVehicle(payload);
+
+    // if type === "Update"
+    
 
     if (data) {
       setSuccess("Vehicle created successfully");
@@ -75,7 +79,7 @@ const VehicleModal = ({ visible, setVisible }) => {
           X
         </Button>
 
-        <Modal.Header className="font-bold">Register New Vehicle</Modal.Header>
+        <Modal.Header className="font-bold">{`${type} Vehicle`}</Modal.Header>
 
         <Modal.Body>
           <form

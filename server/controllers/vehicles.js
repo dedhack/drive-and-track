@@ -108,11 +108,25 @@ const updateVehicle = async (req, res) => {
       [veh_name, capacity, veh_id]
     );
 
+    if (updateVehicle.rows.length === 0) {
+      console.log("PATCH /vehicles/update no vehicles found");
+      return res
+        .status(404)
+        .json({ status: "error", message: "no matching vehicle found" });
+    }
+
     // Update vehicle_logs table
     const updateVehicleLogs = await pool.query(
       "UPDATE vehicle_logs SET veh_desc = $1, make = $2, model = $3, year = $4, vin = $5, ins_pol = $6 WHERE veh_id = $7",
       [veh_desc, make, model, year, vin, ins_pol, veh_id]
     );
+
+    if (updateVehicleLogs.rows.length === 0) {
+      console.log("PATCH /vehicles/update no vehicles found");
+      return res
+        .status(404)
+        .json({ status: "error", message: "no matching vehiclefound" });
+    }
 
     res
       .status(200)
