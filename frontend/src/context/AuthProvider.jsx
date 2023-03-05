@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [user_id, setUser_id] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-  const [selectedVehicle, setSelectedVehicle] = useState(0); // takes in veh_id
+  const [selectedVehicle, setSelectedVehicle] = useState(null); // takes in veh_id
   const [vehicles, setVehicles] = useState([]); // stores all vehicles
 
   const logout = () => {
