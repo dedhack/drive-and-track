@@ -43,6 +43,7 @@ export const updateVehicleLog = async (data) => {
   //     "ins_pol": "456"
   // }
 
+  // payload needs veh_id, and user_id (from global state)
   try {
     const response = await axiosClient.patch("vehicles/update", data);
     return [response.data, null];

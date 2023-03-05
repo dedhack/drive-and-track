@@ -56,12 +56,22 @@ const Vehicles = () => {
               <button className="btn" onClick={handleToggle(vehicle.veh_id)}>
                 Select
               </button>
-              <button
-                className="btn"
-                onClick={() => setVehicleVisible(!vehicleVisible)}
-              >
-                Update
-              </button>
+              <div>
+                <button
+                  className="btn"
+                  onClick={() => setVehicleVisible(!vehicleVisible)}
+                >
+                  Update
+                </button>
+                <VehicleModal
+                  visible={vehicleVisible}
+                  setVisible={setVehicleVisible}
+                  type={"Update"}
+                  veh_id={vehicle.veh_id}
+                  veh_info={vehicle}
+                />
+              </div>
+
               <button className="btn" onClick={handleDelete(vehicle.veh_id)}>
                 Delete
               </button>
@@ -77,11 +87,6 @@ const Vehicles = () => {
       Your Vehicles:
       <div className="flex flex-col items-center justify-between mb-4">
         {content}
-        <VehicleModal
-          visible={vehicleVisible}
-          setVisible={setVehicleVisible}
-          type={"Update"}
-        />
       </div>
     </div>
   );

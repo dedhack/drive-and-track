@@ -20,13 +20,20 @@ const schema = yup.object().shape({
   veh_desc: yup.string().min(3).max(30),
 });
 
-const VehicleModal = ({ visible, setVisible, type }) => {
+const VehicleModal = ({
+  visible,
+  setVisible,
+  type,
+  veh_id = null,
+  veh_info = null,
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: veh_info,
   });
 
   const { user_id, setVehicles } = useAuth();
@@ -50,22 +57,33 @@ const VehicleModal = ({ visible, setVisible, type }) => {
     const payload = { ...formData, user_id: user_id };
     console.log("payload: ", payload);
     // if type === "Register"
-    const [data, error] = await createVehicle(payload);
+    // const [data, error] = await createVehicle(payload);
+    if (type === "Register") {
+      const [data, error] = await createVehicle(payload);
 
-    // if type === "Update"
-    
+      if (data) {
+        setSuccess("Vehicle created successfully");
+        setVisible(false);
+        await fetchVehicles();
+      }
+      if (error) {
+        setError(error.response.data.message);
+      }
+    } else if (type === "Update") {
+      const [data, error] = await createVehicle(payload);
 
-    if (data) {
-      setSuccess("Vehicle created successfully");
-      setVisible(false);
-      await fetchVehicles();
+      if (data) {
+        setSuccess("Vehicle created successfully");
+        setVisible(false);
+        await fetchVehicles();
+      }
+      if (error) {
+        setError(error.response.data.message);
+      }
+      console.log("data: ", data);
+      console.log("error: ", error);
+      setLoading(false);
     }
-    if (error) {
-      setError(error.response.data.message);
-    }
-    console.log("data: ", data);
-    console.log("error: ", error);
-    setLoading(false);
   };
 
   return (
@@ -79,7 +97,7 @@ const VehicleModal = ({ visible, setVisible, type }) => {
           X
         </Button>
 
-        <Modal.Header className="font-bold">{`${type} Vehicle`}</Modal.Header>
+        <Modal.Header className="font-bold">{`${type} Vehicle & ID: ${veh_id}`}</Modal.Header>
 
         <Modal.Body>
           <form
