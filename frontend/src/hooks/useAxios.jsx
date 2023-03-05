@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+// take note of the idea to use options here
+// const options = {
+//   headers: {
+//     Authorization: `Bearer ${token}`,
+//   },
+// };
+
 const useAxios = (url, options = {}) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
