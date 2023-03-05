@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import FuelModal from "../components/modals/FuelModal";
-import { getRefuels } from "../apis/refuelAPI";
+import { getRefuels, deleteRefuel } from "../apis/refuelAPI";
 
 const Fuel = () => {
   const { user_id, selectedVehicle } = useAuth();
@@ -25,6 +25,15 @@ const Fuel = () => {
     console.log(fuel);
   }, []);
 
+  const handleDelete = async (refuel_id) => {
+    const [data, error] = await deleteRefuel({ refuel_id: refuel_id });
+    if (data) {
+      console.log("refuel deleted data: ", data);
+    }
+    // fetch the refuels again
+    fetchFuel();
+  };
+
   let content = null;
   if (Array.isArray(fuel) && fuel.length > 0) {
     content = fuel.map((fuel, index) => {
@@ -40,7 +49,12 @@ const Fuel = () => {
             <div className="p-4 text-center">Litres: {fuel.fuel_amount}L</div>
             <div>
               <button className="btn">Update</button>
-              <button className="btn">Delete</button>
+              <button
+                className="btn"
+                onClick={() => handleDelete(fuel.refuel_id)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </>

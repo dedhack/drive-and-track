@@ -64,6 +64,7 @@ const FuelModal = ({
         setError(error);
       }
     }
+    setLoading(false);
   };
 
   return (
