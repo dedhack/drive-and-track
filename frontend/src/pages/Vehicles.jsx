@@ -10,6 +10,7 @@ const Vehicles = () => {
     setVehicles,
     selectedVehicle,
     setSelectedVehicle,
+    setVehName,
   } = useAuth();
 
   // need an anonymous function to set the state
@@ -29,7 +30,11 @@ const Vehicles = () => {
     const [data2, error2] = await getVehicles({ user_id: user_id });
     if (Array.isArray(data2)) {
       setVehicles(data2);
-    } else setVehicles(null);
+    } else {
+      setVehicles(null);
+      setSelectedVehicle(null);
+      setVehName(null);
+    }
   };
 
   let content = null;

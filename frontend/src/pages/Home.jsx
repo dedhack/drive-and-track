@@ -35,24 +35,7 @@ const Home = () => {
   };
 
   let content = null;
-  if (vehicles !== null && selectedVehicle !== null) {
-    // console.log("vehicles: ", vehicles);
-    console.log("vehicles !== null && !selectedVehicle");
-    content = vehicles.map((vehicle, index) => {
-      return (
-        <div className="flex flex-row m-4 bg-slate-100 justify-around w-full">
-          <div className=" p-4 text-center">
-            vehicle name: {vehicle.veh_name}
-          </div>
-          <div className="p-4 text-center">vehicle make: {vehicle.make}</div>
-          <div className="p-4 text-center">vehicle model: {vehicle.model}</div>
-          <button className="btn" onClick={handleToggle(vehicle.veh_id)}>
-            Select
-          </button>
-        </div>
-      );
-    });
-  } else if (vehicles && selectedVehicle) {
+  if (vehicles && selectedVehicle !== null) {
     const chosen = vehicles.filter(
       (vehicle) => vehicle.veh_id === selectedVehicle
     )[0];

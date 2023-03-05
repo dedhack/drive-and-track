@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null); // takes in veh_id
   const [vehicles, setVehicles] = useState([]); // stores all vehicles
+  const [vehName, setVehName] = useState("");
 
   const logout = () => {
     setAuth({});
@@ -37,6 +38,8 @@ export const AuthProvider = ({ children }) => {
         setSelectedVehicle,
         vehicles,
         setVehicles,
+        vehName,
+        setVehName,
       }}
     >
       {children}

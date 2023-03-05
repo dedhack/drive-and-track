@@ -8,8 +8,7 @@ import VehicleModal from "./modals/VehicleModal";
 const TopBar = () => {
   const [fuelVisible, setFuelVisible] = useState(false);
   const [vehicleVisible, setVehicleVisible] = useState(false);
-  const { selectedVehicle, vehicles } = useAuth();
-  const [vehName, setVehName] = useState("");
+  const { selectedVehicle, vehicles, vehName, setVehName } = useAuth();
 
   useEffect(() => {
     if (selectedVehicle) {
