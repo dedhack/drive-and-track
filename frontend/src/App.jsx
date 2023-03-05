@@ -5,6 +5,8 @@ import useAuth from "./hooks/useAuth";
 
 const App = () => {
   const { auth } = useAuth();
+
+  
   return (
     <>
       <Routes>
