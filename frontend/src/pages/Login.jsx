@@ -6,7 +6,7 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Spinner from "../components/Spinner";
 import ErrAlert from "../components/ErrAlert";
-import useAxios from "../hooks/useAxios";
+
 import axios from "axios";
 import { useJwt } from "react-jwt";
 
@@ -19,9 +19,9 @@ const schema = yup
   .required();
 
 const Login = () => {
-  const { auth, setAuth, setEmail, setUsername, setUser_id, setIsAdmin } =
-    useAuth();
+  const { setAuth, setEmail, setUsername, setUser_id, setIsAdmin } = useAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   // react hook form verification
   const {
@@ -32,9 +32,9 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const { decodedToken, isExpired } = useJwt(auth);
 
   const onSubmit = async (formData) => {
+    setLoading(true);
     console.log("formData: ", formData);
     try {
       const res = await axios.post(
@@ -56,12 +56,17 @@ const Login = () => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
 
   return (
     <>
       <div className="flex justify-center">
         <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-stone-300">
+          {errors?.username || errors?.password ? (
+            <ErrAlert text="Invalid username or password" />
+          ) : null}
+
           <form
             className="form-control w-full"
             onSubmit={handleSubmit(onSubmit)}
@@ -78,6 +83,9 @@ const Login = () => {
                   className="input input-bordered w-full"
                   {...register("username")}
                 />
+                <p className="text-center text-red-600">
+                  {errors.username?.message}
+                </p>
               </div>
               <div className="mb-2 block">
                 <label className="label">
@@ -89,17 +97,27 @@ const Login = () => {
                   className="input input-bordered w-full"
                   {...register("password")}
                 />
+                <p className="text-center text-red-600">
+                  {errors.password?.message}
+                </p>
               </div>
             </div>
 
             {/* Submit button */}
             <div className="text-center">
               <button type="submit" className="btn">
-                Submit
+                {loading ? <Spinner /> : "Login"}
               </button>
-              <Spinner />
             </div>
           </form>
+          <div className="text-center mt-5">
+            <NavLink
+              className="font-medium text-stone-900 hover:underline animate-pulse"
+              to="/register"
+            >
+              Register
+            </NavLink>
+          </div>
         </div>
       </div>
     </>
