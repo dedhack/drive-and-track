@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { makeUseAxios } from "axios-hooks";
 // take note of the idea to use options here
 // const options = {
 //   headers: {
@@ -8,7 +8,13 @@ import axios from "axios";
 //   },
 // };
 
-const useAxios = (url, options = {}) => {
+// const useAxios = makeUseAxios({
+//   axios: axios.create({
+//     baseURL: "http://localhost:5001",
+//   }),
+// });
+
+const useAxios = (url, options = {}, shouldFetch = true) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,7 +24,7 @@ const useAxios = (url, options = {}) => {
     setError(null);
 
     try {
-      const response = await axios(url, options);
+      const response = await axios(`http://localhost:5001/${url}`, options);
       setData(response.data);
     } catch (error) {
       setError(error);
