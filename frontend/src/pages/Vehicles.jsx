@@ -14,6 +14,7 @@ const Vehicles = () => {
     setVehName,
   } = useAuth();
   const [vehicleVisible, setVehicleVisible] = useState(false);
+  const [updateVehicle, setUpdateVehicle] = useState(null);
 
   // need an anonymous function to set the state
   const handleToggle = (veh_id) => () => {
@@ -21,7 +22,10 @@ const Vehicles = () => {
     setSelectedVehicle(veh_id);
   };
 
-  const handleUpdate = (veh_id) => async () => {};
+  const handleUpdate = (veh_id) => async () => {
+    setUpdateVehicle(veh_id);
+    setVehicleVisible(true);
+  };
 
   const handleDelete = (veh_id) => async () => {
     const [data, error] = await deleteVehicleLog({ veh_id: veh_id });
@@ -59,17 +63,19 @@ const Vehicles = () => {
               <div>
                 <button
                   className="btn"
-                  onClick={() => setVehicleVisible(!vehicleVisible)}
+                  onClick={() => handleUpdate(vehicle.veh_id)()}
                 >
                   Update
                 </button>
-                <VehicleModal
-                  visible={vehicleVisible}
-                  setVisible={setVehicleVisible}
-                  type={"Update"}
-                  veh_id={vehicle.veh_id}
-                  veh_info={vehicle}
-                />
+                {updateVehicle === vehicle.veh_id && (
+                  <VehicleModal
+                    visible={vehicleVisible}
+                    setVisible={setVehicleVisible}
+                    type={"Update"}
+                    veh_id={vehicle.veh_id}
+                    veh_info={vehicle}
+                  />
+                )}
               </div>
 
               <button className="btn" onClick={handleDelete(vehicle.veh_id)}>

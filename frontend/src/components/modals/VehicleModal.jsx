@@ -6,7 +6,11 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../Spinner";
 import ErrAlert from "../ErrAlert";
-import { createVehicle, getVehicles } from "../../apis/vehiclesAPI";
+import {
+  createVehicle,
+  getVehicles,
+  updateVehicleLog,
+} from "../../apis/vehiclesAPI";
 
 const schema = yup.object().shape({
   veh_name: yup.string().min(3).max(30).required(),
@@ -59,6 +63,7 @@ const VehicleModal = ({
     // if type === "Register"
     // const [data, error] = await createVehicle(payload);
     if (type === "Register") {
+      console.log("Register path");
       const [data, error] = await createVehicle(payload);
 
       if (data) {
@@ -70,7 +75,9 @@ const VehicleModal = ({
         setError(error.response.data.message);
       }
     } else if (type === "Update") {
-      const [data, error] = await createVehicle(payload);
+      console.log("Update path");
+
+      const [data, error] = await updateVehicleLog(payload);
 
       if (data) {
         setSuccess("Vehicle created successfully");

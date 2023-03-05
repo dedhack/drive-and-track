@@ -104,7 +104,7 @@ const updateVehicle = async (req, res) => {
 
     // Update vehicles table
     const updateVehicle = await pool.query(
-      "UPDATE vehicles SET veh_name = $1, capacity = $2 WHERE veh_id = $3",
+      "UPDATE vehicles SET veh_name = $1, capacity = $2 WHERE veh_id = $3 RETURNING *",
       [veh_name, capacity, veh_id]
     );
 
@@ -112,12 +112,12 @@ const updateVehicle = async (req, res) => {
       console.log("PATCH /vehicles/update no vehicles found");
       return res
         .status(404)
-        .json({ status: "error", message: "no matching vehicle found" });
+        .json({ status: "error", message: "no matching vehicle found pt1" });
     }
 
     // Update vehicle_logs table
     const updateVehicleLogs = await pool.query(
-      "UPDATE vehicle_logs SET veh_desc = $1, make = $2, model = $3, year = $4, vin = $5, ins_pol = $6 WHERE veh_id = $7",
+      "UPDATE vehicle_logs SET veh_desc = $1, make = $2, model = $3, year = $4, vin = $5, ins_pol = $6 WHERE veh_id = $7 RETURNING *",
       [veh_desc, make, model, year, vin, ins_pol, veh_id]
     );
 
@@ -125,7 +125,7 @@ const updateVehicle = async (req, res) => {
       console.log("PATCH /vehicles/update no vehicles found");
       return res
         .status(404)
-        .json({ status: "error", message: "no matching vehiclefound" });
+        .json({ status: "error", message: "no matching vehicle found pt2" });
     }
 
     res
