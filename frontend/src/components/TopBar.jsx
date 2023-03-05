@@ -9,7 +9,7 @@ const TopBar = () => {
 
   return (
     <>
-      <div className="navbar bg-base-300">
+      <div className="navbar bg-base-300 ">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -32,6 +32,7 @@ const TopBar = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
+              {/* FIXME: change to home, vehicles etc */}
               <li>
                 <Link>Item 1</Link>
               </li>
@@ -67,7 +68,7 @@ const TopBar = () => {
             drive & track
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex ">
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link to="/home">Home</Link>
@@ -111,12 +112,12 @@ const TopBar = () => {
         <div className="navbar-end">
           {/* <Link className="btn">+</Link> */}
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn m-1">
+            <label tabIndex={0} className="btn btn-primary m-1">
               +
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+              className="dropdown-content menu p-2 shadow bg-primary-focus text-white rounded-box w-52"
             >
               <li>
                 {/* <button onClick={() => console.log("Add Fuel")}> */}

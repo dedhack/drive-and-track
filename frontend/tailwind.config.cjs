@@ -8,7 +8,7 @@ module.exports = {
     // "./node_modules/react-daisyui/dist/**/*.js",
   ],
   daisyui: {
-    themes: ["night"],
+    themes: false,
   },
   theme: {
     extend: {},

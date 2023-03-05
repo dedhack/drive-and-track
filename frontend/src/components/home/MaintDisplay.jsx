@@ -26,13 +26,14 @@ const MaintDisplay = () => {
       </tr>
     ));
     return (
-      <div className="table mt-40">
-        <table className="table-auto">
+      <div className="text-center">
+        <p>Maintenance</p>
+        <table className="table">
           <thead className="">
-            <tr>
-              <th>Date</th>
-              <th>Odometer</th>
-              <th>Price</th>
+            <tr className="">
+              <th className="bg-gray-800">Date</th>
+              <th className="bg-gray-800">Odometer</th>
+              <th className="bg-gray-800">Price</th>
             </tr>
           </thead>
           <tbody>{content}</tbody>
@@ -40,10 +41,6 @@ const MaintDisplay = () => {
       </div>
     );
   }
-  //   return (
-  //     // <div className="overflow-x-auto">
-
-  //   );
 };
 
 export default MaintDisplay;

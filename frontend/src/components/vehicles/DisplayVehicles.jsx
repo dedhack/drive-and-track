@@ -32,7 +32,7 @@ const DisplayVehicles = () => {
   } else if (selected) {
     const vehicle = selected[selectedVehicle];
     content = (
-      <div className="flex items-center justify-between h-28 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+      <>
         <div className="flex-1 p-4 text-center">
           vehicle name: {vehicle.veh_name}
         </div>
@@ -42,11 +42,17 @@ const DisplayVehicles = () => {
         <div className="flex-1 p-4 text-center">
           vehicle model: {vehicle.model}
         </div>
-      </div>
+      </>
     );
   }
 
-  return <div>{content}</div>;
+  return (
+    <div className="m-4 p-4">
+      <div className="flex items-center justify-between mb-4 rounded bg-base-300">
+        {content}
+      </div>
+    </div>
+  );
 };
 
 export default DisplayVehicles;

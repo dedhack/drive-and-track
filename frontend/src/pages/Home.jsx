@@ -1,34 +1,28 @@
-// import { Navbar } from "flowbite-react";
 import React from "react";
-// import { useAppStore } from "../stores/appStore";
-import { useJwt } from "react-jwt";
-import Side from "../components/Side";
-import useAuth from "../hooks/useAuth";
-import TopBar from "../components/TopBar";
-import HomeContent from "./HomeContent";
-import { useQuery, useQueryClient } from "react-query";
-// import { getVehicles } from "../apis/vehiclesAPI";
-import { axiosClient } from "../apis/usersAPI";
+import MaintDisplay from "../components/home/MaintDisplay";
 import DisplayVehicles from "../components/vehicles/DisplayVehicles";
-import FuelMaintDisplay from "../components/home/FuelMaintDisplay";
 
 const Home = () => {
-  // fetch user refuels
-
-  // fetch user maintenance
-
-  // fetch weather info
-  // if (isLoading) return "Loading...";
-
   return (
-    <div>
-      <HomeContent />
-      <FuelMaintDisplay />
-      {/* {vehiclesData ? (
-        vehiclesData.map((vehicle) => <p key={vehicle.id}>{vehicle.make}</p>)
-      ) : (
-        <p>Loading</p>
-      )} */}
+    <div className="p-4">
+      <div className="p-4 border-2 border-gray-900 rounded-lg ">
+        <DisplayVehicles />
+
+        <div className="flex flex-col justify-around">
+          {/* <MaintDisplay />
+          <MaintDisplay /> */}
+        </div>
+
+        {/* <div className="flex items-center justify-between mb-4 h-40 rounded bg-gray-50 dark:bg-gray-800">
+          <div className="flex-1 p-4 text-center">
+            <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              Fuel
+            </h2>
+          </div>
+          <div className="flex-1 p-4 text-center over">
+          </div>
+        </div> */}
+      </div>
     </div>
   );
 };
