@@ -55,6 +55,7 @@ const VehicleModal = ({
     }
   };
 
+
   const onSubmit = async (formData) => {
     setLoading(true);
     console.log("data: ", formData);

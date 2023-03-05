@@ -33,22 +33,21 @@ CREATE TABLE vehicle_logs(
         REFERENCES vehicles(veh_id)
 );
 
-CREATE TABLE refuel_logs(
-    refuel_id uuid DEFAULT uuid_generate_v4(),
-    veh_id uuid NOT NULL,
+CREATE TABLE refuel_logs (
+    refuel_id UUID DEFAULT uuid_generate_v4(),
+    veh_id UUID NOT NULL,
     datetime DATE DEFAULT CURRENT_DATE,
     odometer NUMERIC(10,1) NOT NULL,
     price NUMERIC(10,2) NOT NULL,
     location VARCHAR(30) NOT NULL,
     fuel_grade VARCHAR(30) NOT NULL,
     fuel_amount NUMERIC(10,2) NOT NULL,
-    is_full INT NOT NULL,
+    is_full BOOLEAN NOT NULL,
     PRIMARY KEY(refuel_id),
     CONSTRAINT fk_veh_id
         FOREIGN KEY(veh_id)
         REFERENCES vehicles(veh_id)
 );
-
 CREATE TABLE service_type(
     type_id SERIAL PRIMARY KEY,
     type_name VARCHAR(30) UNIQUE NOT NULL

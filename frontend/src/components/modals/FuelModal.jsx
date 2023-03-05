@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../Spinner";
-
+import { createRefuel, updateRefuel } from "../../apis/refuelAPI";
 const schema = yup.object().shape({
   datetime: yup.string().required(), // double check
   odometer: yup.number().min(1).required(),
@@ -20,7 +20,7 @@ const FuelModal = ({
   visible,
   setVisible,
   type,
-  veh_id = null,
+  veh_id2 = null,
   veh_info = null,
 }) => {
   // react-hook-form
@@ -38,13 +38,32 @@ const FuelModal = ({
   const { user_id, selectedVehicle } = useAuth();
 
   // FETCHING STUFF
+  //TODO: Make sure veh_id or selectedVehicle is passed else, throw an alert to user
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
   const onSubmit = async (formData) => {
     console.log("form data", formData);
-    console.log(errors);
+    setLoading(true);
+    const payload = { ...formData, veh_id: selectedVehicle };
+    console.log("payload", payload);
+    if (type === "Create") {
+      const [data, error] = await createRefuel(payload);
+
+      if (data) {
+        setSuccess("Successfully created refuel");
+      } else {
+        setError(error);
+      }
+    } else if (type === "Update") {
+      const [data, error] = await updateRefuel(payload);
+      if (data) {
+        setSuccess("Successfully updated refuel");
+      } else {
+        setError(error);
+      }
+    }
   };
 
   return (
@@ -58,7 +77,7 @@ const FuelModal = ({
           X
         </Button>
 
-        <Modal.Header className="font-bold">{`${type} Fuel & Fuel ID: ${veh_id}`}</Modal.Header>
+        <Modal.Header className="font-bold">{`${type} Fuel & SelectedVehicle ID: ${selectedVehicle}`}</Modal.Header>
 
         <Modal.Body>
           <form
@@ -151,7 +170,7 @@ const FuelModal = ({
                   {errors.fuel_amount?.message}
                 </p>
               </div>
-              {/* <div className="mb-2 block">
+              <div className="mb-2 block">
                 <label className="label">
                   <span className="label-text">Full Tank? </span>
                 </label>
@@ -164,7 +183,7 @@ const FuelModal = ({
                 <p className="text-center text-red-600">
                   {errors.is_full?.message}
                 </p>
-              </div> */}
+              </div>
             </div>
 
             {/* Submit button */}
