@@ -64,7 +64,7 @@ const TopBar = () => {
             </ul>
           </div>
 
-          <Link className="btn btn-ghost normal-case text-xl">
+          <Link className="btn btn-ghost normal-case text-xl" to="/login">
             drive & track
           </Link>
         </div>

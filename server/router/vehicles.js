@@ -13,8 +13,8 @@ const {
 // FIXME: all routes need to include auth. temporarily removed for testing
 
 router.put("/create", createVehicle);
-router.get("/allvehicles", getAllVehicles);
-router.get("/vehiclebyid", getVehicleById); //info for particular vehicle
+router.post("/allvehicles", getAllVehicles);
+router.post("/vehiclebyid", getVehicleById); //info for particular vehicle
 router.patch("/update/", updateVehicle);
 router.delete("/delete/", deleteVehicle);
 
