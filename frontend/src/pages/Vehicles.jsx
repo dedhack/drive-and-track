@@ -27,9 +27,9 @@ const Vehicles = () => {
     }
     // fetch the vehicles again
     const [data2, error2] = await getVehicles({ user_id: user_id });
-    if (data2) {
+    if (Array.isArray(data2)) {
       setVehicles(data2);
-    }
+    } else setVehicles(null);
   };
 
   let content = null;

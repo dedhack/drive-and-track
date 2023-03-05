@@ -19,6 +19,8 @@ const Home = () => {
 
     if (Array.isArray(data)) {
       setVehicles(data);
+    } else if (data?.message) {
+      console.log("message: ", error);
     }
     // console.log(vehicles);
   };
@@ -33,8 +35,9 @@ const Home = () => {
   };
 
   let content = null;
-  if (vehicles !== null && !selectedVehicle) {
+  if (vehicles !== null && selectedVehicle !== null) {
     // console.log("vehicles: ", vehicles);
+    console.log("vehicles !== null && !selectedVehicle");
     content = vehicles.map((vehicle, index) => {
       return (
         <div className="flex flex-row m-4 bg-slate-100 justify-around w-full">
@@ -66,7 +69,8 @@ const Home = () => {
       </div>
     );
   } else {
-    content = <div>no vehicles</div>;
+    console.log("no vehicles");
+    content = <div>no vehicles selected</div>;
   }
 
   return (

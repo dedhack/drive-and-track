@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../Spinner";
 import ErrAlert from "../ErrAlert";
-import { createVehicle } from "../../apis/vehiclesAPI";
+import { createVehicle, getVehicles } from "../../apis/vehiclesAPI";
 
 const schema = yup.object().shape({
   veh_name: yup.string().min(3).max(30).required(),
@@ -29,12 +29,20 @@ const VehicleModal = ({ visible, setVisible }) => {
     resolver: yupResolver(schema),
   });
 
-  const { user_id } = useAuth();
+  const { user_id, setVehicles } = useAuth();
 
   // FETCHING STUFF
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+
+  const fetchVehicles = async () => {
+    const [data, error] = await getVehicles({ user_id: user_id });
+
+    if (Array.isArray(data)) {
+      setVehicles(data);
+    }
+  };
 
   const onSubmit = async (formData) => {
     setLoading(true);
@@ -46,6 +54,7 @@ const VehicleModal = ({ visible, setVisible }) => {
     if (data) {
       setSuccess("Vehicle created successfully");
       setVisible(false);
+      await fetchVehicles();
     }
     if (error) {
       setError(error.response.data.message);
