@@ -73,7 +73,14 @@ const loginUser = async (req, res) => {
       jwtid: payload.id, // only express requires you to create the id.
     });
 
-    const response = { access, refresh, username: user.rows[0].username };
+    const response = {
+      access,
+      refresh,
+      username: user.rows[0].username,
+      email: user.rows[0].email,
+      is_Admin: user.rows[0].is_admin,
+      user_id: user.rows[0].id,
+    };
     // const response = typeof payload.id;
     res.json(response);
   } catch (error) {

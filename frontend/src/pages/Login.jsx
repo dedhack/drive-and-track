@@ -8,6 +8,7 @@ import Spinner from "../components/Spinner";
 import ErrAlert from "../components/ErrAlert";
 import useAxios from "../hooks/useAxios";
 import axios from "axios";
+import { useJwt } from "react-jwt";
 
 const schema = yup
   .object()
@@ -18,9 +19,9 @@ const schema = yup
   .required();
 
 const Login = () => {
-  const { setAuth, setEmail, setUsername, setUser_id, setIsAdmin } = useAuth();
+  const { auth, setAuth, setEmail, setUsername, setUser_id, setIsAdmin } =
+    useAuth();
   const navigate = useNavigate();
-  const [shouldFetch, setShouldFetch] = useState(false);
 
   // react hook form verification
   const {
@@ -31,6 +32,7 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const { decodedToken, isExpired } = useJwt(auth);
 
   const onSubmit = async (formData) => {
     console.log("formData: ", formData);
@@ -45,14 +47,15 @@ const Login = () => {
         const data = res.data;
         setAuth(data.access);
         setUsername(data.username);
-        // setUser_id(data.user_id);
-        // setIsAdmin(data.is_admin);
-        // navigate("/home");
+        setEmail(data.email);
+        setUser_id(data.user_id);
+        setIsAdmin(data.is_Admin);
+        localStorage.setItem("refresh", data.refresh);
+        navigate("/home", { replace: true });
       }
     } catch (error) {
       console.log(error);
     }
-    // console.log(data);
   };
 
   return (
