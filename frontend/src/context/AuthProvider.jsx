@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [user_id, setUser_id] = useState("");
@@ -19,7 +19,17 @@ export const AuthProvider = ({ children }) => {
   const [serviceTypes, setServiceTypes] = useState([]); // stores all service types. we will want to fetch once, and use it for the drop options in the maintenance modal
 
   const logout = () => {
-    setAuth({});
+    setAuth(null);
+    setUsername("");
+    setEmail("");
+    setUser_id("");
+    setIsAdmin(false);
+    setSelectedVehicle(null);
+    setVehicles([]);
+    setVehName("");
+    setFuelLogs([]);
+    setServiceLogs([]);
+    setServiceTypes([]);
     localStorage.removeItem("refresh");
   };
 

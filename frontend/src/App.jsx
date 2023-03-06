@@ -15,6 +15,11 @@ import Charts from "./pages/Charts";
 import FuelCharts from "./pages/FuelCharts";
 import MaintenanceCharts from "./pages/MaintenanceCharts";
 import TopBar from "./components/TopBar";
+import Logout from "./pages/Logout";
+import Admin from "./pages/Admin";
+
+import RequireAuth from "./components/RequireAuth";
+import RequireAuthAdmin from "./components/RequireAuthAdmin";
 
 const App = () => {
   const { auth } = useAuth();
@@ -23,15 +28,27 @@ const App = () => {
     <>
       <TopBar />
       <Routes>
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/vehicles" element={<Vehicles />} />
-        <Route path="/fuel" element={<Fuel />} />
-        <Route path="/maintenance" element={<Maintenance />} />
-        <Route path="/charts" element={<Charts />} />
-        <Route path="/fuel-charts" element={<FuelCharts />} />
-        <Route path="/maintenance-charts" element={<MaintenanceCharts />} />
+
+        {/* Protected Routes */}
+        <Route element={<RequireAuth />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/vehicles" element={<Vehicles />} />
+          <Route path="/fuel" element={<Fuel />} />
+          <Route path="/maintenance" element={<Maintenance />} />
+          <Route path="/charts" element={<Charts />} />
+          <Route path="/fuel-charts" element={<FuelCharts />} />
+          <Route path="/maintenance-charts" element={<MaintenanceCharts />} />
+          <Route path="/logout" element={<Logout />} />
+
+          <Route element={<RequireAuthAdmin />}>
+            <Route path="/admin" element={<Admin />} />
+          </Route>
+        </Route>
+
+        {/* TODO: Error page */}
       </Routes>
     </>
   );

@@ -18,7 +18,8 @@ const schema = yup
   .required();
 
 const Login = () => {
-  const { setAuth, setEmail, setUsername, setUser_id, setIsAdmin } = useAuth();
+  const { auth, setAuth, setEmail, setUsername, setUser_id, setIsAdmin } =
+    useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -61,66 +62,70 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex justify-center">
-        <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-stone-300">
-          {/* {errors?.username || errors?.password ? (
+      {auth ? (
+        navigate("/home", { replace: true })
+      ) : (
+        <div className="flex justify-center">
+          <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-stone-300">
+            {/* {errors?.username || errors?.password ? (
             <ErrAlert text="Invalid username or password" />
           ) : null} */}
-          {error ? <ErrAlert text={error} /> : null}
+            {error ? <ErrAlert text={error} /> : null}
 
-          <form
-            className="form-control w-full"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <h1 className="text-3xl font-bold text-center">Login</h1>
-            <div>
-              <div className="mb-2 block">
-                <label className="label">
-                  <span className="label-text">Username</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered w-full"
-                  {...register("username")}
-                />
-                <p className="text-center text-red-600">
-                  {errors.username?.message}
-                </p>
-              </div>
-              <div className="mb-2 block">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Type here"
-                  className="input input-bordered w-full"
-                  {...register("password")}
-                />
-                <p className="text-center text-red-600">
-                  {errors.password?.message}
-                </p>
-              </div>
-            </div>
-
-            {/* Submit button */}
-            <div className="text-center">
-              <button type="submit" className="btn">
-                {loading ? <Spinner /> : "Login"}
-              </button>
-            </div>
-          </form>
-          <div className="text-center mt-5">
-            <NavLink
-              className="font-medium text-stone-900 hover:underline animate-pulse"
-              to="/register"
+            <form
+              className="form-control w-full"
+              onSubmit={handleSubmit(onSubmit)}
             >
-              Register
-            </NavLink>
+              <h1 className="text-3xl font-bold text-center">Login</h1>
+              <div>
+                <div className="mb-2 block">
+                  <label className="label">
+                    <span className="label-text">Username</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered w-full"
+                    {...register("username")}
+                  />
+                  <p className="text-center text-red-600">
+                    {errors.username?.message}
+                  </p>
+                </div>
+                <div className="mb-2 block">
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Type here"
+                    className="input input-bordered w-full"
+                    {...register("password")}
+                  />
+                  <p className="text-center text-red-600">
+                    {errors.password?.message}
+                  </p>
+                </div>
+              </div>
+
+              {/* Submit button */}
+              <div className="text-center">
+                <button type="submit" className="btn">
+                  {loading ? <Spinner /> : "Login"}
+                </button>
+              </div>
+            </form>
+            <div className="text-center mt-5">
+              <NavLink
+                className="font-medium text-stone-900 hover:underline animate-pulse"
+                to="/register"
+              >
+                Register
+              </NavLink>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
