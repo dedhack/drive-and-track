@@ -10,7 +10,7 @@ const {
 } = require("../controllers/services");
 
 router.put("/create", auth, createServiceLog);
-router.post("/all", auth, getAllServices);
+router.post("/allservices", auth, getAllServices);
 router.patch("/update/", auth, updateServiceLog);
 router.delete("/delete/", auth, deleteServiceLog);
 

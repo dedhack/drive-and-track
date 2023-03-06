@@ -6,7 +6,7 @@ const axiosClient = axios.create({
 
 export const createService = async (newData, access) => {
   try {
-    const response = await axiosClient.put("services/create", newData{
+    const response = await axiosClient.put("services/create", newData, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
@@ -23,7 +23,7 @@ export const getServices = async (veh_id, access) => {
       headers: {
         Authorization: `Bearer ${access}`,
       },
-    })
+    });
     return [response.data, null];
   } catch (error) {
     return [null, error];

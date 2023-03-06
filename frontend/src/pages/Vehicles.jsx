@@ -48,7 +48,10 @@ const Vehicles = () => {
     content = vehicles.map((vehicle, index) => {
       return (
         <>
-          <div className="flex flex-row m-4 bg-slate-100 justify-around w-full">
+          <div
+            key={index}
+            className="flex flex-row m-4 bg-slate-100 justify-around w-full"
+          >
             <div className=" p-4 text-center">
               vehicle name: {vehicle.veh_name}
             </div>
