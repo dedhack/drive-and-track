@@ -21,6 +21,7 @@ const Login = () => {
   const { setAuth, setEmail, setUsername, setUser_id, setIsAdmin } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   // react hook form verification
   const {
@@ -53,7 +54,7 @@ const Login = () => {
         navigate("/home", { replace: true });
       }
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.message);
     }
     setLoading(false);
   };
@@ -62,9 +63,10 @@ const Login = () => {
     <>
       <div className="flex justify-center">
         <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-stone-300">
-          {errors?.username || errors?.password ? (
+          {/* {errors?.username || errors?.password ? (
             <ErrAlert text="Invalid username or password" />
-          ) : null}
+          ) : null} */}
+          {error ? <ErrAlert text={error} /> : null}
 
           <form
             className="form-control w-full"

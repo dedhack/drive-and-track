@@ -34,14 +34,12 @@ const loginUser = async (req, res) => {
     const user = await pool.query("SELECT * FROM users WHERE username = $1", [
       req.body.username,
     ]);
+    // if user does not exist return error
     if (user.rows.length === 0) {
-      res
+      return res
         .status(400)
         .json({ status: "error", message: "username/password issue" });
     }
-
-    // check what is returned in user
-    // res.json(user);
 
     // Check if password is correct
     const result = await bcrypt.compare(
@@ -82,10 +80,10 @@ const loginUser = async (req, res) => {
       user_id: user.rows[0].id,
     };
     // const response = typeof payload.id;
-    res.json(response);
+    return res.json(response);
   } catch (error) {
     console.log("POST /users/login", error);
-    res.status(400).json({ status: "error", message: error });
+    return res.status(400).json({ status: "error", message: error });
   }
 };
 
