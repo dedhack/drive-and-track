@@ -6,10 +6,11 @@ const auth = (req, res, next) => {
   //
   console.log(req.headers);
   const token = req.headers["authorization"].replace("Bearer ", "");
-
+  console.log("token: ", token);
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.ACCESS_SECRET);
+      console.log("decoded: ", decoded);
       req.decoded = decoded;
       next();
     } catch (error) {

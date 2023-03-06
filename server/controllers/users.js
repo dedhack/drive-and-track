@@ -63,7 +63,7 @@ const loginUser = async (req, res) => {
 
     // create access token
     const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
-      expiresIn: 30,
+      expiresIn: "1D",
       jwtid: payload.id,
     });
 
