@@ -5,7 +5,7 @@ CREATE TABLE users(
     username VARCHAR(30) NOT NULL UNIQUE,
     email VARCHAR(30) NOT NULL UNIQUE,
     password TEXT NOT NULL,
-    is_Admin INT DEFAULT 0,
+    is_Admin BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
@@ -19,7 +19,7 @@ INSERT INTO users(
     'admin',
     'admin@test.com',
     -- '12345678', -- password needs to be encrypted with bcrypt
-    1
+    'TRUE',
 )
 
 -- | id                                   | username | email          | password                                                     | is_admin |
@@ -77,13 +77,13 @@ INSERT INTO vehicles(
 CREATE TABLE refuel_logs(
     refuel_id uuid DEFAULT uuid_generate_v4(),
     veh_id uuid NOT NULL,
-    datetime DATE DEFAULT CURRENT_DATE,
+    datetime TIMESTAMP DEFAULT CURRENT_DATE,
     odometer NUMERIC(10,1) NOT NULL,
     price NUMERIC(10,2) NOT NULL,
     location VARCHAR(30) NOT NULL,
     fuel_grade VARCHAR(30) NOT NULL,
     fuel_amount NUMERIC(10,2) NOT NULL,
-    is_full INT NOT NULL,
+    is_full BOOLEAN NOT NULL,
     PRIMARY KEY(refuel_id),
     CONSTRAINT fk_veh_id
         FOREIGN KEY(veh_id)
@@ -99,13 +99,14 @@ CREATE TABLE service_type(
 CREATE TABLE service_logs(
     service_id uuid DEFAULT uuid_generate_v4(),
     veh_id uuid NOT NULL REFERENCES vehicles(veh_id),
-    datetime DATE DEFAULT CURRENT_DATE,
+    datetime TIMESTAMP DEFAULT CURRENT_DATE,
     odometer NUMERIC(10,1) NOT NULL,
     price NUMERIC(10,2) NOT NULL,
     location VARCHAR(30) NOT NULL,
     service_type INT NOT NULL REFERENCES service_type(type_id),
     service_desc TEXT NOT NULL,
     PRIMARY KEY(service_id)
+    -- TODO: Later need to edit this
     -- CONSTRAINT fk_veh_id, service_type
     --     FOREIGN KEY(veh_id, service_type)
     --     REFERENCES vehicles(veh_id), service_type(type_name)

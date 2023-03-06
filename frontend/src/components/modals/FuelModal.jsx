@@ -63,7 +63,7 @@ const FuelModal = ({
       if (data) {
         setSuccess("Successfully updated refuel");
         setVisible(false);
-        await getRefuels();
+        await getRefuels({});
       } else {
         setError(error);
       }
