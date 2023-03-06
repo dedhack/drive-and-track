@@ -50,7 +50,7 @@ const FuelModal = ({
     const payload = { ...formData, veh_id: selectedVehicle };
     console.log("payload", payload);
     if (type === "Create") {
-      const [data, error] = await createRefuel(payload);
+      const [data, error] = await createRefuel(payload, auth);
 
       if (data) {
         setSuccess("Successfully created refuel");
@@ -66,11 +66,14 @@ const FuelModal = ({
         setError(error);
       }
     } else if (type === "Update") {
-      const [data, error] = await updateRefuel(payload);
+      const [data, error] = await updateRefuel(payload, auth);
       if (data) {
         setSuccess("Successfully updated refuel");
         setVisible(false);
-        const [data, error] = await getRefuels({ veh_id: selectedVehicle });
+        const [data, error] = await getRefuels(
+          { veh_id: selectedVehicle },
+          auth
+        );
         if (Array.isArray(data)) {
           setFuelLogs(data);
         }
