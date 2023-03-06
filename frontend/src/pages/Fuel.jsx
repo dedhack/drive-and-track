@@ -28,9 +28,12 @@ const Fuel = () => {
   }, []);
 
   const handleDelete = async (refuel_id) => {
-    const [data, error] = await deleteRefuel({ refuel_id: refuel_id });
+    const [data, error] = await deleteRefuel({ refuel_id: refuel_id }, auth);
     if (data) {
       console.log("refuel deleted data: ", data);
+    }
+    if (error) {
+      console.log("refuel deleted error: ", error);
     }
     // fetch the refuels again
     fetchFuel();

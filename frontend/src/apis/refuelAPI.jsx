@@ -32,10 +32,13 @@ export const getRefuels = async (veh_id, access) => {
     return [null, error];
   }
 };
-
-export const deleteRefuel = async (refuel_id) => {
+//
+export const deleteRefuel = async (refuel_id, access) => {
   try {
     const response = await axiosClient.delete("refuels/delete", {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
       data: refuel_id,
     });
     return [response.data, null];
@@ -44,7 +47,7 @@ export const deleteRefuel = async (refuel_id) => {
   }
 };
 
-export const updateRefuel = async (newData) => {
+export const updateRefuel = async (newData, access) => {
   try {
     const response = await axiosClient.patch("refuels/update", newData);
     return [response.data, null];
