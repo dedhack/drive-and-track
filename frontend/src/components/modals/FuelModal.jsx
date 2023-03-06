@@ -55,6 +55,10 @@ const FuelModal = ({
       if (data) {
         setSuccess("Successfully created refuel");
         setVisible(false);
+        const [data, error] = await getRefuels({ veh_id: selectedVehicle });
+        if (Array.isArray(data)) {
+          setFuelLogs(data);
+        }
       } else {
         setError(error);
       }
