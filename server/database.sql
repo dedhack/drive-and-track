@@ -9,24 +9,6 @@ CREATE TABLE users(
     PRIMARY KEY (id)
 );
 
--- Insert admin user
-INSERT INTO users(
-    username,
-    email,
-    password,
-    is_Admin
-) VALUES (
-    'admin',
-    'admin@test.com',
-    -- '12345678', -- password needs to be encrypted with bcrypt
-    'TRUE',
-)
-
--- | id                                   | username | email          | password                                                     | is_admin |
--- | ------------------------------------ | -------- | -------------- | ------------------------------------------------------------ | -------- |
--- | 679460b7-84f8-44be-bb1b-50d3a50c04cc | admin    | admin@test.com | $2b$12$BiiEix7cBBacXbNOkR3QReraMM0RPiMeo0ozBOrCYCE1ByFLYQRfW | 0        |
--- | 5d7f10e0-01cc-4dda-9c7a-5e667b6d0aef | test     | test@test.com  | $2b$12$vv6hJ83YzMhFp3QA/PL6oOf9A5ingl6ojE4gPXvu3xA2AiTTsiy5O | 0        |
-
 -- Create table for vehicles
 CREATE TABLE vehicles(
     veh_id uuid DEFAULT uuid_generate_v4(),
@@ -37,6 +19,7 @@ CREATE TABLE vehicles(
     CONSTRAINT fk_user_id
         FOREIGN KEY(user_id)
         REFERENCES users(id)
+        ON DELETE CASCADE
 );
 
 -- Create table for vehicle logs
@@ -56,23 +39,6 @@ CREATE TABLE vehicle_logs(
 );
 
 
--- Insert vehicle
-INSERT INTO vehicles(
-    veh_name,
-    capacity,
-    user_id
-) VALUES (
-    'Toyota',
-    40,
-    '679460b7-84f8-44be-bb1b-50d3a50c04cc'
-);
-
--- | veh_id                               | veh_name | capacity | user_id                              |
--- | ------------------------------------ | -------- | -------- | ------------------------------------ |
--- | c3e75ff9-b8e4-4b7b-82d5-2f80f102104b | Toyota   | 40.00    | 679460b7-84f8-44be-bb1b-50d3a50c04cc |
-
-
-
 -- Create refuel_logs table
 CREATE TABLE refuel_logs(
     refuel_id uuid DEFAULT uuid_generate_v4(),
@@ -88,6 +54,7 @@ CREATE TABLE refuel_logs(
     CONSTRAINT fk_veh_id
         FOREIGN KEY(veh_id)
         REFERENCES vehicles(veh_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE service_type(

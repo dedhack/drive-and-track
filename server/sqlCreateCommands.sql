@@ -1,42 +1,45 @@
-CREATE TABLE users(
-    id uuid DEFAULT uuid_generate_v4(),
-    username VARCHAR(30) NOT NULL UNIQUE,
-    email VARCHAR(30) NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    is_Admin INT DEFAULT 0,
-    PRIMARY KEY (id)
+CREATE TABLE users (
+  id uuid DEFAULT uuid_generate_v4(),
+  username VARCHAR(30) NOT NULL UNIQUE,
+  email VARCHAR(30) NOT NULL UNIQUE,
+  password TEXT NOT NULL,
+  is_admin BOOLEAN DEFAULT FALSE,
+  PRIMARY KEY (id)
 );
 
-CREATE TABLE vehicles(
-    veh_id uuid DEFAULT uuid_generate_v4(),
-    veh_name VARCHAR(30) NOT NULL,
-    capacity NUMERIC(5,2) NOT NULL,
-    user_id uuid NOT NULL,
-    PRIMARY KEY(veh_id),
-    CONSTRAINT fk_user_id
-        FOREIGN KEY(user_id)
-        REFERENCES users(id)
+CREATE TABLE vehicles (
+  veh_id uuid DEFAULT uuid_generate_v4(),
+  veh_name VARCHAR(30) NOT NULL,
+  capacity NUMERIC(5,2) NOT NULL,
+  user_id uuid NOT NULL,
+  PRIMARY KEY(veh_id),
+  CONSTRAINT fk_user_id
+    FOREIGN KEY(user_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
 );
 
-CREATE TABLE vehicle_logs(
-    log_id uuid DEFAULT uuid_generate_v4(),
-    veh_desc TEXT NOT NULL,
-    make VARCHAR(30) NOT NULL,
-    model VARCHAR(30) NOT NULL,
-    year NUMERIC(4,0) NOT NULL,
-    vin VARCHAR(30) NOT NULL,
-    ins_pol VARCHAR(30) NOT NULL,
+CREATE TABLE vehicle_logs (
+  log_id uuid DEFAULT uuid_generate_v4(),
+  veh_desc TEXT NOT NULL,
+  make VARCHAR(30) NOT NULL,
+  model VARCHAR(30) NOT NULL,
+  year NUMERIC(4,0) NOT NULL,
+  vin VARCHAR(30) NOT NULL,
+  ins_pol VARCHAR(30) NOT NULL,
+  veh_id uuid NOT NULL,
+  PRIMARY KEY(log_id),
+  CONSTRAINT fk_veh_id
+    FOREIGN KEY(veh_id)
+    REFERENCES vehicles(veh_id)
+    ON DELETE CASCADE
+);
+
+-- Create refuel_logs table
+CREATE TABLE refuel_logs(
+    refuel_id uuid DEFAULT uuid_generate_v4(),
     veh_id uuid NOT NULL,
-    PRIMARY KEY(log_id),
-    CONSTRAINT fk_veh_id
-        FOREIGN KEY(veh_id)
-        REFERENCES vehicles(veh_id)
-);
-
-CREATE TABLE refuel_logs (
-    refuel_id UUID DEFAULT uuid_generate_v4(),
-    veh_id UUID NOT NULL,
-    datetime DATE DEFAULT CURRENT_DATE,
+    datetime TIMESTAMP DEFAULT CURRENT_DATE,
     odometer NUMERIC(10,1) NOT NULL,
     price NUMERIC(10,2) NOT NULL,
     location VARCHAR(30) NOT NULL,
@@ -47,26 +50,35 @@ CREATE TABLE refuel_logs (
     CONSTRAINT fk_veh_id
         FOREIGN KEY(veh_id)
         REFERENCES vehicles(veh_id)
-);
-CREATE TABLE service_type(
-    type_id SERIAL PRIMARY KEY,
-    type_name VARCHAR(30) UNIQUE NOT NULL
+        ON DELETE CASCADE
 );
 
-CREATE TABLE service_logs(
-    service_id uuid DEFAULT uuid_generate_v4(),
-    veh_id uuid NOT NULL REFERENCES vehicles(veh_id),
-    datetime DATE DEFAULT CURRENT_DATE,
-    odometer NUMERIC(10,1) NOT NULL,
-    price NUMERIC(10,2) NOT NULL,
-    location VARCHAR(30) NOT NULL,
-    service_type INT NOT NULL REFERENCES service_type(type_id),
-    service_desc TEXT NOT NULL,
-    PRIMARY KEY(service_id)
-    -- CONSTRAINT fk_veh_id, service_type
-    --     FOREIGN KEY(veh_id, service_type)
-    --     REFERENCES vehicles(veh_id), service_type(type_name)
+
+CREATE TABLE service_type (
+  type_id SERIAL PRIMARY KEY,
+  type_name VARCHAR(30) UNIQUE NOT NULL
 );
+
+CREATE TABLE service_logs (
+  service_id uuid DEFAULT uuid_generate_v4(),
+  veh_id uuid NOT NULL,
+  datetime DATE DEFAULT CURRENT_DATE,
+  odometer NUMERIC(10,1) NOT NULL,
+  price NUMERIC(10,2) NOT NULL,
+  location VARCHAR(30) NOT NULL,
+  service_type INT NOT NULL,
+  service_desc TEXT NOT NULL,
+  PRIMARY KEY(service_id),
+  CONSTRAINT fk_veh_id
+    FOREIGN KEY(veh_id)
+    REFERENCES vehicles(veh_id)
+    ON DELETE CASCADE,
+  CONSTRAINT fk_service_type
+    FOREIGN KEY(service_type)
+    REFERENCES service_type(type_id)
+    ON DELETE CASCADE
+);
+
 
 --FIXME:
 -- modifications done to these tables to allow for cascading
