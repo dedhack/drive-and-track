@@ -4,6 +4,7 @@ import { getVehicles } from "../apis/vehiclesAPI";
 
 const Home = () => {
   const {
+    auth,
     username,
     user_id,
     vehicles,
@@ -15,7 +16,7 @@ const Home = () => {
   // pull out list of vehicles
 
   const fetchVehicles = async () => {
-    const [data, error] = await getVehicles({ user_id: user_id });
+    const [data, error] = await getVehicles({ user_id: user_id }, auth);
 
     if (Array.isArray(data)) {
       setVehicles(data);

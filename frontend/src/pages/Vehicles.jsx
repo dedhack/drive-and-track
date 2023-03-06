@@ -11,6 +11,7 @@ const Vehicles = () => {
     selectedVehicle,
     setSelectedVehicle,
     setVehName,
+    auth,
   } = useAuth();
   const [vehicleVisible, setVehicleVisible] = useState(false);
   const [updateVehicle, setUpdateVehicle] = useState(null);
@@ -27,12 +28,12 @@ const Vehicles = () => {
   };
 
   const handleDelete = (veh_id) => async () => {
-    const [data, error] = await deleteVehicleLog({ veh_id: veh_id });
+    const [data, error] = await deleteVehicleLog({ veh_id: veh_id }, auth);
     if (data) {
       console.log("vehicle deleted data: ", data);
     }
     // fetch the vehicles again
-    const [data2, error2] = await getVehicles({ user_id: user_id });
+    const [data2, error2] = await getVehicles({ user_id: user_id }, auth);
     if (Array.isArray(data2)) {
       setVehicles(data2);
     } else {

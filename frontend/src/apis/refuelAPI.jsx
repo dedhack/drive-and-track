@@ -49,7 +49,11 @@ export const deleteRefuel = async (refuel_id, access) => {
 
 export const updateRefuel = async (newData, access) => {
   try {
-    const response = await axiosClient.patch("refuels/update", newData);
+    const response = await axiosClient.patch("refuels/update", newData, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    });
     return [response.data, null];
   } catch (error) {
     return [null, error];

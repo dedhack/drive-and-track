@@ -4,9 +4,13 @@ const axiosClient = axios.create({
   baseURL: "http://localhost:5001/",
 });
 
-export const createVehicle = async (data) => {
+export const createVehicle = async (data, access) => {
   try {
-    const response = await axiosClient.put("vehicles/create", data);
+    const response = await axiosClient.put("vehicles/create", data, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    });
     return [response.data, null];
   } catch (error) {
     return [null, error];
@@ -15,9 +19,14 @@ export const createVehicle = async (data) => {
 
 // TODO: below are generics HTTP requests that needs to be edited
 
-export const getVehicles = async (data) => {
+export const getVehicles = async (data, access) => {
   try {
-    const response = await axiosClient.post("vehicles/allvehicles", data);
+    const response = await axiosClient.post("vehicles/allvehicles", data, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+      data: data,
+    });
     return [response.data, null];
   } catch (error) {
     return [null, error];
@@ -25,27 +34,17 @@ export const getVehicles = async (data) => {
 };
 
 // for specific vehicle log
-export const getVehicleLog = async (data) => {};
+export const getVehicleLog = async (data, access) => {};
 
 // Update vehicle log by id
-export const updateVehicleLog = async (data) => {
-  // expected data format:
-  //   {
-  //     "veh_id" : "dc792216-bf37-4c5a-857e-0add90a87087",
-  //     "veh_name": "toyota vios 2",
-  //     "capacity": "40",
-  //     "user_id": "679460b7-84f8-44be-bb1b-50d3a50c04cc",
-  //     "veh_desc": "blue",
-  //     "make": "toyota",
-  //     "model": "vios",
-  //     "year": "2010",
-  //     "vin": "123",
-  //     "ins_pol": "456"
-  // }
-
+export const updateVehicleLog = async (data, access) => {
   // payload needs veh_id, and user_id (from global state)
   try {
-    const response = await axiosClient.patch("vehicles/update", data);
+    const response = await axiosClient.patch("vehicles/update", data, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    });
     return [response.data, null];
   } catch (error) {
     return [null, error];
@@ -53,9 +52,12 @@ export const updateVehicleLog = async (data) => {
 };
 
 // Delete vehicle log by id
-export const deleteVehicleLog = async (data) => {
+export const deleteVehicleLog = async (data, access) => {
   try {
     const response = await axiosClient.delete("vehicles/delete", {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
       data: data,
     });
     return [response.data, null];

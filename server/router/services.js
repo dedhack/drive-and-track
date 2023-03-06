@@ -9,9 +9,9 @@ const {
   deleteServiceLog,
 } = require("../controllers/services");
 
-router.put("/create", createServiceLog);
-router.post("/all", getAllServices);
-router.patch("/update/", updateServiceLog);
-router.delete("/delete/", deleteServiceLog);
+router.put("/create", auth, createServiceLog);
+router.post("/all", auth, getAllServices);
+router.patch("/update/", auth, updateServiceLog);
+router.delete("/delete/", auth, deleteServiceLog);
 
 module.exports = router;

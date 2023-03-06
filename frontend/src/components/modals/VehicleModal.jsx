@@ -40,7 +40,7 @@ const VehicleModal = ({
     defaultValues: veh_info,
   });
 
-  const { user_id, setVehicles } = useAuth();
+  const { auth, user_id, setVehicles } = useAuth();
 
   // FETCHING STUFF
   const [loading, setLoading] = useState(false);
@@ -48,13 +48,12 @@ const VehicleModal = ({
   const [success, setSuccess] = useState(null);
 
   const fetchVehicles = async () => {
-    const [data, error] = await getVehicles({ user_id: user_id });
+    const [data, error] = await getVehicles({ user_id: user_id }, auth);
 
     if (Array.isArray(data)) {
       setVehicles(data);
     }
   };
-
 
   const onSubmit = async (formData) => {
     setLoading(true);
@@ -65,7 +64,7 @@ const VehicleModal = ({
     // const [data, error] = await createVehicle(payload);
     if (type === "Register") {
       console.log("Register path");
-      const [data, error] = await createVehicle(payload);
+      const [data, error] = await createVehicle(payload, auth);
 
       if (data) {
         setSuccess("Vehicle created successfully");
@@ -78,7 +77,7 @@ const VehicleModal = ({
     } else if (type === "Update") {
       console.log("Update path");
 
-      const [data, error] = await updateVehicleLog(payload);
+      const [data, error] = await updateVehicleLog(payload, auth);
 
       if (data) {
         setSuccess("Vehicle created successfully");

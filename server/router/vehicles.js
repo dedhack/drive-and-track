@@ -12,10 +12,10 @@ const {
 
 // FIXME: all routes need to include auth. temporarily removed for testing
 
-router.put("/create", createVehicle);
-router.post("/allvehicles", getAllVehicles);
-router.post("/vehiclebyid", getVehicleById); //info for particular vehicle
-router.patch("/update/", updateVehicle);
-router.delete("/delete/", deleteVehicle);
+router.put("/create", auth, createVehicle);
+router.post("/allvehicles", auth, getAllVehicles);
+router.post("/vehiclebyid", auth, getVehicleById); //info for particular vehicle
+router.patch("/update/", auth, updateVehicle);
+router.delete("/delete/", auth, deleteVehicle);
 
 module.exports = router;
