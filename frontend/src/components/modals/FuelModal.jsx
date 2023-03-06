@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../Spinner";
-import { createRefuel, updateRefuel } from "../../apis/refuelAPI";
+import { createRefuel, updateRefuel, getRefuels } from "../../apis/refuelAPI";
 const schema = yup.object().shape({
   datetime: yup.string().required(), // double check
   odometer: yup.number().min(1).required(),
@@ -20,8 +20,8 @@ const FuelModal = ({
   visible,
   setVisible,
   type,
-  veh_id2 = null,
-  veh_info = null,
+  refuel_id = null,
+  refuel_info = null,
 }) => {
   // react-hook-form
   const {
@@ -31,6 +31,7 @@ const FuelModal = ({
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: refuel_info,
   });
 
   // console.log(watch("datetime"));
@@ -53,6 +54,7 @@ const FuelModal = ({
 
       if (data) {
         setSuccess("Successfully created refuel");
+        setVisible(false);
       } else {
         setError(error);
       }
@@ -60,6 +62,8 @@ const FuelModal = ({
       const [data, error] = await updateRefuel(payload);
       if (data) {
         setSuccess("Successfully updated refuel");
+        setVisible(false);
+        await getRefuels();
       } else {
         setError(error);
       }
@@ -78,7 +82,7 @@ const FuelModal = ({
           X
         </Button>
 
-        <Modal.Header className="font-bold">{`${type} Fuel & SelectedVehicle ID: ${selectedVehicle}`}</Modal.Header>
+        <Modal.Header className="font-bold">{`${type} Fuel & Fuel ID: ${refuel_id}`}</Modal.Header>
 
         <Modal.Body>
           <form

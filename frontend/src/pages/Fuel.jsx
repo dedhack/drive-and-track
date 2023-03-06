@@ -7,6 +7,8 @@ const Fuel = () => {
   const { user_id, selectedVehicle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [fuel, setFuel] = useState([]);
+  const [fuelVisible, setFuelVisible] = useState(false);
+  const [updateRefuel, setUpdateRefuel] = useState(null);
 
   const fetchFuel = async () => {
     console.log("selectedVehicle: ", selectedVehicle);
@@ -34,30 +36,47 @@ const Fuel = () => {
     fetchFuel();
   };
 
+  const handleUpdate = (refuel_id) => async () => {
+    setUpdateRefuel(refuel_id);
+    setFuelVisible(true);
+  };
+
   let content = null;
   if (Array.isArray(fuel) && fuel.length > 0) {
     content = fuel.map((fuel, index) => {
       return (
-        <>
-          <div
-            key={index}
-            className="flex flex-row m-4 bg-slate-100 justify-around w-full"
-          >
-            <div className="p-4 text-center">date: {fuel.datetime}</div>
-            <div className="p-4 text-center">odometer: {fuel.odometer} km</div>
-            <div className="p-4 text-center">price: ${fuel.price}</div>
-            <div className="p-4 text-center">Litres: {fuel.fuel_amount}L</div>
-            <div>
-              <button className="btn">Update</button>
-              <button
-                className="btn"
-                onClick={() => handleDelete(fuel.refuel_id)}
-              >
-                Delete
-              </button>
-            </div>
+        <div
+          key={index}
+          className="flex flex-row mt-4 bg-slate-100 justify-around w-full"
+        >
+          <div className="p-4 text-center">date: {fuel.datetime}</div>
+          <div className="p-4 text-center">odometer: {fuel.odometer} km</div>
+          <div className="p-4 text-center">price: ${fuel.price}</div>
+          <div className="p-4 text-center">Litres: {fuel.fuel_amount}L</div>
+          <div>
+            <button
+              className="btn"
+              onClick={() => handleUpdate(fuel.refuel_id)()}
+            >
+              Update
+            </button>
+            {updateRefuel === fuel.refuel_id && (
+              <FuelModal
+                visible={fuelVisible}
+                setVisible={setFuelVisible}
+                type={"Update"}
+                refuel_id={fuel.refuel_id}
+                refuel_info={fuel}
+              />
+            )}
+            <button
+              className="btn"
+              onClick={() => handleDelete(fuel.refuel_id)}
+            >
+              Delete
+            </button>
           </div>
-        </>
+        </div>
       );
     });
   } else {

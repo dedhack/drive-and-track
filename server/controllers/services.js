@@ -51,7 +51,7 @@ const getAllServices = async (req, res) => {
     }
 
     const serviceLogs = await pool.query(
-      "SELECT * FROM service_logs WHERE veh_id = $1",
+      "SELECT * FROM service_logs INNER JOIN vehicles ON service_logs.veh_id WHERE vehicles.veh_id = $1 ORDER BY datetime DESC",
       [veh_id]
     );
     res.status(200).json(serviceLogs.rows);

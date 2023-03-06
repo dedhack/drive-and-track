@@ -149,6 +149,7 @@ const deleteRefuelLog = async (req, res) => {
       "DELETE FROM refuel_logs WHERE refuel_id = $1 RETURNING *",
       [refuel_id]
     );
+
     // console.log(deletedFuelLog.rows[0])
     res.status(200).json({ status: "success", message: "refuel log deleted" });
   } catch (error) {
