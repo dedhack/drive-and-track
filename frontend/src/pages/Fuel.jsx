@@ -4,9 +4,9 @@ import FuelModal from "../components/modals/FuelModal";
 import { getRefuels, deleteRefuel } from "../apis/refuelAPI";
 
 const Fuel = () => {
-  const { user_id, selectedVehicle } = useAuth();
+  const { user_id, selectedVehicle, fuelLogs, setFuelLogs } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const [fuel, setFuel] = useState([]);
+  // const [fuel, setFuel] = useState([]);
   const [fuelVisible, setFuelVisible] = useState(false);
   const [updateRefuel, setUpdateRefuel] = useState(null);
 
@@ -15,7 +15,7 @@ const Fuel = () => {
     const [data, error] = await getRefuels({ veh_id: selectedVehicle });
     console.log("data: ", data); // data returned is an object for 1 entry
     if (data) {
-      setFuel(data);
+      setFuelLogs(data);
     } else if (data?.message) {
       console.log("message: ", error);
     }
@@ -24,7 +24,7 @@ const Fuel = () => {
 
   useEffect(() => {
     fetchFuel();
-    console.log(fuel);
+    console.log(fuelLogs);
   }, []);
 
   const handleDelete = async (refuel_id) => {
@@ -42,8 +42,8 @@ const Fuel = () => {
   };
 
   let content = null;
-  if (Array.isArray(fuel) && fuel.length > 0) {
-    content = fuel.map((fuel, index) => {
+  if (Array.isArray(fuelLogs) && fuelLogs.length > 0) {
+    content = fuelLogs.map((fuel, index) => {
       return (
         <div
           key={index}

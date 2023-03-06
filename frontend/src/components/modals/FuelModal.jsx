@@ -36,7 +36,7 @@ const FuelModal = ({
 
   // console.log(watch("datetime"));
   // selected vehicle -> veh_id
-  const { user_id, selectedVehicle } = useAuth();
+  const { user_id, selectedVehicle, setFuelLogs } = useAuth();
 
   // FETCHING STUFF
   //TODO: Make sure veh_id or selectedVehicle is passed else, throw an alert to user
@@ -63,7 +63,10 @@ const FuelModal = ({
       if (data) {
         setSuccess("Successfully updated refuel");
         setVisible(false);
-        await getRefuels({});
+        const [data, error] = await getRefuels({ veh_id: selectedVehicle });
+        if (Array.isArray(data)) {
+          setFuelLogs(data);
+        }
       } else {
         setError(error);
       }

@@ -9,9 +9,13 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [user_id, setUser_id] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+
   const [selectedVehicle, setSelectedVehicle] = useState(null); // takes in veh_id
   const [vehicles, setVehicles] = useState([]); // stores all vehicles
   const [vehName, setVehName] = useState("");
+
+  const [fuelLogs, setFuelLogs] = useState([]); // stores all fuel logs
+  const [serviceLogs, setServiceLogs] = useState([]); // stores all service logs
 
   const logout = () => {
     setAuth({});
@@ -40,6 +44,10 @@ export const AuthProvider = ({ children }) => {
         setVehicles,
         vehName,
         setVehName,
+        fuelLogs,
+        setFuelLogs,
+        serviceLogs,
+        setServiceLogs,
       }}
     >
       {children}
