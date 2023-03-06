@@ -46,8 +46,22 @@ export const deleteService = async (service_id, access) => {
 
 export const updateService = async (newData, access) => {
   try {
-    const response = await axiosClient.patch("services/update", newData);
+    const response = await axiosClient.patch("services/update", newData, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    });
 
+    return [response.data, null];
+  } catch (error) {
+    return [null, error];
+  }
+};
+
+// don't need auth
+export const getServiceTypes = async () => {
+  try {
+    const response = await axiosClient.get("services/types");
     return [response.data, null];
   } catch (error) {
     return [null, error];

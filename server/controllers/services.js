@@ -147,9 +147,22 @@ const deleteServiceLog = async (req, res) => {
   }
 };
 
+// 5. get all service types
+
+const getAllServiceTypes = async (req, res) => {
+  try {
+    const serviceTypes = await pool.query("SELECT * FROM service_type");
+    res.status(200).json(serviceTypes.rows);
+  } catch (error) {
+    console.log("GET /services/types", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
+
 module.exports = {
   createServiceLog,
   getAllServices,
   updateServiceLog,
   deleteServiceLog,
+  getAllServiceTypes,
 };

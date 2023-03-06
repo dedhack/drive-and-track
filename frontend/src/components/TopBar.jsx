@@ -4,10 +4,12 @@ import { useJwt } from "react-jwt";
 import useAuth from "../hooks/useAuth";
 import FuelModal from "./modals/FuelModal";
 import VehicleModal from "./modals/VehicleModal";
+import MaintenanceModal from "./modals/MaintenanceModal";
 
 const TopBar = () => {
   const [fuelVisible, setFuelVisible] = useState(false);
   const [vehicleVisible, setVehicleVisible] = useState(false);
+  const [serviceVisible, setServiceVisible] = useState(false);
   const { selectedVehicle, vehicles, vehName, setVehName } = useAuth();
 
   useEffect(() => {
@@ -145,22 +147,27 @@ const TopBar = () => {
                 </button>
               </li>
               <li>
-                <button onClick={() => console.log("Add Maintenance")}>
+                <button onClick={() => setServiceVisible(!serviceVisible)}>
                   Add Maintenance
                 </button>
               </li>
             </ul>
           </div>
         </div>
+        <VehicleModal
+          visible={vehicleVisible}
+          setVisible={setVehicleVisible}
+          type={"Register"}
+        />
         <FuelModal
           visible={fuelVisible}
           setVisible={setFuelVisible}
           type={"Create"}
         />
-        <VehicleModal
-          visible={vehicleVisible}
-          setVisible={setVehicleVisible}
-          type={"Register"}
+        <MaintenanceModal
+          visible={serviceVisible}
+          setVisible={setServiceVisible}
+          type={"Create"}
         />
       </div>
     </>

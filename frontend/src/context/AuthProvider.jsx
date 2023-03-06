@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
 
   const [fuelLogs, setFuelLogs] = useState([]); // stores all fuel logs
   const [serviceLogs, setServiceLogs] = useState([]); // stores all service logs
+  const [serviceTypes, setServiceTypes] = useState([]); // stores all service types. we will want to fetch once, and use it for the drop options in the maintenance modal
 
   const logout = () => {
     setAuth({});
@@ -48,6 +49,8 @@ export const AuthProvider = ({ children }) => {
         setFuelLogs,
         serviceLogs,
         setServiceLogs,
+        serviceTypes,
+        setServiceTypes,
       }}
     >
       {children}

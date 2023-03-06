@@ -1,10 +1,21 @@
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import MaintenanceModal from "../components/modals/MaintenanceModal";
-import { getServices, deleteService } from "../apis/servicesAPI";
+import {
+  getServices,
+  deleteService,
+  getServiceTypes,
+} from "../apis/servicesAPI";
 
 const Maintenance = () => {
-  const { auth, selectedVehicle, serviceLogs, setServiceLogs } = useAuth();
+  const {
+    auth,
+    selectedVehicle,
+    serviceLogs,
+    setServiceLogs,
+    setServiceTypes,
+    serviceTypes,
+  } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
   const [serviceVisible, setServiceVisible] = useState(false);
@@ -22,8 +33,19 @@ const Maintenance = () => {
     setIsLoading(false);
   };
 
+  // pre-fetch the service types
+  const fetchServiceTypes = async () => {
+    const [data, error] = await getServiceTypes();
+    if (data) {
+      setServiceTypes(data);
+    }
+  };
+
   useEffect(() => {
     fetchService();
+    if (serviceTypes.length === 0) {
+      fetchServiceTypes();
+    }
     console.log(serviceLogs);
   }, []);
 
@@ -59,10 +81,7 @@ const Maintenance = () => {
             Description: {service.description}
           </div>
           <div>
-            <button
-              className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded"
-              onClick={handleUpdate(service.service_id)}
-            >
+            <button className="btn" onClick={handleUpdate(service.service_id)}>
               Update
             </button>
             {updateService === service.service_id && (
@@ -74,10 +93,8 @@ const Maintenance = () => {
                 service_info={service}
               />
             )}
-          </div>
-          <div>
             <button
-              className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded"
+              className="btn"
               onClick={() => handleDelete(service.service_id)}
             >
               Delete

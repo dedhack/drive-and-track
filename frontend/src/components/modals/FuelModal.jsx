@@ -45,7 +45,7 @@ const FuelModal = ({
   const [success, setSuccess] = useState(null);
 
   const onSubmit = async (formData) => {
-    console.log("form data", formData);
+    console.log("refuel form data", formData);
     setLoading(true);
     const payload = { ...formData, veh_id: selectedVehicle };
     console.log("payload", payload);

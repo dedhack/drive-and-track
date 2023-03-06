@@ -6,7 +6,7 @@ import { getRefuels, deleteRefuel } from "../apis/refuelAPI";
 const Fuel = () => {
   const { auth, selectedVehicle, fuelLogs, setFuelLogs } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  // const [fuel, setFuel] = useState([]);
+
   const [fuelVisible, setFuelVisible] = useState(false);
   const [updateRefuel, setUpdateRefuel] = useState(null);
 
