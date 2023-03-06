@@ -69,7 +69,7 @@ const getAllRefuels = async (req, res) => {
     }
 
     const allRefuels = await pool.query(
-      "SELECT * FROM refuel_logs INNER JOIN vehicles ON refuel_logs.veh_id = vehicles.veh_id WHERE vehicles.veh_id = $1",
+      "SELECT * FROM refuel_logs INNER JOIN vehicles ON refuel_logs.veh_id = vehicles.veh_id WHERE vehicles.veh_id = $1 ORDER BY refuel_logs.datetime DESC",
       [veh_id]
     );
 
