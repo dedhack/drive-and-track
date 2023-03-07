@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { getVehicles, deleteVehicleLog } from "../apis/vehiclesAPI";
 import VehicleModal from "../components/modals/VehicleModal";
-
+import VehicleCard from "../components/VehicleCard";
 const Vehicles = () => {
   const {
     user_id,
@@ -101,18 +101,35 @@ const Vehicles = () => {
                     Delete
                   </button>
                 </div>
+                <button
+                  className={`btn ${
+                    selectedVehicle === vehicle.veh_id ? "btn-active" : ""
+                  }`}
+                  onClick={handleToggle(vehicle.veh_id)}
+                >
+                  Select{selectedVehicle === vehicle.veh_id && "ed"}
+                </button>
+                <button
+                  className="btn"
+                  onClick={() => handleUpdate(vehicle.veh_id)()}
+                >
+                  Update
+                </button>
+                <button className="btn" onClick={handleDelete(vehicle.veh_id)}>
+                  Delete
+                </button>
+                {updateVehicle === vehicle.veh_id && (
+                  <VehicleModal
+                    visible={vehicleVisible}
+                    setVisible={setVehicleVisible}
+                    type={"Update"}
+                    veh_id={vehicle.veh_id}
+                    veh_info={vehicle}
+                  />
+                )}
               </div>
             </div>
           </div>
-          {updateVehicle === vehicle.veh_id && (
-            <VehicleModal
-              visible={vehicleVisible}
-              setVisible={setVehicleVisible}
-              type={"Update"}
-              veh_id={vehicle.veh_id}
-              veh_info={vehicle}
-            />
-          )}
         </div>
       );
     });

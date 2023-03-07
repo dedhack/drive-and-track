@@ -17,7 +17,6 @@ const schema = yup.object().shape({
   make: yup.string().min(3).max(30).required(),
   model: yup.string().min(3).max(30).required(),
   year: yup.number().min(1900).required(),
-  color: yup.string().min(3).max(30),
   vin: yup.string().min(3).max(30),
   ins_pol: yup.string().min(3).max(30),
   capacity: yup.number().min(1).required(),
@@ -182,20 +181,7 @@ const VehicleModal = ({
                   {errors.year?.message}
                 </p>
               </div>
-              <div className="mb-2 block">
-                <label className="label">
-                  <span className="label-text">Color : (Optional)</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Blue"
-                  className="input input-bordered w-full"
-                  {...register("color")}
-                />
-                <p className="text-center text-red-600">
-                  {errors.color?.message}
-                </p>
-              </div>
+
               <div className="mb-2 block">
                 <label className="label">
                   <span className="label-text">VIN : (Optional) </span>

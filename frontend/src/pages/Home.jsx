@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { getVehicles } from "../apis/vehiclesAPI";
-
+import { Link } from "react-router-dom";
+import VehicleCard from "../components/VehicleCard";
 const Home = () => {
   const {
     auth,
@@ -38,32 +39,34 @@ const Home = () => {
   // };
 
   let content = null;
+  let content2 = null;
   if (vehicles && selectedVehicle !== null) {
     const chosen = vehicles.filter(
       (vehicle) => vehicle.veh_id === selectedVehicle
     )[0];
     console.log("chosen: ", chosen);
-    content = (
-      <div>
-        <div className="flex flex-row m-4 bg-slate-100 justify-around w-full">
-          <div className=" p-4 text-center">
-            vehicle name: {chosen.veh_name}
-          </div>
-          <div className="p-4 text-center">vehicle make: {chosen.make}</div>
-          <div className="p-4 text-center">vehicle model: {chosen.model}</div>
-        </div>
-      </div>
-    );
+    content = <VehicleCard vehicle={chosen} />;
   } else {
     console.log("no vehicles");
-    content = <div>no vehicles selected</div>;
+    content2 = (
+      <div className="card w-96 bg-neutral shadow-xl text-white">
+        <div className="card-body text-center">
+          <p>You have not selected any vehicles</p>
+        </div>
+        <Link className="link link-success text-center p-4" to="/vehicles">
+          <button className="">Click here to select a vehicle</button>
+        </Link>
+      </div>
+    );
   }
 
   return (
-    <div>
-      Welcome {username}
-      <div className="flex flex-col items-center justify-between mb-4">
-        {content}
+    <div className="">
+      <div className="flex justify-center">{content2}</div>
+      <div className="grid grid-cols-4">
+        <div className="">{content}</div>
+        <div className="">{content}</div>
+        <div className="">{content}</div>
       </div>
     </div>
   );
