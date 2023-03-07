@@ -47,56 +47,79 @@ const Vehicles = () => {
   if (vehicles) {
     content = vehicles.map((vehicle, index) => {
       return (
-        <>
-          <div
-            key={index}
-            className="flex flex-row m-4 bg-slate-100 justify-around w-full"
-          >
-            <div className=" p-4 text-center">
-              vehicle name: {vehicle.veh_name}
-            </div>
-            <div className="p-4 text-center">vehicle make: {vehicle.make}</div>
-            <div className="p-4 text-center">
-              vehicle model: {vehicle.model}
-            </div>
-            <div>
-              <button className="btn" onClick={handleToggle(vehicle.veh_id)}>
-                Select
-              </button>
-              <div>
-                <button
-                  className="btn"
-                  onClick={() => handleUpdate(vehicle.veh_id)()}
-                >
-                  Update
-                </button>
-                {updateVehicle === vehicle.veh_id && (
-                  <VehicleModal
-                    visible={vehicleVisible}
-                    setVisible={setVehicleVisible}
-                    type={"Update"}
-                    veh_id={vehicle.veh_id}
-                    veh_info={vehicle}
-                  />
-                )}
-              </div>
+        <div key={index}>
+          <div className="card card-compact w-96 bg-base-200 shadow-xl">
+            <figure>
+              <img
+                src="https://www.suzukiauto.co.za/hubfs/Swift-Sport_Front_5.png"
+                alt="Suzuki Swift"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-center">{vehicle.veh_name}</h2>
+              <p className="text-base">
+                <span className="font-bold">Make: </span>
+                {vehicle.make}
+              </p>
+              <p className="text-base">
+                <span className="font-bold">Model: </span>
+                {vehicle.model}
+              </p>
+              <p className="text-base">
+                <span className="font-bold">Year: </span>
+                {vehicle.year}
+              </p>
+              <p className="text-base">
+                <span className="font-bold">Capacity: </span>
+                {vehicle.capacity} L
+              </p>
+              <p className="text-base">
+                <span className="font-bold">Description: </span>
+                {vehicle.veh_desc}
+              </p>
 
-              <button className="btn" onClick={handleDelete(vehicle.veh_id)}>
-                Delete
-              </button>
+              <div className="card-actions justify-center mt-10">
+                <div className="btn-group">
+                  <button
+                    className="btn btn-active"
+                    onClick={handleToggle(vehicle.veh_id)}
+                  >
+                    Select
+                  </button>
+                  <button
+                    className="btn"
+                    onClick={() => handleUpdate(vehicle.veh_id)()}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="btn"
+                    onClick={handleDelete(vehicle.veh_id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </>
+          {updateVehicle === vehicle.veh_id && (
+            <VehicleModal
+              visible={vehicleVisible}
+              setVisible={setVehicleVisible}
+              type={"Update"}
+              veh_id={vehicle.veh_id}
+              veh_info={vehicle}
+            />
+          )}
+        </div>
       );
     });
   }
 
   return (
-    <div>
-      Your Vehicles:
-      <div className="flex flex-col items-center justify-between mb-4">
-        {content}
-      </div>
+    <div className="">
+      <div className="text-center text-3xl m-10">Your Garage</div>
+      <div className="flex justify-center space-x-10">{content}</div>
     </div>
   );
 };
