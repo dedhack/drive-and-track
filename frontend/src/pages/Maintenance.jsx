@@ -78,7 +78,7 @@ const Maintenance = () => {
           <div className="p-4 text-center">odometer: {service.odometer} km</div>
           <div className="p-4 text-center">price: ${service.price}</div>
           <div className="p-4 text-center">
-            Description: {service.description}
+            Description: {service.service_desc}
           </div>
           <div>
             <button className="btn" onClick={handleUpdate(service.service_id)}>

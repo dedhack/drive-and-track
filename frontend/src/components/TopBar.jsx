@@ -10,7 +10,8 @@ const TopBar = () => {
   const [fuelVisible, setFuelVisible] = useState(false);
   const [vehicleVisible, setVehicleVisible] = useState(false);
   const [serviceVisible, setServiceVisible] = useState(false);
-  const { auth, selectedVehicle, vehicles, vehName, setVehName } = useAuth();
+  const { auth, selectedVehicle, vehicles, vehName, setVehName, isAdmin } =
+    useAuth();
 
   useEffect(() => {
     if (selectedVehicle) {
@@ -20,7 +21,7 @@ const TopBar = () => {
         }
       });
     }
-  }, [selectedVehicle]);
+  }, [selectedVehicle, vehicles]);
 
   return (
     <>
@@ -130,6 +131,11 @@ const TopBar = () => {
                   </li>
                 </ul>
               </li>
+              {isAdmin ? (
+                <li>
+                  <Link to="/admin">Admin</Link>
+                </li>
+              ) : null}
               <li>
                 <Link to="/logout">Logout</Link>
               </li>

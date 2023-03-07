@@ -61,13 +61,13 @@ const loginUser = async (req, res) => {
 
     // create access token
     const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
-      expiresIn: "1D",
+      expiresIn: "1d",
       jwtid: payload.id,
     });
 
     // create refresh token
     const refresh = jwt.sign(payload, process.env.REFRESH_SECRET, {
-      expiresIn: "30D",
+      expiresIn: "30d",
       jwtid: payload.id, // only express requires you to create the id.
     });
 
@@ -100,7 +100,7 @@ const refreshToken = async (req, res) => {
 
     // create access token
     const access = jwt.sign(payload, process.env.ACCESS_SECRET, {
-      expiresIn: 10,
+      expiresIn: "1d",
       jwtid: payload.id,
     });
     const response = { access }; // don't have to do for refresh, once refresh is created and will be valid for 30 days

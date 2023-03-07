@@ -1,9 +1,16 @@
-import React from 'react'
-
+import React from "react";
+import UsersList from "../components/Admin/UsersList";
 const Admin = () => {
   return (
-    <div>Admin</div>
-  )
-}
+    <div className="text-center">
+      <div className="text-2xl p-10">Admin Dashboard</div>
 
-export default Admin
+      <div className="text-xl">Users</div>
+      <div>
+        <UsersList />
+      </div>
+    </div>
+  );
+};
+
+export default Admin;

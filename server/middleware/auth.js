@@ -14,6 +14,13 @@ const auth = (req, res, next) => {
       req.decoded = decoded;
       next();
     } catch (error) {
+      if (error.name === "TokenExpiredError") {
+        return res.status(402).send({
+          status: "error",
+          message: "token expired",
+        });
+      }
+      // general catch all
       return res.status(401).send({
         status: "error",
         message: "unauthorized",

@@ -1,8 +1,9 @@
-import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 
 // hooks
 import useAuth from "./hooks/useAuth";
+import { useJwt } from "react-jwt";
 
 // pages
 import Login from "./pages/Login";
@@ -17,12 +18,22 @@ import MaintenanceCharts from "./pages/MaintenanceCharts";
 import TopBar from "./components/TopBar";
 import Logout from "./pages/Logout";
 import Admin from "./pages/Admin";
+import Unauthorized from "./pages/Unauthorized";
 
 import RequireAuth from "./components/RequireAuth";
 import RequireAuthAdmin from "./components/RequireAuthAdmin";
+import { refreshToken } from "./apis/usersAPI";
+
+const refToken = localStorage.getItem("refresh");
+const accToken = localStorage.getItem("access");
 
 const App = () => {
-  const { auth } = useAuth();
+  // handle tokens
+
+  const { auth, setAuth, logout } = useAuth();
+  const { isExpired, reEvaluateToken } = useJwt(auth);
+  const { isExpired: isExpiredRef } = useJwt(refToken);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -43,12 +54,14 @@ const App = () => {
           <Route path="/maintenance-charts" element={<MaintenanceCharts />} />
           <Route path="/logout" element={<Logout />} />
 
+          {/* Admin Protected Route */}
           <Route element={<RequireAuthAdmin />}>
             <Route path="/admin" element={<Admin />} />
           </Route>
         </Route>
 
         {/* TODO: Error page */}
+        <Route path="/unauthorized" element={<Unauthorized />} />
       </Routes>
     </>
   );

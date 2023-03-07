@@ -9,7 +9,7 @@ const RequireAuthAdmin = () => {
   return auth && isAdmin ? (
     <Outlet />
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to="/unauthorized" state={{ from: location }} replace />
   );
 };
 
