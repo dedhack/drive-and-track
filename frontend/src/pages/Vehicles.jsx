@@ -48,59 +48,10 @@ const Vehicles = () => {
     content = vehicles.map((vehicle, index) => {
       return (
         <div key={index}>
-          <div className="card card-compact w-96 bg-base-200 shadow-xl border-4">
-            <figure>
-              <img
-                src="https://www.suzukiauto.co.za/hubfs/Swift-Sport_Front_5.png"
-                alt="Suzuki Swift"
-              />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title text-center">{vehicle.veh_name}</h2>
-              <p className="text-base">
-                <span className="font-bold">Make: </span>
-                {vehicle.make}
-              </p>
-              <p className="text-base">
-                <span className="font-bold">Model: </span>
-                {vehicle.model}
-              </p>
-              <p className="text-base">
-                <span className="font-bold">Year: </span>
-                {vehicle.year}
-              </p>
-              <p className="text-base">
-                <span className="font-bold">Capacity: </span>
-                {vehicle.capacity} L
-              </p>
-              <p className="text-base">
-                <span className="font-bold">Description: </span>
-                {vehicle.veh_desc}
-              </p>
-
-              <div className="card-actions justify-center mt-10">
-                <div className="btn-group">
-                  <button
-                    className={`btn ${
-                      selectedVehicle === vehicle.veh_id ? "btn-active" : ""
-                    }`}
-                    onClick={handleToggle(vehicle.veh_id)}
-                  >
-                    Select{selectedVehicle === vehicle.veh_id && "ed"}
-                  </button>
-                  <button
-                    className="btn"
-                    onClick={() => handleUpdate(vehicle.veh_id)()}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="btn"
-                    onClick={handleDelete(vehicle.veh_id)}
-                  >
-                    Delete
-                  </button>
-                </div>
+          <div className="w-96">
+            <VehicleCard vehicle={vehicle} />
+            <div className="card-actions justify-center  m-10">
+              <div className="btn-group">
                 <button
                   className={`btn ${
                     selectedVehicle === vehicle.veh_id ? "btn-active" : ""
