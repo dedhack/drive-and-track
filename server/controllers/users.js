@@ -151,14 +151,14 @@ const deleteUser = async (req, res) => {
 
 // get all users
 
-const 2getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
     // check if user is admin
-    const decoded = jwt.verify(req.body.access, process.env.ACCESS_SECRET);
-    console.log(decoded.is_Admin);
-    if (!decoded.is_Admin) {
-      return res.json({ status: "error", message: "not authorized" });
-    }
+    // const decoded = jwt.verify(req.body.access, process.env.ACCESS_SECRET);
+    // console.log(decoded.is_Admin);
+    // if (!decoded.is_Admin) {
+    //   return res.json({ status: "error", message: "not authorized" });
+    // }
 
     const users = await pool.query("SELECT * FROM users");
     res.json(users.rows);

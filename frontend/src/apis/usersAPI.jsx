@@ -36,15 +36,31 @@ export const refreshToken = async (data) => {
 };
 
 // update user password
-export const updatePassword = async (data) => {};
+export const updatePassword = async (data, access) => {};
 
 // delete user
-export const deleteUser = async (data) => {};
+export const deleteUser = async (user_id, access) => {
+  try {
+    const response = await axiosClient.delete("users/delete", {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+      data: user_id,
+    });
+    return [response.data, null];
+  } catch (error) {
+    return [null, error];
+  }
+};
 
 // get all users (admin only)
-export const getAllUsers = async (data) => {
+export const getAllUsers = async (auth) => {
   try {
-    const response = await axiosClient.get("users", data);
+    const response = await axiosClient.get("users/allusers", {
+      headers: {
+        Authorization: `Bearer ${auth}`,
+      },
+    });
     return [response.data, null];
   } catch (error) {
     return [null, error];

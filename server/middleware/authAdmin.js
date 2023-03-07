@@ -18,6 +18,7 @@ const authAdmin = (req, res, next) => {
           message: "not admin",
         });
       } else {
+        console.log("Admin coming through");
         next();
       }
     } catch (error) {
@@ -27,7 +28,7 @@ const authAdmin = (req, res, next) => {
           message: "token expired",
         });
       }
-      // general catch all 
+      // general catch all
       return res.status(401).send({
         status: "error",
         message: "unauthorized",

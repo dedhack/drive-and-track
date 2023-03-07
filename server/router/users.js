@@ -20,6 +20,6 @@ router.delete("/delete", auth, deleteUser); // require auth
 router.post("/refresh", refreshToken);
 
 // admin endpoints
-router.get("/allusers", auth, getAllUsers);
+router.get("/allusers", authAdmin, getAllUsers);
 
 module.exports = router;
