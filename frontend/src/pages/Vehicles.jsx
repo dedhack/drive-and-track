@@ -48,7 +48,7 @@ const Vehicles = () => {
     content = vehicles.map((vehicle, index) => {
       return (
         <div key={index}>
-          <div className="card card-compact w-96 bg-base-200 shadow-xl">
+          <div className="card card-compact w-96 bg-base-200 shadow-xl border-4">
             <figure>
               <img
                 src="https://www.suzukiauto.co.za/hubfs/Swift-Sport_Front_5.png"
@@ -81,10 +81,12 @@ const Vehicles = () => {
               <div className="card-actions justify-center mt-10">
                 <div className="btn-group">
                   <button
-                    className="btn btn-active"
+                    className={`btn ${
+                      selectedVehicle === vehicle.veh_id ? "btn-active" : ""
+                    }`}
                     onClick={handleToggle(vehicle.veh_id)}
                   >
-                    Select
+                    Select{selectedVehicle === vehicle.veh_id && "ed"}
                   </button>
                   <button
                     className="btn"
