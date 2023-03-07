@@ -2,8 +2,12 @@ import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 
 const UsersList = () => {
+  // fetch list of users
+  // const [users, setUsers] = useState([]);
 
-    
+  // map over users and create a row for each user
+
+  // handle delete of users
   const handleDelete = () => {
     console.log("Delete");
   };

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
+const authAdmin = require("../middleware/authAdmin");
 const {
   createUser,
   loginUser,
@@ -16,7 +17,9 @@ router.post("/login", loginUser);
 router.post("/logout", logoutUser); // require auth
 router.patch("/update", auth, updatePassword); // require auth
 router.delete("/delete", auth, deleteUser); // require auth
-router.get("/allusers", auth, getAllUsers);
 router.post("/refresh", refreshToken);
+
+// admin endpoints
+router.get("/allusers", auth, getAllUsers);
 
 module.exports = router;

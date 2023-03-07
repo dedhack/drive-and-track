@@ -40,3 +40,13 @@ export const updatePassword = async (data) => {};
 
 // delete user
 export const deleteUser = async (data) => {};
+
+// get all users (admin only)
+export const getAllUsers = async (data) => {
+  try {
+    const response = await axiosClient.get("users", data);
+    return [response.data, null];
+  } catch (error) {
+    return [null, error];
+  }
+};

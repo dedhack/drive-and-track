@@ -151,7 +151,7 @@ const deleteUser = async (req, res) => {
 
 // get all users
 
-const getAllUsers = async (req, res) => {
+const 2getAllUsers = async (req, res) => {
   try {
     // check if user is admin
     const decoded = jwt.verify(req.body.access, process.env.ACCESS_SECRET);
