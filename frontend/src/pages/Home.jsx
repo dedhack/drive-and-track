@@ -65,8 +65,6 @@ const Home = () => {
       <div className="flex justify-center">{content2}</div>
       <div className="grid grid-cols-4">
         <div className="">{content}</div>
-        <div className="">{content}</div>
-        <div className="">{content}</div>
       </div>
     </div>
   );

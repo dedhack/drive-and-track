@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import FuelModal from "../components/modals/FuelModal";
 import { getRefuels, deleteRefuel } from "../apis/refuelAPI";
+import FuelCard from "../components/FuelCard";
 
 const Fuel = () => {
   const { auth, selectedVehicle, fuelLogs, setFuelLogs } = useAuth();
@@ -47,49 +48,81 @@ const Fuel = () => {
   let content = null;
   if (Array.isArray(fuelLogs) && fuelLogs.length > 0) {
     content = fuelLogs.map((fuel, index) => {
+      // convert to readable datetime
+      const conDate = new Date(fuel.datetime).toLocaleString();
       return (
-        <div
-          key={index}
-          className="flex flex-row mt-4 bg-slate-100 justify-around w-full"
-        >
-          <div className="p-4 text-center">date: {fuel.datetime}</div>
-          <div className="p-4 text-center">odometer: {fuel.odometer} km</div>
-          <div className="p-4 text-center">price: ${fuel.price}</div>
-          <div className="p-4 text-center">Litres: {fuel.fuel_amount}L</div>
-          <div>
-            <button
-              className="btn"
-              onClick={() => handleUpdate(fuel.refuel_id)()}
-            >
-              Update
-            </button>
-            {updateRefuel === fuel.refuel_id && (
-              <FuelModal
-                visible={fuelVisible}
-                setVisible={setFuelVisible}
-                type={"Update"}
-                refuel_id={fuel.refuel_id}
-                refuel_info={fuel}
-              />
-            )}
-            <button
-              className="btn"
-              onClick={() => handleDelete(fuel.refuel_id)}
-            >
-              Delete
-            </button>
-          </div>
-        </div>
+        // <div
+        //   key={index}
+        //   className="flex flex-row mt-4 bg-slate-100 justify-around w-full"
+        // >
+        //   <div className="p-4 text-center">date: {fuel.datetime}</div>
+        //   <div className="p-4 text-center">odometer: {fuel.odometer} km</div>
+        //   <div className="p-4 text-center">price: ${fuel.price}</div>
+        //   <div className="p-4 text-center">Litres: {fuel.fuel_amount}L</div>
+        //   <div>
+        //     <button
+        //       className="btn"
+        //       onClick={() => handleUpdate(fuel.refuel_id)()}
+        //     >
+        //       Update
+        //     </button>
+        //     {updateRefuel === fuel.refuel_id && (
+        //       <FuelModal
+        //         visible={fuelVisible}
+        //         setVisible={setFuelVisible}
+        //         type={"Update"}
+        //         refuel_id={fuel.refuel_id}
+        //         refuel_info={fuel}
+        //       />
+        //     )}
+        //     <button
+        //       className="btn"
+        //       onClick={() => handleDelete(fuel.refuel_id)}
+        //     >
+        //       Delete
+        //     </button>
+        //   </div>
+        // </div>
+        // new fuel card
+        <li className="mb-10 ml-4">
+          <FuelCard fuel={fuel} conDate={conDate} />
+          <button
+            className="btn btn-sm m-1"
+            onClick={() => handleUpdate(fuel.refuel_id)()}
+          >
+            Update
+          </button>
+          <button
+            className="btn btn-sm m-1"
+            onClick={() => handleDelete(fuel.refuel_id)}
+          >
+            Delete
+          </button>
+          {updateRefuel === fuel.refuel_id && (
+            <FuelModal
+              visible={fuelVisible}
+              setVisible={setFuelVisible}
+              type={"Update"}
+              refuel_id={fuel.refuel_id}
+              refuel_info={fuel}
+            />
+          )}
+        </li>
       );
     });
   } else {
-    content = <div>no fuel</div>;
+    content = <div>No Fuel Records. Have you selected a vehicle?</div>;
   }
 
   return (
     <div>
-      FUEL
-      {content}
+      <div className="my-10 mx-20">
+        <ol className="relative border-l border-gray-200 dark:border-gray-700">
+          {/* <FuelCard /> */}
+          {content}
+        </ol>
+      </div>
+      <div>TEST</div>
     </div>
   );
 };
