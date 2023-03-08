@@ -18,7 +18,10 @@ const MaintenanceCard = ({ service, conDate }) => {
         {service.service_desc}
       </p> */}
       {/* TESTING CARDS */}
-      <div className="card w-96 bg-neutral text-neutral-content hover:bg-neutral-focus">
+      <div
+        tabIndex={0}
+        className="collapse card w-96 bg-neutral text-neutral-content hover:bg-neutral-focus"
+      >
         <div className="card-body">
           <p className="mb-1 text-sm font-normal leading-none text-[#FF79C6]">
             {conDate} @{" "}
@@ -29,12 +32,14 @@ const MaintenanceCard = ({ service, conDate }) => {
           <p className="text-base font-semibold ">
             Odometer: {service.odometer} km
           </p>
-          <p className="mb-2 text-base font-normal">
+          <p className="mb-0 text-base font-normal">
             ${service.price}, {service.service_type}
           </p>
-          <p className="mb-4 text-sm font-normal italic text-gray-200 ">
-            {service.service_desc}
-          </p>
+          <div className="collapse-content">
+            <p className="mb-1 text-sm font-normal italic text-gray-200 ">
+              {service.service_desc}
+            </p>
+          </div>
         </div>
       </div>
     </>

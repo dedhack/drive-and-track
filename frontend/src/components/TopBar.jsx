@@ -159,14 +159,16 @@ const TopBar = () => {
         {auth ? (
           <div className="navbar-end">
             {/* <Link className="btn">+</Link> */}
-            <p className="px-10">{vehName}</p>
+            <p className="py-3 px-6 bg-neutral rounded-box text-white">
+              {vehName}
+            </p>
             <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-primary m-1">
+              <label tabIndex={0} className="btn btn-neutral m-1.5">
                 +
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu p-2 shadow bg-primary-focus text-white rounded-box w-52"
+                className="dropdown-content menu p-2 shadow bg-neutral text-white rounded-box w-52"
               >
                 <li>
                   <button onClick={() => setVehicleVisible(!vehicleVisible)}>
