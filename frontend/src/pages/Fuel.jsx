@@ -51,40 +51,8 @@ const Fuel = () => {
       // convert to readable datetime
       const conDate = new Date(fuel.datetime).toLocaleString();
       return (
-        // <div
-        //   key={index}
-        //   className="flex flex-row mt-4 bg-slate-100 justify-around w-full"
-        // >
-        //   <div className="p-4 text-center">date: {fuel.datetime}</div>
-        //   <div className="p-4 text-center">odometer: {fuel.odometer} km</div>
-        //   <div className="p-4 text-center">price: ${fuel.price}</div>
-        //   <div className="p-4 text-center">Litres: {fuel.fuel_amount}L</div>
-        //   <div>
-        //     <button
-        //       className="btn"
-        //       onClick={() => handleUpdate(fuel.refuel_id)()}
-        //     >
-        //       Update
-        //     </button>
-        //     {updateRefuel === fuel.refuel_id && (
-        //       <FuelModal
-        //         visible={fuelVisible}
-        //         setVisible={setFuelVisible}
-        //         type={"Update"}
-        //         refuel_id={fuel.refuel_id}
-        //         refuel_info={fuel}
-        //       />
-        //     )}
-        //     <button
-        //       className="btn"
-        //       onClick={() => handleDelete(fuel.refuel_id)}
-        //     >
-        //       Delete
-        //     </button>
-        //   </div>
-        // </div>
         // new fuel card
-        <li className="mb-10 ml-4">
+        <li key={index} className="mb-10 ml-4">
           <FuelCard fuel={fuel} conDate={conDate} />
           <button
             className="btn btn-sm m-1"
@@ -116,16 +84,23 @@ const Fuel = () => {
 
   return (
     <>
-      <div className="mt-24 text-center">FUEL LOG</div>
-      <div className=" flex">
+      <div className="mt-20 text-center"></div>
+      <div className="flex max-h-screen ">
         {/* <div className="my-10 mx-20"> */}
-        <div className="w-1/3 px-10">
-          <ol className="relative border-l border-gray-400 ">
+        <div className="w-1/3 px-10 overflow-y-scroll">
+          <ol className="relative border-l border-gray-400">
             {/* <FuelCard /> */}
             {content}
           </ol>
         </div>
-        <div className="w-2/3">NEXT 2 THIRDS</div>
+        <div className="w-2/3 sticky top-0 right-0 h-screen bg-gray-100">
+          NEXT 2 THIRDS Number of entries: {fuelLogs.length}
+          <p>TOTAL COST</p>
+          <p>Average Daily Cost for Fuel</p>
+          <p>Average per km Cost for Fuel</p>
+          <p>Total Volume of petrol</p>
+          <p>MONTHLY EXPENSE CHART</p>
+        </div>
       </div>
     </>
   );

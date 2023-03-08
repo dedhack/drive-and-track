@@ -1,11 +1,12 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-function PieChart({ chartData }) {
+function PieChart({ chartData, options }) {
   return (
-    <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Pie Chart</h2>
+    <div className="">
+      <h2>Pie Chart</h2>
       <Doughnut
+        className="w-10"
         data={chartData}
         options={{
           plugins: {
@@ -15,6 +16,8 @@ function PieChart({ chartData }) {
             },
           },
         }}
+        // width={10}
+        // height={5}
       />
     </div>
   );

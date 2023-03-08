@@ -109,6 +109,11 @@ const Home = () => {
                   </Link>
                 </div>
               </div>
+              <div>
+                <div className="card w-64 bg-neutral shadow-xl text-white text-center">
+                  COST COMPARISON CHART between fuel and maintenance
+                </div>
+              </div>
             </div>
           </div>
         ) : (

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 
 // chart js setup
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import PieChart from "../components/charts/PieChart";
+import { Doughnut } from "react-chartjs-2";
 
 // TODO: CHECK WHAT THIS IS FOR
 Chart.register(CategoryScale);
@@ -17,7 +18,7 @@ const Charts = () => {
   // Then from the locations, sum up the total price and total litres
   // Data manipulation
   // { location: "Shell", summed_price: 100, summed_litres: 20}
-  const testData = Object.values(
+  const fuelChartData = Object.values(
     fuelLogs.reduce((acc, log) => {
       const { location, fuel_amount, price } = log;
       if (!acc[location]) {
@@ -32,14 +33,13 @@ const Charts = () => {
       return acc;
     }, {})
   );
-  
-  
+
   const [chartData, setChartData] = useState({
-    labels: testData.map((data) => data.location), // these are the categories. for fuel, this should be location
+    labels: fuelChartData.map((data) => data.location), // these are the categories. for fuel, this should be location
     datasets: [
       {
         label: "Location name",
-        data: testData.map((data) => data.summed_price),
+        data: fuelChartData.map((data) => data.summed_price),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -60,13 +60,36 @@ const Charts = () => {
       },
     ],
   });
+  // useEffect(() => {
+  //   setChartData(fuelChartData);
+  // }, [fuelLogs]);
 
   return (
     <div className="mt-24">
-      <div className="">FUEL CHARTS HERE</div>
-      <div className=" m-4 border-2 rounded-3xl">
-        <PieChart chartData={chartData} />
+      <div className="">
+        <div className="text-center">FUEL CHARTS HERE</div>
       </div>
+      {chartData ? (
+        <div className=" flex justify-center m-4 border-2 rounded-3xl w-96 p-4">
+          <Doughnut
+            className=""
+            data={chartData}
+            height={400}
+            // width={100}
+            options={{
+              maintainAspectRatio: false,
+              plugins: {
+                title: {
+                  display: true,
+                  text: "Amount of Litres",
+                },
+              },
+            }}
+          />
+        </div>
+      ) : (
+        "no charts"
+      )}
     </div>
   );
 };
