@@ -7,6 +7,7 @@ import {
   getServiceTypes,
 } from "../apis/servicesAPI";
 import MaintenanceCard from "../components/MaintenanceCard";
+import MDoChart from "../components/charts/MDoChart";
 
 const Maintenance = () => {
   const {
@@ -120,6 +121,7 @@ const Maintenance = () => {
         </div>
         <div className="w-2/3 sticky top-0 right-0 h-screen bg-gray-100">
           NEXT 2 THIRDS
+          <MDoChart />
         </div>
       </div>
     </>

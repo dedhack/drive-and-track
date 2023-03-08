@@ -6,21 +6,12 @@ import {
   Chart,
   BarElement,
   LinearScale,
-  Tooltip,
-  Legend,
   ArcElement,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { categorizeByMonth } from "./calculations";
 
-Chart.register(
-  CategoryScale,
-  BarElement,
-  LinearScale,
-  // Tooltip,
-  // Legend,
-  ArcElement
-);
+Chart.register(CategoryScale, BarElement, LinearScale, ArcElement);
 
 const FBarChart = () => {
   const { fuelLogs } = useAuth();

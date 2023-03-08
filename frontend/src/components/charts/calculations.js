@@ -1,7 +1,6 @@
 // For all the calculations that are used in the charts
 import { fuels } from "./draft.js";
 // Function to categorize the data by month
-
 export const categorizeByMonth = (data) => {
   // use a reduce function to create an object with the months as keys
   const sumEachMonth = Object.values(
@@ -28,5 +27,5 @@ export const categorizeByMonth = (data) => {
   return sumEachMonth;
 };
 
-const test = categorizeByMonth(fuels);
-console.log(test);
+// const test = categorizeByMonth(fuels);
+// console.log(test);

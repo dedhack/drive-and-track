@@ -2,45 +2,49 @@ import React, { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { CategoryScale, Chart, ArcElement } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-// https://www.chartjs.org/docs/master/getting-started/integration.html#bundlers-webpack-rollup-etc
+
 Chart.register(CategoryScale, ArcElement);
+// Maintenance Doughnut chart
 
-const DoChart = () => {
-  // get the fuel logs
-  const { fuelLogs } = useAuth();
-  // console.log("fuelLogs", fuelLogs);
+const MDoChart = () => {
+  const { serviceLogs, serviceTypes } = useAuth();
+  console.log("serviceLogs", serviceLogs);
 
-  // Change the fuel log data into the format that the chart needs
-  const fuelChartData = Object.values(
-    fuelLogs.reduce((acc, log) => {
-      const { location, fuel_amount, price } = log;
-      if (!acc[location]) {
-        acc[location] = {
+  // price, service_type
+
+  // need to match the service type to the string which we stored inside serviceTypes state
+  // we match the service_type number to the serviceTypes array index
+  const serviceChartData = Object.values(
+    serviceLogs.reduce((acc, log) => {
+      const { service_type, price } = log;
+      if (!acc[service_type]) {
+        acc[service_type] = {
           summed_price: 0,
-          summed_litres: 0,
-          location: location,
+          service_type: service_type,
+          service_text: serviceTypes[service_type - 1].type_name,
         };
       }
-      acc[location].summed_price += parseFloat(price);
-      acc[location].summed_litres += parseFloat(fuel_amount);
+      acc[service_type].summed_price += parseFloat(price);
+
       return acc;
     }, {})
   );
+  console.log(serviceTypes);
 
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    if (!fuelLogs) {
+    if (!serviceLogs) {
       return;
-    } else if (!fuelChartData) {
+    } else if (!serviceChartData) {
       return;
     } else {
       setChartData({
-        labels: fuelChartData.map((data) => data.location), // these are the categories. for fuel, this should be location
+        labels: serviceChartData.map((data) => data.service_text),
         datasets: [
           {
             label: "Total Price",
-            data: fuelChartData.map((data) => data.summed_price),
+            data: serviceChartData.map((data) => data.summed_price),
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
@@ -62,7 +66,7 @@ const DoChart = () => {
         ],
       });
     }
-  }, [fuelLogs]);
+  }, [serviceLogs]);
 
   return (
     <>
@@ -91,4 +95,5 @@ const DoChart = () => {
     </>
   );
 };
-export default DoChart;
+
+export default MDoChart;
