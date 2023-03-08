@@ -4,7 +4,6 @@ import useAuth from "../hooks/useAuth";
 // chart js setup
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
-import PieChart from "../components/charts/PieChart";
 import { Doughnut } from "react-chartjs-2";
 
 // TODO: CHECK WHAT THIS IS FOR
@@ -28,8 +27,8 @@ const Charts = () => {
           location: location,
         };
       }
-      acc[location].summed_price += Number(price);
-      acc[location].summed_litres += Number(fuel_amount);
+      acc[location].summed_price += parseFloat(price);
+      acc[location].summed_litres += parseFloat(fuel_amount);
       return acc;
     }, {})
   );

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useJwt } from "react-jwt";
 import useAuth from "../hooks/useAuth";
 import FuelModal from "./modals/FuelModal";
 import VehicleModal from "./modals/VehicleModal";
 import MaintenanceModal from "./modals/MaintenanceModal";
+import { RiCarLine } from "react-icons/ri";
 
 const TopBar = () => {
   const [fuelVisible, setFuelVisible] = useState(false);
@@ -159,9 +159,13 @@ const TopBar = () => {
         {auth ? (
           <div className="navbar-end">
             {/* <Link className="btn">+</Link> */}
-            <p className="py-3 px-6 bg-neutral rounded-box text-white">
-              {vehName}
-            </p>
+            <Link to="/vehicles">
+              <div className="py-3 px-6 bg-neutral rounded-box text-white">
+                <RiCarLine />
+                {vehName}
+              </div>
+            </Link>
+
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-neutral m-1.5">
                 +
