@@ -6,24 +6,24 @@ import {
   Chart,
   BarElement,
   LinearScale,
-  Tooltip,
+  // Tooltip,
   Legend,
   ArcElement,
 } from "chart.js";
-import { Doughnut, Bar } from "react-chartjs-2";
-
+import { Doughnut } from "react-chartjs-2";
+// https://www.chartjs.org/docs/master/getting-started/integration.html#bundlers-webpack-rollup-etc
 Chart.register(
   CategoryScale,
-  BarElement,
-  LinearScale,
-  Tooltip,
-  Legend,
+  // BarElement,
+  // LinearScale,
+  // Tooltip,
+  // Legend,
   ArcElement
 );
 
-const PieChart = () => {
+const DoChart = () => {
   // get the fuel logs
-  const { fuelLogs, serviceLogs } = useAuth();
+  const { fuelLogs } = useAuth();
   console.log("fuelLogs", fuelLogs);
 
   // Change the fuel log data into the format that the chart needs
@@ -55,7 +55,7 @@ const PieChart = () => {
         labels: fuelChartData.map((data) => data.location), // these are the categories. for fuel, this should be location
         datasets: [
           {
-            label: "Location name",
+            label: "Total Price",
             data: fuelChartData.map((data) => data.summed_price),
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
@@ -82,21 +82,22 @@ const PieChart = () => {
 
   return (
     <>
-      <div className=" flex justify-center m-4 border-2 rounded-3xl w-96 p-4">
+      <div className="flex justify-center p-4 border-2 rounded-3xl ">
         {chartData ? (
           <Doughnut
             className=""
             data={chartData}
-            height={400}
             // width={100}
             options={{
-              maintainAspectRatio: false,
+              maintainAspectRatio: true,
               plugins: {
                 title: {
                   display: true,
                   text: "Amount of Litres",
                 },
               },
+              aspectRatio: 1,
+              responsive: true,
             }}
           />
         ) : (
@@ -106,4 +107,4 @@ const PieChart = () => {
     </>
   );
 };
-export default PieChart;
+export default DoChart;

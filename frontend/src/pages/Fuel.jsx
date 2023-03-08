@@ -3,7 +3,8 @@ import useAuth from "../hooks/useAuth";
 import FuelModal from "../components/modals/FuelModal";
 import { getRefuels, deleteRefuel } from "../apis/refuelAPI";
 import FuelCard from "../components/FuelCard";
-import PieChart from "../components/charts/PieChart";
+import DoChart from "../components/charts/DoChart";
+import FBarChart from "../components/charts/FBarChart";
 
 const Fuel = () => {
   const { auth, selectedVehicle, fuelLogs, setFuelLogs } = useAuth();
@@ -94,14 +95,29 @@ const Fuel = () => {
             {content}
           </ol>
         </div>
-        <div className="w-2/3 sticky top-0 right-0 h-screen bg-gray-100">
-          NEXT 2 THIRDS Number of entries: {fuelLogs.length}
-          <p>TOTAL COST</p>
-          <p>Average Daily Cost for Fuel</p>
-          <p>Average per km Cost for Fuel</p>
-          <p>Total Volume of petrol</p>
-          <p>MONTHLY EXPENSE CHART</p>
-          {fuelLogs.length > 0 ? <PieChart /> : null}
+        <div className="w-2/3 bg-gray-100">
+          <div className="flex flex-row gap-4 p-4 ">
+            <div className="basis-1/3">
+              {fuelLogs.length > 0 ? <DoChart /> : null}
+            </div>
+            {/* CARD STARTS HERE */}
+            <div className="card basis-2/3">
+              <div className="card bg-neutral text-primary-content">
+                <div className="card-body">
+                  <h2 className="card-title">Fuel Logs Summary</h2>
+                  <p>Number of entries: {fuelLogs.length}</p>
+                  <p>Average Daily Cost for Fuel: </p>
+                  <p>Total Volume of petrol</p>
+                  <p>TOTAL COST: </p>
+                  <p>Average Fuel Efficiency: </p>
+                </div>
+              </div>
+            </div>
+            {/* CARD ENDS HERE */}
+          </div>
+          <div className="h-[500px]">
+            {fuelLogs.length > 0 ? <FBarChart /> : null}
+          </div>
         </div>
       </div>
     </>
