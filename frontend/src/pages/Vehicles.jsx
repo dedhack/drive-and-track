@@ -87,7 +87,7 @@ const Vehicles = () => {
   }
 
   return (
-    <div className="">
+    <div className="mt-24">
       <div className="text-center text-3xl m-10">Your Garage</div>
       <div className="flex justify-center space-x-10">{content}</div>
     </div>

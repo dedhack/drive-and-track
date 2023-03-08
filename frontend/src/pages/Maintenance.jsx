@@ -6,6 +6,7 @@ import {
   deleteService,
   getServiceTypes,
 } from "../apis/servicesAPI";
+import MaintenanceCard from "../components/MaintenanceCard";
 
 const Maintenance = () => {
   const {
@@ -69,48 +70,84 @@ const Maintenance = () => {
   let content = null;
   if (Array.isArray(serviceLogs) && serviceLogs.length > 0) {
     content = serviceLogs.map((service, index) => {
+      const conDate = new Date(service.datetime).toLocaleString();
+
       return (
-        <div
-          key={index}
-          className="flex flex-row mt-4 bg-slate-100 justify-around w-full"
-        >
-          <div className="p-4 text-center">date: {service.datetime}</div>
-          <div className="p-4 text-center">odometer: {service.odometer} km</div>
-          <div className="p-4 text-center">price: ${service.price}</div>
-          <div className="p-4 text-center">
-            Description: {service.service_desc}
-          </div>
-          <div>
-            <button className="btn" onClick={handleUpdate(service.service_id)}>
-              Update
-            </button>
-            {updateService === service.service_id && (
-              <MaintenanceModal
-                visible={serviceVisible}
-                setVisible={setServiceVisible}
-                type={"Update"}
-                service_id={service.service_id}
-                service_info={service}
-              />
-            )}
-            <button
-              className="btn"
-              onClick={() => handleDelete(service.service_id)}
-            >
-              Delete
-            </button>
-          </div>
-        </div>
+        // <div
+        //   key={index}
+        //   className="flex flex-row mt-4 bg-slate-100 justify-around w-full"
+        // >
+        //   <div className="p-4 text-center">date: {service.datetime}</div>
+        //   <div className="p-4 text-center">odometer: {service.odometer} km</div>
+        //   <div className="p-4 text-center">price: ${service.price}</div>
+        //   <div className="p-4 text-center">
+        //     Description: {service.service_desc}
+        //   </div>
+        //   <div>
+        //     <button className="btn" onClick={handleUpdate(service.service_id)}>
+        //       Update
+        //     </button>
+        //     {updateService === service.service_id && (
+        //       <MaintenanceModal
+        //         visible={serviceVisible}
+        //         setVisible={setServiceVisible}
+        //         type={"Update"}
+        //         service_id={service.service_id}
+        //         service_info={service}
+        //       />
+        //     )}
+        //     <button
+        //       className="btn"
+        //       onClick={() => handleDelete(service.service_id)}
+        //     >
+        //       Delete
+        //     </button>
+        //   </div>
+        // </div>
+        <li className="mb-10 ml-4">
+          <MaintenanceCard service={service} conDate={conDate} />
+          <button
+            className="btn btn-sm m-1"
+            onClick={() => handleUpdate(service.service_id)()}
+          >
+            Update
+          </button>
+          <button
+            className="btn btn-sm m-1"
+            onClick={() => handleDelete(service.service_id)}
+          >
+            Delete
+          </button>
+          {updateService === service.service_id && (
+            <MaintenanceModal
+              visible={serviceVisible}
+              setVisible={setServiceVisible}
+              type={"Update"}
+              service_id={service.service_id}
+              service_info={service}
+            />
+          )}
+        </li>
       );
     });
   } else {
-    content = <div className="text-center">No services found</div>;
+    content = (
+      <div className="text-center">
+        No Service Records. Have you selected a vehicle?
+      </div>
+    );
   }
 
   return (
-    <div>
-      Maintenance
-      {content}
+    <div className="mt-24 flex">
+      {/* <div className="my-10 mx-20"> */}
+      <div className="w-1/3 px-10">
+        <ol className="relative border-l border-gray-400 ">
+          {/* <FuelCard /> */}
+          {content}
+        </ol>
+      </div>
+      <div className="w-2/3">NEXT 2 THIRDS</div>
     </div>
   );
 };

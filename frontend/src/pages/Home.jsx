@@ -61,10 +61,59 @@ const Home = () => {
   }
 
   return (
-    <div className="">
+    <div className="mt-24">
       <div className="flex justify-center">{content2}</div>
       <div className="grid grid-cols-4">
         <div className="">{content}</div>
+
+        {/* No. of Vehicles */}
+        {vehicles && selectedVehicle !== null ? (
+          <div className="flex flex-col space-y-8">
+            <div>
+              <div className="card w-64 bg-neutral shadow-xl text-white">
+                <div className="card-body text-center">
+                  <h3 className="font-bold text-4xl">{vehicles.length}</h3>
+                  <p className="text-sm">Vehicles</p>
+                </div>
+              </div>
+            </div>
+
+            {/* CARD USER INFO */}
+            <div>
+              <div className="card w-64 bg-neutral shadow-xl text-white">
+                <div className="card-header">
+                  <h4 className="font-bold text-lg text-center">
+                    User Information
+                  </h4>
+                </div>
+                <div className="card-body">
+                  <p>Username: {username}</p>
+                  <p>User ID: {user_id}</p>
+                </div>
+              </div>
+            </div>
+            {/* CARD VEHICLE */}
+            <div>
+              <div className="card w-64 bg-neutral shadow-xl text-white text-center">
+                <div className="card-header">
+                  <h4 className="font-bold text-lg">Update Vehicle?</h4>
+                </div>
+                <div className="card-body">
+                  <Link
+                    className="link link-success text-center p-4"
+                    to="/vehicles/new"
+                  >
+                    <button className="">
+                      Click here to manage your vehicles
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -115,15 +115,19 @@ const Fuel = () => {
   }
 
   return (
-    <div>
-      <div className="my-10 mx-20">
-        <ol className="relative border-l border-gray-200 dark:border-gray-700">
-          {/* <FuelCard /> */}
-          {content}
-        </ol>
+    <>
+      <div className="mt-24 text-center">FUEL LOG</div>
+      <div className=" flex">
+        {/* <div className="my-10 mx-20"> */}
+        <div className="w-1/3 px-10">
+          <ol className="relative border-l border-gray-400 ">
+            {/* <FuelCard /> */}
+            {content}
+          </ol>
+        </div>
+        <div className="w-2/3">NEXT 2 THIRDS</div>
       </div>
-      <div>TEST</div>
-    </div>
+    </>
   );
 };
 
