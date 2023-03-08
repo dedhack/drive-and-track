@@ -37,8 +37,9 @@ const Charts = () => {
   );
 
   // BAR CHART STUFFS LESGOOOOO
-  const sumOfEachMonth = categorizeByMonth(fuelLogs).reverse();
-
+  // categorize the data by month, then we want to slice to the last 3 months, and then reverse order
+  const sumOfEachMonth = categorizeByMonth(fuelLogs).slice(0, 3).reverse();
+  console.log("sumOfEachMonth", sumOfEachMonth);
   // const [barData, setBarData] = useState({});
   // barchart is for monthly expenses
   const [barData, setBarData] = useState({
@@ -47,14 +48,14 @@ const Charts = () => {
       {
         label: "Amount Spent", // amount spent
         data: sumOfEachMonth.map((month) => month.price), // logs.map((log) => log.price)))
-        backgroundColor: "aqua",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "black",
         borderWidth: 1,
       },
       {
         label: "Volume of Fuel",
         data: sumOfEachMonth.map((month) => month.fuel_amount), // logs.map((log) => log.fuel_amount)
-        backgroundColor: "green",
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "black",
         borderWidth: 1,
       },

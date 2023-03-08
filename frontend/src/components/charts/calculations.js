@@ -9,7 +9,7 @@ export const categorizeByMonth = (data) => {
       // create a date object from the datetime string
       const date = new Date(cur.datetime);
       // get the month from the date object
-      const month = date.getMonth();
+      const month = date.getMonth() + 1; // hotfix for the month
       // get the year from the date object
       const year = date.getFullYear();
       // create a key for the object
