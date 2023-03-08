@@ -73,7 +73,7 @@ const Maintenance = () => {
       const conDate = new Date(service.datetime).toLocaleString();
 
       return (
-        <li className="mb-10 ml-4">
+        <li key={index} className="mb-10 ml-4">
           <MaintenanceCard service={service} conDate={conDate} />
           <button
             className="btn btn-sm m-1"

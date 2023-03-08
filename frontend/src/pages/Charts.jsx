@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 
 // chart js setup
-import Chart from "chart.js/auto";
-import { CategoryScale } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+// import Chart from "chart.js/auto";
+import { CategoryScale, Chart } from "chart.js";
+import { BarElement, LinearScale, Tooltip, Legend } from "chart.js";
+import { Doughnut, Bar } from "react-chartjs-2";
 
-// TODO: CHECK WHAT THIS IS FOR
-Chart.register(CategoryScale);
+Chart.register(CategoryScale, BarElement, LinearScale, Tooltip, Legend);
+
+// import my calculation stuff
+import { categorizeByMonth } from "../components/charts/calculations";
 
 const Charts = () => {
   const { fuelLogs, serviceLogs } = useAuth();
@@ -32,6 +35,33 @@ const Charts = () => {
       return acc;
     }, {})
   );
+
+  // BAR CHART STUFFS LESGOOOOO
+  const sumOfEachMonth = categorizeByMonth(fuelLogs);
+
+  // const [barData, setBarData] = useState({});
+  // barchart is for monthly expenses
+  const [barData, setBarData] = useState({
+    labels: sumOfEachMonth.map((month) => month.key), // should be the months i.e. '2023-1' logs.datetime ... dont't forget need to add 1 to the month
+    datasets: [
+      {
+        label: "Amount Spent", // amount spent
+        data: sumOfEachMonth.map((month) => month.price), // logs.map((log) => log.price)))
+        backgroundColor: "aqua",
+        borderColor: "black",
+        borderWidth: 1,
+      },
+      {
+        label: "Volume of Fuel",
+        data: sumOfEachMonth.map((month) => month.fuel_amount), // logs.map((log) => log.fuel_amount)
+        backgroundColor: "green",
+        borderColor: "black",
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const barOptions = {};
 
   const [chartData, setChartData] = useState({
     labels: fuelChartData.map((data) => data.location), // these are the categories. for fuel, this should be location
@@ -59,16 +89,13 @@ const Charts = () => {
       },
     ],
   });
-  // useEffect(() => {
-  //   setChartData(fuelChartData);
-  // }, [fuelLogs]);
 
   return (
     <div className="mt-24">
       <div className="">
         <div className="text-center">FUEL CHARTS HERE</div>
       </div>
-      {chartData ? (
+      {/* {chartData ? (
         <div className=" flex justify-center m-4 border-2 rounded-3xl w-96 p-4">
           <Doughnut
             className=""
@@ -88,7 +115,12 @@ const Charts = () => {
         </div>
       ) : (
         "no charts"
-      )}
+      )} */}
+
+      {/* BAR CHART TESTING */}
+      <div className="">
+        <Bar data={barData} options={barOptions} />
+      </div>
     </div>
   );
 };
