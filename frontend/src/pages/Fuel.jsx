@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 import FuelModal from "../components/modals/FuelModal";
 import { getRefuels, deleteRefuel } from "../apis/refuelAPI";
 import FuelCard from "../components/FuelCard";
+import PieChart from "../components/charts/PieChart";
 
 const Fuel = () => {
   const { auth, selectedVehicle, fuelLogs, setFuelLogs } = useAuth();
@@ -100,6 +101,7 @@ const Fuel = () => {
           <p>Average per km Cost for Fuel</p>
           <p>Total Volume of petrol</p>
           <p>MONTHLY EXPENSE CHART</p>
+          {fuelLogs.length > 0 ? <PieChart /> : null}
         </div>
       </div>
     </>
