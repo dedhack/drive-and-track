@@ -85,9 +85,9 @@ const FuelModal = ({
   };
 
   return (
-    <div className="font-sans">
+    <div className="font-sans text-white">
       {/* <Button onClick={toggleVisible}>Open Modal</Button> */}
-      <Modal className="relative" open={visible}>
+      <Modal className="relative bg-neutral" open={visible}>
         <Button
           className="absolute top-2 right-2"
           onClick={() => setVisible(!visible)}
@@ -99,13 +99,13 @@ const FuelModal = ({
 
         <Modal.Body>
           <form
-            className="form-control w-full mt-5"
+            className="form-control w-full mt-5 "
             onSubmit={handleSubmit(onSubmit)}
           >
             <div>
-              <div className="mb-2 block">
+              <div className="mb-2 block ">
                 <label className="label">
-                  <span className="label-text">Date</span>
+                  <span className="label-text text-white">Date</span>
                 </label>
                 <input
                   type="datetime-local"
@@ -118,8 +118,8 @@ const FuelModal = ({
                 </p>
               </div>
               <div className="mb-2 block">
-                <label className="label">
-                  <span className="label-text">Odometer</span>
+                <label className="label ">
+                  <span className="label-text text-white">Odometer</span>
                 </label>
                 <input
                   type="text"
@@ -133,7 +133,7 @@ const FuelModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Price</span>
+                  <span className="label-text text-white">Price</span>
                 </label>
                 <input
                   type="number"
@@ -148,7 +148,7 @@ const FuelModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Location :(Optional)</span>
+                  <span className="label-text text-white">Location</span>
                 </label>
                 <input
                   type="text"
@@ -162,7 +162,7 @@ const FuelModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Fuel Grade</span>
+                  <span className="label-text text-white">Fuel Grade</span>
                 </label>
                 <input
                   type="text"
@@ -176,7 +176,7 @@ const FuelModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Fuel Amount</span>
+                  <span className="label-text text-white">Fuel Amount</span>
                 </label>
                 <input
                   type="number"
@@ -190,7 +190,7 @@ const FuelModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Full Tank? </span>
+                  <span className="label-text text-white">Full Tank? </span>
                 </label>
                 <input
                   type="checkbox"
@@ -206,7 +206,10 @@ const FuelModal = ({
 
             {/* Submit button */}
             <div className="text-center">
-              <button type="submit" className="btn mt-10">
+              <button
+                type="submit"
+                className="btn bg-neutral-content text-black mt-10"
+              >
                 {loading ? <Spinner /> : "Save"}
               </button>
             </div>
