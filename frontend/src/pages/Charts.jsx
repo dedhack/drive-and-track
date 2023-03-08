@@ -37,7 +37,7 @@ const Charts = () => {
   );
 
   // BAR CHART STUFFS LESGOOOOO
-  const sumOfEachMonth = categorizeByMonth(fuelLogs);
+  const sumOfEachMonth = categorizeByMonth(fuelLogs).reverse();
 
   // const [barData, setBarData] = useState({});
   // barchart is for monthly expenses
