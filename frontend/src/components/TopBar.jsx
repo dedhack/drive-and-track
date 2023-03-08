@@ -48,13 +48,21 @@ const TopBar = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {/* FIXME: change to home, vehicles etc */}
               <li>
-                <Link>Item 1</Link>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/vehicles">Vehicles</Link>
+              </li>
+              <li>
+                <Link to="/fuel">Fuel</Link>
+              </li>
+              <li>
+                <Link to="/maintenance">Maintenance</Link>
               </li>
               <li tabIndex={0}>
-                <Link className="justify-between">
-                  Parent
+                <Link className="justify-between" to="/charts">
+                  Charts
                   <svg
                     className="fill-current"
                     xmlns="http://www.w3.org/2000/svg"
@@ -67,15 +75,20 @@ const TopBar = () => {
                 </Link>
                 <ul className="p-2">
                   <li>
-                    <Link>Submenu 1</Link>
+                    <Link to="/fuel-charts">Fuel</Link>
                   </li>
                   <li>
-                    <Link>Submenu 2</Link>
+                    <Link to="/maintenance-charts">Maintenance</Link>
                   </li>
                 </ul>
               </li>
+              {isAdmin ? (
+                <li>
+                  <Link to="/admin">Admin</Link>
+                </li>
+              ) : null}
               <li>
-                <Link>Item 3</Link>
+                <Link to="/logout">Logout</Link>
               </li>
             </ul>
           </div>
