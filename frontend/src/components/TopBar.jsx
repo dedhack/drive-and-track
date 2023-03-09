@@ -119,7 +119,7 @@ const TopBar = () => {
               <li>
                 <Link to="/maintenance">Maintenance</Link>
               </li>
-              <li tabIndex={0}>
+              {/* <li tabIndex={0}>
                 <Link to="/charts">
                   Charts
                   <svg
@@ -143,7 +143,7 @@ const TopBar = () => {
                     <Link to="/maintenance-charts">Maintenance</Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               {isAdmin ? (
                 <li>
                   <Link to="/admin">Admin</Link>

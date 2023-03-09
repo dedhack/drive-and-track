@@ -1,5 +1,7 @@
 // For all the calculations that are used in the charts
 import { fuels } from "./draft.js";
+import { differenceInCalendarDays } from "date-fns";
+
 // Function to categorize the data by month
 export const categorizeByMonth = (data) => {
   // use a reduce function to create an object with the months as keys
@@ -57,3 +59,23 @@ export const maintCategorizeByMonth = (data) => {
   // return the object
   return sumEachMonth;
 };
+
+export const averageCost = (data) => {
+  // get the range of days from the first and last entry in the array
+  const firstDate = new Date(data[0].datetime);
+  const lastDate = new Date(data[data.length - 1].datetime);
+
+  const noOfDays = differenceInCalendarDays(firstDate, lastDate);
+
+  // get total amount of spending
+  const totalSpending = data.reduce((acc, cur) => {
+    return acc + parseFloat(cur.price);
+  }, 0);
+
+  // calculate the average cost per day
+  const averageCost = totalSpending / noOfDays;
+
+  return averageCost;
+};
+
+console.log(averageCost(fuels));

@@ -25,7 +25,6 @@ const Vehicles = () => {
     // get fuel logs
 
     // get maint logs
-
   };
 
   const handleUpdate = (veh_id) => async () => {
@@ -60,7 +59,7 @@ const Vehicles = () => {
               <div className="btn-group">
                 <button
                   className={`btn ${
-                    selectedVehicle === vehicle.veh_id ? "btn-active" : ""
+                    selectedVehicle === vehicle.veh_id ? " btn-outline" : ""
                   }`}
                   onClick={handleToggle(vehicle.veh_id)}
                 >
