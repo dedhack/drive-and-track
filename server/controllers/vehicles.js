@@ -170,10 +170,63 @@ const deleteVehicle = async (req, res) => {
   }
 };
 
+// check total distance travelled for a vehicle
+const getVehicleDistance = async (req, res) => {
+  try {
+    const { veh_id } = req.body;
+
+    // get the latest odometer reading for the vehicle
+    const latestOdometerRefuel = await pool.query(
+      "SELECT * FROM refuel_logs WHERE veh_id = $1 ORDER BY odometer DESC LIMIT 1",
+      [veh_id]
+    );
+
+    const latestOdometerService = await pool.query(
+      "SELECT * FROM service_logs WHERE veh_id = $1 ORDER BY odometer DESC LIMIT 1",
+      [veh_id]
+    );
+
+    // compare the two latest odometer readings and return the larger one
+    const latestOdometer =
+      latestOdometerRefuel.rows[0].odometer >
+      latestOdometerService.rows[0].odometer
+        ? latestOdometerRefuel
+        : latestOdometerService;
+
+    // do for the earliest odometer reading
+    const earliestOdometerRefuel = await pool.query(
+      "SELECT * FROM refuel_logs WHERE veh_id = $1 ORDER BY odometer ASC LIMIT 1",
+      [veh_id]
+    );
+
+    const earliestOdometerService = await pool.query(
+      "SELECT * FROM service_logs WHERE veh_id = $1 ORDER BY odometer ASC LIMIT 1",
+      [veh_id]
+    );
+
+    // compare the two earliest odometer readings and return the smaller one
+    const earliestOdometer =
+      earliestOdometerRefuel.rows[0].odometer <
+      earliestOdometerService.rows[0].odometer
+        ? earliestOdometerRefuel
+        : earliestOdometerService;
+
+    // subtract the two odometer readings to get the total distance travelled
+    const totalDistance =
+      latestOdometer.rows[0].odometer - earliestOdometer.rows[0].odometer;
+
+    res.status(200).json(totalDistance);
+  } catch (error) {
+    console.log("GET /vehicles/vehicle/distance", error);
+    res.status(400).json({ status: "error", message: error.message });
+  }
+};
+
 module.exports = {
   createVehicle,
   getAllVehicles,
   getVehicleById,
   updateVehicle,
   deleteVehicle,
+  getVehicleDistance,
 };

@@ -1,14 +1,19 @@
 import React from "react";
 
+const links = [
+  "https://rare-gallery.com/mocahbig/443094-drift-Assetto-Corsa-Toyota-Toyota-AE86-Toyota-Corolla-AE86.png",
+  "https://www.suzukiauto.co.za/hubfs/Swift-Sport_Front_5.png",
+];
+
+const randomNumber = (max) => {
+  return Math.floor(Math.random() * max);
+};
+
 const VehicleCard = ({ vehicle }) => {
   return (
     <div className="card card-compact  bg-neutral text-white text-left shadow-xl border-4">
       <figure>
-        <img
-          src="https://www.suzukiauto.co.za/hubfs/Swift-Sport_Front_5.png"
-          alt="Suzuki Swift"
-          className=""
-        />
+        <img src={links[randomNumber(2)]} alt="Suzuki Swift" className="" />
       </figure>
       <div className="card-body border-t-2">
         <h2 className="card-title text-center">{vehicle.veh_name}</h2>

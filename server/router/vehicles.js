@@ -8,6 +8,7 @@ const {
   getVehicleById,
   updateVehicle,
   deleteVehicle,
+  getVehicleDistance,
 } = require("../controllers/vehicles");
 
 // FIXME: all routes need to include auth. temporarily removed for testing
@@ -17,5 +18,6 @@ router.post("/allvehicles", auth, getAllVehicles);
 router.post("/vehiclebyid", auth, getVehicleById); //info for particular vehicle
 router.patch("/update/", auth, updateVehicle);
 router.delete("/delete/", auth, deleteVehicle);
+router.get("/distance", getVehicleDistance);
 
 module.exports = router;

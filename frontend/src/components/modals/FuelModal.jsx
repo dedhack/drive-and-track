@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-daisyui";
+import { Modal, Button, Checkbox } from "react-daisyui";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../Spinner";
 import { createRefuel, updateRefuel, getRefuels } from "../../apis/refuelAPI";
+
 const schema = yup.object().shape({
   datetime: yup.string().required(), // double check
   odometer: yup.number().min(1).required(),
@@ -193,7 +194,7 @@ const FuelModal = ({
                 <label className="label">
                   <span className="label-text text-white">Full Tank? </span>
                 </label>
-                <input
+                <Checkbox
                   type="checkbox"
                   placeholder="190-H-123"
                   className="input input-sm input-bordered w-8"
