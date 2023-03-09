@@ -181,6 +181,7 @@ const FuelModal = ({
                 <input
                   type="number"
                   placeholder="40"
+                  step="0.01"
                   className="input input-bordered w-full text-black"
                   {...register("fuel_amount")}
                 />

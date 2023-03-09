@@ -60,6 +60,7 @@ export const maintCategorizeByMonth = (data) => {
   return sumEachMonth;
 };
 
+// can use for both maintenance and fuel
 export const averageCost = (data) => {
   // get the range of days from the first and last entry in the array
   const firstDate = new Date(data[0].datetime);
@@ -78,4 +79,40 @@ export const averageCost = (data) => {
   return averageCost;
 };
 
-console.log(averageCost(fuels));
+// console.log(averageCost(fuels));
+
+// To calculate total cost of fuel/ maintenance
+export const totalCost = (data) => {
+  const totalSpending = data.reduce((acc, cur) => {
+    return acc + parseFloat(cur.price);
+  }, 0);
+
+  return totalSpending;
+};
+
+// To calculate total fuel used
+export const totalFuelUsed = (data) => {
+  const totalFuel = data.reduce((acc, cur) => {
+    return acc + parseFloat(cur.fuel_amount);
+  }, 0);
+
+  return totalFuel;
+};
+
+// To calculate average distance traveled per day
+export const averageDistance = (data) => {
+  // get the range of days from the first and last entry in the array
+  const firstDate = new Date(data[0].datetime);
+  const lastDate = new Date(data[data.length - 1].datetime);
+
+  const noOfDays = differenceInCalendarDays(firstDate, lastDate);
+
+  // get difference in odometer reading
+  const totalDistance =
+    parseInt(data[0].odometer) - parseInt(data[data.length - 1].odometer);
+
+  // calculate the average distance traveled per day
+  const averageDistance = totalDistance / noOfDays;
+
+  return averageDistance;
+};

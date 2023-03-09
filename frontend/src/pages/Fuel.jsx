@@ -5,6 +5,12 @@ import { getRefuels, deleteRefuel } from "../apis/refuelAPI";
 import FuelCard from "../components/FuelCard";
 import DoChart from "../components/charts/DoChart";
 import FBarChart from "../components/charts/FBarChart";
+import {
+  averageCost,
+  totalCost,
+  totalFuelUsed,
+  averageDistance,
+} from "../components/charts/calculations";
 
 const Fuel = () => {
   const { auth, selectedVehicle, fuelLogs, setFuelLogs } = useAuth();
@@ -96,7 +102,7 @@ const Fuel = () => {
           </ol>
         </div>
 
-         {/* NEXT 2/3 of the page */}
+        {/* NEXT 2/3 of the page */}
         <div className="w-2/3 bg-gray-100">
           <div className="flex flex-row gap-4 p-4 ">
             <div className="basis-1/3">
@@ -106,12 +112,28 @@ const Fuel = () => {
             <div className="card basis-2/3">
               <div className="card bg-neutral text-primary-content">
                 <div className="card-body">
-                  <h2 className="card-title">Fuel Logs Summary</h2>
-                  <p>Number of entries: {fuelLogs.length}</p>
-                  <p>Average Daily Cost for Fuel: </p>
-                  <p>Total Volume of petrol</p>
-                  <p>TOTAL COST: </p>
-                  <p>Average Fuel Efficiency: </p>
+                  <h2 className="card-title italic">Fuel Logs Summary</h2>
+                  <p>Number of entries : {fuelLogs.length}</p>
+                  {fuelLogs.length > 0 ? (
+                    <>
+                      <p>
+                        Average Daily Cost for Fuel :
+                        <span> ${averageCost(fuelLogs).toFixed(2)}</span>
+                      </p>
+                      <p>
+                        Average Distance Traveled :
+                        <span> {averageDistance(fuelLogs).toFixed(2)} km</span>
+                      </p>
+                      <p>
+                        Total Volume of petrol :
+                        <span> {totalFuelUsed(fuelLogs).toFixed(2)} L</span>
+                      </p>
+                      <p>
+                        Total Spent on Fuel :
+                        <span> ${totalCost(fuelLogs).toFixed(2)}</span>
+                      </p>
+                    </>
+                  ) : null}
                 </div>
               </div>
             </div>

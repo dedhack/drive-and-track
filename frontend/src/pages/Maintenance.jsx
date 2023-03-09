@@ -133,9 +133,13 @@ const Maintenance = () => {
                 <div className="card-body">
                   <h2 className="card-title">Service Logs Summary</h2>
                   <p>Number of entries: {serviceLogs.length}</p>
-                  <p>Average Daily Cost for Maintenance: </p>
-                  <p>TOTAL COST: </p>
-                  <p>Average Daily Spent on Maintenance: </p>
+                  {serviceLogs.length > 0 ? (
+                    <>
+                      <p>Average Daily Cost for Maintenance: </p>
+                      <p>TOTAL COST: </p>
+                      <p>Average Daily Spent on Maintenance: </p>
+                    </>
+                  ) : null}
                 </div>
               </div>
             </div>
