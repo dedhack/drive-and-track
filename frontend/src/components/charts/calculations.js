@@ -116,3 +116,18 @@ export const averageDistance = (data) => {
 
   return averageDistance;
 };
+
+// To calculate average fuel efficiency
+export const averageFuelEfficiency = (data) => {
+  // get total fuel used
+  const totalFuel = totalFuelUsed(data);
+
+  // get difference in odometer reading
+  const totalDistance =
+    parseInt(data[0].odometer) - parseInt(data[data.length - 1].odometer);
+
+  // calculate the average fuel efficiency in km/L
+  const averageFuelEfficiency = totalDistance / totalFuel;
+
+  return averageFuelEfficiency;
+};

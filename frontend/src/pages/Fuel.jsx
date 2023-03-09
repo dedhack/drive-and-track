@@ -10,6 +10,7 @@ import {
   totalCost,
   totalFuelUsed,
   averageDistance,
+  averageFuelEfficiency,
 } from "../components/charts/calculations";
 
 const Fuel = () => {
@@ -131,6 +132,13 @@ const Fuel = () => {
                       <p>
                         Total Spent on Fuel :
                         <span> ${totalCost(fuelLogs).toFixed(2)}</span>
+                      </p>
+                      <p>
+                        Average fuel efficiency :
+                        <span>
+                          {" "}
+                          {averageFuelEfficiency(fuelLogs).toFixed(2)} km/L
+                        </span>
                       </p>
                     </>
                   ) : null}

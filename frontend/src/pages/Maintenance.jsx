@@ -9,6 +9,7 @@ import {
 import MaintenanceCard from "../components/MaintenanceCard";
 import MDoChart from "../components/charts/MDoChart";
 import MBarChart from "../components/charts/MBarChart";
+import { averageCost, totalCost } from "../components/charts/calculations";
 
 const Maintenance = () => {
   const {
@@ -135,9 +136,18 @@ const Maintenance = () => {
                   <p>Number of entries: {serviceLogs.length}</p>
                   {serviceLogs.length > 0 ? (
                     <>
-                      <p>Average Daily Cost for Maintenance: </p>
-                      <p>TOTAL COST: </p>
-                      <p>Average Daily Spent on Maintenance: </p>
+                      <p>
+                        Average Daily Cost for Maintenance:
+                        <span>$ {averageCost(serviceLogs).toFixed(2)}</span>
+                      </p>
+                      <p>
+                        Total spent on Maintenance:
+                        <span>$ {totalCost(serviceLogs).toFixed(2)}</span>
+                      </p>
+                      <p>
+                        Average Daily Spent on Maintenance:
+                        <span>$ {totalCost(serviceLogs).toFixed(2)}</span>
+                      </p>
                     </>
                   ) : null}
                 </div>
