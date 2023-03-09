@@ -18,6 +18,6 @@ router.post("/allvehicles", auth, getAllVehicles);
 router.post("/vehiclebyid", auth, getVehicleById); //info for particular vehicle
 router.patch("/update/", auth, updateVehicle);
 router.delete("/delete/", auth, deleteVehicle);
-router.get("/distance", getVehicleDistance);
+router.post("/distance", auth, getVehicleDistance);
 
 module.exports = router;

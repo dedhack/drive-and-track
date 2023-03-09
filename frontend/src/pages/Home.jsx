@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-import { getVehicles } from "../apis/vehiclesAPI";
+import { getVehicles, distanceTraveled } from "../apis/vehiclesAPI";
 import { Link } from "react-router-dom";
 import VehicleCard from "../components/VehicleCard";
 const Home = () => {
@@ -11,8 +11,12 @@ const Home = () => {
     vehicles,
     setVehicles,
     selectedVehicle,
-    setSelectedVehicle,
+    vehName,
+    fuelLogs,
+    serviceLogs,
   } = useAuth();
+
+  const [distance, setDistance] = useState(0);
 
   // pull out list of vehicles
 
@@ -26,6 +30,23 @@ const Home = () => {
     }
     // console.log(vehicles);
   };
+
+  const fetchDistance = async () => {
+    const [data, error] = await distanceTraveled(
+      { veh_id: selectedVehicle },
+      auth
+    );
+    if (data) {
+      console.log("distance data: ", data);
+      setDistance(data);
+    } else if (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDistance();
+  }, [fuelLogs, serviceLogs]);
 
   useEffect(() => {
     fetchVehicles();
@@ -72,17 +93,26 @@ const Home = () => {
         {vehicles && selectedVehicle !== null ? (
           <div className="col-span-3">
             <div className="flex flex-row space-x-4 px-4 justify-center">
-              <div className="card w-64 h-32 bg-neutral shadow-xl text-white p-4">
-                <p className="text-center text-3xl">Hi {username}!</p>
-                <p className="text-center p-4">You have...</p>
+              <div className="card w-64 h-42 bg-neutral shadow-xl text-white">
+                <div className="card-body text-center">
+                  <h3 className="font-bold text-4xl">Hi {username}</h3>
+                  <p className="text-sm">you have...</p>
+                </div>
               </div>
-              <div className="card w-64 h-32 bg-neutral shadow-xl text-white">
+              <div className="card w-64 h-42 bg-neutral shadow-xl text-white">
                 <div className="card-body text-center">
                   <h3 className="font-bold text-4xl">{vehicles.length}</h3>
                   <p className="text-sm">Vehicles</p>
                 </div>
               </div>
               {/* next card here */}
+              <div className="card w-64 h-42 bg-neutral shadow-xl text-white">
+                <div className="card-body text-center">
+                  <h3 className="font-bold text-4xl">{distance} km</h3>
+                  <p className="text-sm">Distance Traveled</p>
+                  <p className="text-sm">{vehName}</p>
+                </div>
+              </div>
             </div>
             {/* end of flex row */}
           </div>

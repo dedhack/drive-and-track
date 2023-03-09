@@ -65,3 +65,16 @@ export const deleteVehicleLog = async (data, access) => {
     return [null, error];
   }
 };
+
+export const distanceTraveled = async (veh_id, access) => {
+  try {
+    const response = await axiosClient.post("vehicles/distance", veh_id, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    });
+    return [response.data, null];
+  } catch (error) {
+    return [null, error];
+  }
+};
