@@ -8,6 +8,7 @@ import {
 } from "../apis/servicesAPI";
 import MaintenanceCard from "../components/MaintenanceCard";
 import MDoChart from "../components/charts/MDoChart";
+import MBarChart from "../components/charts/MBarChart";
 
 const Maintenance = () => {
   const {
@@ -119,9 +120,30 @@ const Maintenance = () => {
             {content}
           </ol>
         </div>
-        <div className="w-2/3 sticky top-0 right-0 h-screen bg-gray-100">
-          NEXT 2 THIRDS
-          <MDoChart />
+
+        {/* NEXT 2/3 of the page */}
+        <div className="w-2/3 bg-gray-100">
+          <div className="flex flex-row gap-4 p-4 ">
+            <div className="basis-1/3">
+              {serviceLogs.length > 0 ? <MDoChart /> : null}
+            </div>
+            {/* CARD STARTS HERE */}
+            <div className="card basis-2/3">
+              <div className="card bg-neutral text-primary-content">
+                <div className="card-body">
+                  <h2 className="card-title">Service Logs Summary</h2>
+                  <p>Number of entries: {serviceLogs.length}</p>
+                  <p>Average Daily Cost for Maintenance: </p>
+                  <p>TOTAL COST: </p>
+                  <p>Average Daily Spent on Maintenance: </p>
+                </div>
+              </div>
+            </div>
+            {/* CARD ENDS HERE */}
+          </div>
+          <div className="h-[500px]">
+            {serviceLogs.length > 0 ? <MBarChart /> : null}
+          </div>
         </div>
       </div>
     </>

@@ -95,6 +95,8 @@ const Fuel = () => {
             {content}
           </ol>
         </div>
+
+         {/* NEXT 2/3 of the page */}
         <div className="w-2/3 bg-gray-100">
           <div className="flex flex-row gap-4 p-4 ">
             <div className="basis-1/3">

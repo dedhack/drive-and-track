@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import { CategoryScale, Chart, ArcElement } from "chart.js";
+import { CategoryScale, Chart, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-Chart.register(CategoryScale, ArcElement);
+Chart.register(CategoryScale, ArcElement, Legend);
 // Maintenance Doughnut chart
 
 const MDoChart = () => {
@@ -21,7 +21,7 @@ const MDoChart = () => {
         acc[service_type] = {
           summed_price: 0,
           service_type: service_type,
-          service_text: serviceTypes[service_type - 1].type_name,
+          service_text: serviceTypes[service_type - 1]?.type_name, // need to check if the serviceType is null or undefined first
         };
       }
       acc[service_type].summed_price += parseFloat(price);
@@ -29,12 +29,12 @@ const MDoChart = () => {
       return acc;
     }, {})
   );
-  console.log(serviceTypes);
+  // console.log(serviceTypes);
 
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    if (!serviceLogs) {
+    if (!serviceLogs || !serviceTypes) {
       return;
     } else if (!serviceChartData) {
       return;
@@ -66,7 +66,7 @@ const MDoChart = () => {
         ],
       });
     }
-  }, [serviceLogs]);
+  }, [serviceLogs, serviceTypes]);
 
   return (
     <>

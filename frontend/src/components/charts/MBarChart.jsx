@@ -9,18 +9,20 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { categorizeByMonth } from "./calculations";
+import { maintCategorizeByMonth } from "./calculations";
 
 Chart.register(CategoryScale, BarElement, LinearScale, ArcElement, Legend);
 
-const FBarChart = () => {
-  const { fuelLogs } = useAuth();
-  const sumOfEachMonth = categorizeByMonth(fuelLogs).slice(0, 3).reverse();
-
+const MBarChart = () => {
+  const { serviceLogs, serviceTypes } = useAuth();
   const [barData, setBarData] = useState(null);
 
+  const sumOfEachMonth = maintCategorizeByMonth(serviceLogs)
+    .slice(0, 3)
+    .reverse();
+
   useEffect(() => {
-    if (!fuelLogs) {
+    if (!serviceLogs) {
       return;
     } else if (!sumOfEachMonth) {
       return;
@@ -36,18 +38,10 @@ const FBarChart = () => {
             borderWidth: 2,
             borderRadius: 25,
           },
-          {
-            label: "Volume of Fuel",
-            data: sumOfEachMonth.map((month) => month.fuel_amount), // logs.map((log) => log.fuel_amount)
-            backgroundColor: "rgba(54, 162, 235, 0.2)",
-            borderColor: "rgba(54, 162, 235,1)",
-            borderWidth: 2,
-            borderRadius: 25,
-          },
         ],
       });
     }
-  }, [fuelLogs]);
+  }, [serviceLogs]);
 
   return (
     <div className="h-96">
@@ -60,7 +54,7 @@ const FBarChart = () => {
             plugins: {
               title: {
                 display: true,
-                text: "Amount of Litres per month",
+                text: "Amount of $ spent per month",
               },
             },
           }}
@@ -72,4 +66,4 @@ const FBarChart = () => {
   );
 };
 
-export default FBarChart;
+export default MBarChart;

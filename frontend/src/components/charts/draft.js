@@ -64,3 +64,12 @@ export const fuelByMonth = [
   { month: "2023-2", fuel_amount: 64, price: 220 },
   { month: "2023-1", fuel_amount: 36, price: 122.39999999999999 },
 ];
+
+export const serviceSampleData = [
+  { datetime: "2023-03-07T15:41:00.000Z", price: "55.50" },
+  { datetime: "2023-03-07T15:41:00.000Z", price: "55.50" },
+  { datetime: "2023-02-07T15:41:00.000Z", price: "55.50" },
+  { datetime: "2023-02-07T15:41:00.000Z", price: "55.50" },
+  { datetime: "2023-01-07T15:41:00.000Z", price: "55.50" },
+  { datetime: "2023-01-07T15:41:00.000Z", price: "55.50" },
+];

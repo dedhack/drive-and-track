@@ -20,6 +20,12 @@ const Vehicles = () => {
   const handleToggle = (veh_id) => () => {
     console.log("veh_id: ", veh_id);
     setSelectedVehicle(veh_id);
+    // TODO: fetch all fuel logs, maint logs, service types for the vehicle
+
+    // get fuel logs
+
+    // get maint logs
+
   };
 
   const handleUpdate = (veh_id) => async () => {
@@ -39,7 +45,7 @@ const Vehicles = () => {
     } else {
       setVehicles(null);
       setSelectedVehicle(null);
-      setVehName(null);
+      setVehName(null); // TODO: check whether this is being used
     }
   };
 
