@@ -95,7 +95,7 @@ const FuelModal = ({
           X
         </Button>
 
-        <Modal.Header className="font-bold">{`${type} Fuel & Fuel ID: ${refuel_id}`}</Modal.Header>
+        <Modal.Header className="font-bold">{`${type} Fuel`}</Modal.Header>
 
         <Modal.Body>
           <form
@@ -110,7 +110,7 @@ const FuelModal = ({
                 <input
                   type="datetime-local"
                   placeholder="01/01/2023"
-                  className="input input-bordered w-full text-black"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("datetime")}
                 />
                 <p className="text-center text-red-600">
@@ -124,7 +124,7 @@ const FuelModal = ({
                 <input
                   type="text"
                   placeholder="1000"
-                  className="input input-bordered w-full text-black"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("odometer")}
                 />
                 <p className="text-center text-red-600">
@@ -139,7 +139,7 @@ const FuelModal = ({
                   type="number"
                   step="0.01"
                   placeholder="40.50"
-                  className="input input-bordered w-full text-black"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("price")}
                 />
                 <p className="text-center text-red-600">
@@ -153,7 +153,7 @@ const FuelModal = ({
                 <input
                   type="text"
                   placeholder="Sinopec Bukit Timah"
-                  className="input input-bordered w-full text-black"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("location")}
                 />
                 <p className="text-center text-red-600">
@@ -167,7 +167,7 @@ const FuelModal = ({
                 <input
                   type="text"
                   placeholder="RON 95"
-                  className="input input-bordered w-full text-black"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("fuel_grade")}
                 />
                 <p className="text-center text-red-600">
@@ -182,7 +182,7 @@ const FuelModal = ({
                   type="number"
                   placeholder="40"
                   step="0.01"
-                  className="input input-bordered w-full text-black"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("fuel_amount")}
                 />
                 <p className="text-center text-red-600">
@@ -196,7 +196,7 @@ const FuelModal = ({
                 <input
                   type="checkbox"
                   placeholder="190-H-123"
-                  className="input input-bordered w-8"
+                  className="input input-sm input-bordered w-8"
                   {...register("is_full")}
                 />
                 <p className="text-center text-red-600">

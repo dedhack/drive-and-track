@@ -61,14 +61,16 @@ const Home = () => {
   }
 
   return (
-    <div className="mt-24">
-      <div className="flex justify-center">{content2}</div>
-      <div className="grid grid-cols-4">
+    <div className="bg-gray-500 h-screen">
+      <div className="flex justify-center">
+        <div className="mt-24">{content2}</div>
+      </div>
+      <div className="grid grid-cols-4 p-4">
         <div className="">{content}</div>
 
         {/* No. of Vehicles */}
         {vehicles && selectedVehicle !== null ? (
-          <div className="flex flex-col space-y-8">
+          <div className="flex flex-row space-x-4 px-4">
             <div>
               <div className="card w-64 bg-neutral shadow-xl text-white">
                 <div className="card-body text-center">

@@ -58,7 +58,7 @@ const Vehicles = () => {
             <div className="card-actions justify-center  m-10">
               <div className="btn-group">
                 <button
-                  className={`btn ${
+                  className={`btn text-white${
                     selectedVehicle === vehicle.veh_id ? " btn-outline" : ""
                   }`}
                   onClick={handleToggle(vehicle.veh_id)}
@@ -92,9 +92,15 @@ const Vehicles = () => {
   }
 
   return (
-    <div className="mt-24">
-      <div className="text-center text-3xl m-10">Your Garage</div>
-      <div className="flex justify-center space-x-10">{content}</div>
+    <div className="bg-gray-500 h-screen">
+      <div className="flex justify-center">
+        <div className="mt-24"></div>
+      </div>
+
+      <div className="text-center text-3xl">
+        <div className="text-white m-10">Your Garage</div>
+        <div className="flex justify-center space-x-10">{content}</div>
+      </div>
     </div>
   );
 };

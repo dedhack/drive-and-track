@@ -53,24 +53,24 @@ const Register = () => {
   };
 
   return (
-    <>
+    <div className="bg-gray-500 h-screen">
       <div className="flex justify-center">
-        <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-stone-300">
+        <div className="w-96 my-32 p-5 border border-white rounded-lg bg-[#414752] text-white">
           {error ? <ErrAlert text={error} /> : null}
           <form
             className="form-control w-full"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h1 className="text-3xl font-bold text-center">Register</h1>
+            <h1 className="text-3xl font-bold text-center ">Register</h1>
             <div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Username</span>
+                  <span className="label-text text-white">Username</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Type here"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full text-black"
                   {...register("username")}
                 />
                 <p className="text-center text-red-600">
@@ -79,12 +79,12 @@ const Register = () => {
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text text-white">Email</span>
                 </label>
                 <input
                   type="email"
                   placeholder="j.cena@wwe.com"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full text-black"
                   {...register("email")}
                 />
                 <p className="text-center text-red-600">
@@ -93,12 +93,12 @@ const Register = () => {
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text text-white">Password</span>
                 </label>
                 <input
                   type="password"
                   placeholder="Type here"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full text-black"
                   {...register("password")}
                 />
                 <p className="text-center text-red-600">
@@ -108,15 +108,18 @@ const Register = () => {
             </div>
 
             {/* Submit button */}
-            <div className="text-center">
-              <button type="submit" className="btn">
+            <div className="text-center pt-10">
+              <button
+                type="submit"
+                className="btn btn-outline btn-wide text-white"
+              >
                 {loading ? <Spinner /> : "Register"}
               </button>
             </div>
           </form>
           <div className="text-center mt-5">
             <NavLink
-              className="font-medium text-stone-900 hover:underline animate-pulse"
+              className="font-medium text-white hover:underline "
               to="/login"
             >
               To login page
@@ -124,7 +127,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

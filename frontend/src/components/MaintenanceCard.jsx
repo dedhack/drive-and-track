@@ -3,7 +3,7 @@ import React from "react";
 const MaintenanceCard = ({ service, conDate }) => {
   return (
     <>
-      <div className="absolute w-3 h-3 bg-gray-700 rounded-full mt-1.5 -left-1.5 border border-gray-900 "></div>
+      <div className="absolute w-4 h-4 bg-gray-700 rounded-full mt-1.5 -left-2.5 border border-gray-900 "></div>
 
       {/* <p className="mb-1 text-sm font-normal leading-none text-gray-600">
         {conDate} @ <span className="font-bold">{service.location}</span>
@@ -24,10 +24,8 @@ const MaintenanceCard = ({ service, conDate }) => {
       >
         <div className="card-body">
           <p className="mb-1 text-sm font-normal leading-none text-[#FF79C6]">
-            {conDate} @{" "}
-            <span className="font-bold italic underline">
-              {service.location}
-            </span>
+            {conDate}{" "}
+            <p className="font-bold italic underline">@ {service.location}</p>
           </p>
           <p className="text-base font-semibold ">
             Odometer: {service.odometer} km

@@ -15,11 +15,13 @@ const Logout = () => {
   }, []);
 
   return (
-    <div className="flex justify-center text-center">
-      <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-primary text-white">
-        Logging out..
-        <div className="mt-5">
-          <Spinner />
+    <div className="bg-gray-500 h-screen">
+      <div className="flex justify-center text-center">
+        <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-neutral text-white">
+          Logging out..
+          <div className="mt-5">
+            <Spinner />
+          </div>
         </div>
       </div>
     </div>

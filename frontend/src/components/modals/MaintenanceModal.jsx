@@ -90,9 +90,9 @@ const MaintenanceModal = ({
   ));
 
   return (
-    <div className="font-sans">
+    <div className="font-sans text-white">
       {/* <Button onClick={toggleVisible}>Open Modal</Button> */}
-      <Modal className="relative" open={visible}>
+      <Modal className="relative bg-neutral" open={visible}>
         <Button
           className="absolute top-2 right-2"
           onClick={() => setVisible(!visible)}
@@ -100,7 +100,7 @@ const MaintenanceModal = ({
           X
         </Button>
 
-        <Modal.Header className="font-bold">{`${type} Service & Service ID: ${service_id}`}</Modal.Header>
+        <Modal.Header className="font-bold">{`${type} Service`}</Modal.Header>
 
         <Modal.Body>
           <form
@@ -110,12 +110,12 @@ const MaintenanceModal = ({
             <div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Date</span>
+                  <span className="label-text text-white">Date</span>
                 </label>
                 <input
                   type="datetime-local"
                   placeholder="01/01/2023"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("datetime")}
                 />
                 <p className="text-center text-red-600">
@@ -124,12 +124,12 @@ const MaintenanceModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Odometer</span>
+                  <span className="label-text text-white">Odometer</span>
                 </label>
                 <input
                   type="text"
                   placeholder="10000"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("odometer")}
                 />
                 <p className="text-center text-red-600">
@@ -138,13 +138,13 @@ const MaintenanceModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Price</span>
+                  <span className="label-text text-white">Price</span>
                 </label>
                 <input
                   type="number"
                   step="0.01"
                   placeholder="109.00"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("price")}
                 />
                 <p className="text-center text-red-600">
@@ -153,12 +153,12 @@ const MaintenanceModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Location :(Optional)</span>
+                  <span className="label-tex text-white">Location</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Ah Huat Garage"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("location")}
                 />
                 <p className="text-center text-red-600">
@@ -167,10 +167,10 @@ const MaintenanceModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Type of Service</span>
+                  <span className="label-text text-white">Type of Service</span>
                 </label>
                 <select
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("service_type")}
                 >
                   <option value="">Select a service type</option>
@@ -182,12 +182,12 @@ const MaintenanceModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Description</span>
+                  <span className="label-text text-white">Description</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Did a routine oil change"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("service_desc")}
                 />
                 <p className="text-center text-red-600">

@@ -3,7 +3,7 @@ import React from "react";
 const FuelCard = ({ fuel, conDate }) => {
   return (
     <>
-      <div className="absolute w-3 h-3 bg-gray-700 rounded-full mt-1.5 -left-1.5 border border-gray-900 "></div>
+      <div className="absolute w-4 h-4 bg-gray-700 rounded-full mt-1.5 -left-2.5 border border-gray-900 "></div>
 
       <div
         tabIndex={0}

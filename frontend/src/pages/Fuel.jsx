@@ -88,23 +88,30 @@ const Fuel = () => {
       );
     });
   } else {
-    content = <div>No Fuel Records. Have you selected a vehicle?</div>;
+    content = (
+      <div className="text-center">
+        No Fuel Records. Have you selected a vehicle?
+      </div>
+    );
   }
 
   return (
-    <>
-      <div className="mt-20 text-center"></div>
+    <div className="bg-gray-500 ">
+      <div className="flex justify-center">
+        <div className="mt-[81px]"></div>
+      </div>
+
       <div className="flex max-h-screen ">
         {/* <div className="my-10 mx-20"> */}
-        <div className="w-1/3 px-10 overflow-y-scroll">
-          <ol className="relative border-l border-gray-400">
+        <div className="w-1/3 px-10 pt-2 overflow-y-scroll">
+          <ol className="relative border-l-4 border-gray-400">
             {/* <FuelCard /> */}
             {content}
           </ol>
         </div>
 
         {/* NEXT 2/3 of the page */}
-        <div className="w-2/3 bg-gray-100">
+        <div className="w-2/3 bg-gray-300">
           <div className="flex flex-row gap-4 p-4 ">
             <div className="basis-1/3">
               {fuelLogs.length > 0 ? <DoChart /> : null}
@@ -152,7 +159,7 @@ const Fuel = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

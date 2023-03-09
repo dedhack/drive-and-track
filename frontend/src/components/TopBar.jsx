@@ -25,7 +25,7 @@ const TopBar = () => {
 
   return (
     <>
-      <div className="navbar bg-base-300 fixed top-0 w-full z-50">
+      <div className="navbar bg-[#414752] fixed top-0 w-full z-50 text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -195,21 +195,27 @@ const TopBar = () => {
           </div>
         ) : null}
 
-        <VehicleModal
-          visible={vehicleVisible}
-          setVisible={setVehicleVisible}
-          type={"Register"}
-        />
-        <FuelModal
-          visible={fuelVisible}
-          setVisible={setFuelVisible}
-          type={"Create"}
-        />
-        <MaintenanceModal
-          visible={serviceVisible}
-          setVisible={setServiceVisible}
-          type={"Create"}
-        />
+        {selectedVehicle ? (
+          <>
+            <VehicleModal
+              visible={vehicleVisible}
+              setVisible={setVehicleVisible}
+              type={"Register"}
+            />
+            <FuelModal
+              visible={fuelVisible}
+              setVisible={setFuelVisible}
+              type={"Create"}
+            />
+            <MaintenanceModal
+              visible={serviceVisible}
+              setVisible={setServiceVisible}
+              type={"Create"}
+            />
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );

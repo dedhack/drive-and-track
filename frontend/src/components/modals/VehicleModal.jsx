@@ -93,9 +93,9 @@ const VehicleModal = ({
   };
 
   return (
-    <div className="font-sans">
+    <div className="font-sans  text-white">
       {/* <Button onClick={toggleVisible}>Open Modal</Button> */}
-      <Modal className="relative" open={visible}>
+      <Modal className="relative bg-neutral" open={visible}>
         <Button
           className="absolute top-2 right-2"
           onClick={() => setVisible(!visible)}
@@ -103,7 +103,7 @@ const VehicleModal = ({
           X
         </Button>
 
-        <Modal.Header className="font-bold">{`${type} Vehicle & ID: ${veh_id}`}</Modal.Header>
+        <Modal.Header className="font-bold">{`${type} Vehicle`}</Modal.Header>
 
         <Modal.Body>
           <form
@@ -113,12 +113,12 @@ const VehicleModal = ({
             <div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Vehicle Name</span>
+                  <span className="label-text text-white">Vehicle Name</span>
                 </label>
                 <input
                   type="text"
                   placeholder="veh_name"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("veh_name")}
                 />
                 <p className="text-center text-red-600">
@@ -127,12 +127,12 @@ const VehicleModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Make</span>
+                  <span className="label-text text-white">Make</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Nissan"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("make")}
                 />
                 <p className="text-center text-red-600">
@@ -141,12 +141,12 @@ const VehicleModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Model</span>
+                  <span className="label-text text-white">Model</span>
                 </label>
                 <input
                   type="text"
                   placeholder="GTR"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("model")}
                 />
                 <p className="text-center text-red-600">
@@ -155,12 +155,12 @@ const VehicleModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Year</span>
+                  <span className="label-text text-white">Year</span>
                 </label>
                 <input
                   type="number"
                   placeholder="2020"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("year")}
                 />
                 <p className="text-center text-red-600">
@@ -169,12 +169,12 @@ const VehicleModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Tank Capacity</span>
+                  <span className="label-text text-white">Tank Capacity</span>
                 </label>
                 <input
                   type="number"
                   placeholder="40"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("capacity")}
                 />
                 <p className="text-center text-red-600">
@@ -184,12 +184,12 @@ const VehicleModal = ({
 
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">VIN : (Optional) </span>
+                  <span className="label-text text-white">VIN</span>
                 </label>
                 <input
                   type="text"
                   placeholder="190-H-123"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("vin")}
                 />
                 <p className="text-center text-red-600">
@@ -198,14 +198,14 @@ const VehicleModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">
-                    Insurance Policy : (Optional)
+                  <span className="label-text text-white">
+                    Insurance Policy
                   </span>
                 </label>
                 <input
                   type="text"
                   placeholder="AXA"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("ins_pol")}
                 />
                 <p className="text-center text-red-600">
@@ -214,12 +214,12 @@ const VehicleModal = ({
               </div>
               <div className="mb-2 block">
                 <label className="label">
-                  <span className="label-text">Description</span>
+                  <span className="label-text text-white">Description</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Fav car"
-                  className="input input-bordered w-full"
+                  className="input input-sm input-bordered w-full text-black"
                   {...register("veh_desc")}
                 />
                 <p className="text-center text-red-600">

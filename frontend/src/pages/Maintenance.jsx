@@ -111,12 +111,14 @@ const Maintenance = () => {
   }
 
   return (
-    <>
-      <div className="mt-20 text-center"></div>
+    <div className="bg-gray-500 h-screen">
+      <div className="flex justify-center">
+        <div className="mt-[81px]"></div>
+      </div>
       <div className="flex max-h-screen ">
         {/* <div className="my-10 mx-20"> */}
-        <div className="w-1/3 px-10 overflow-y-scroll">
-          <ol className="relative border-l border-gray-400">
+        <div className="w-1/3 px-10 pt-2 overflow-y-scroll">
+          <ol className="relative border-l-4 border-gray-400">
             {/* <FuelCard /> */}
             {content}
           </ol>
@@ -132,7 +134,7 @@ const Maintenance = () => {
             <div className="card basis-2/3">
               <div className="card bg-neutral text-primary-content">
                 <div className="card-body">
-                  <h2 className="card-title">Service Logs Summary</h2>
+                  <h2 className="card-title italic">Service Logs Summary</h2>
                   <p>Number of entries: {serviceLogs.length}</p>
                   {serviceLogs.length > 0 ? (
                     <>
@@ -160,7 +162,7 @@ const Maintenance = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

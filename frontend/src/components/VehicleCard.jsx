@@ -2,14 +2,15 @@ import React from "react";
 
 const VehicleCard = ({ vehicle }) => {
   return (
-    <div className="card card-compact  bg-base-200 shadow-xl border-4">
+    <div className="card card-compact  bg-neutral text-white text-left shadow-xl border-4">
       <figure>
         <img
           src="https://www.suzukiauto.co.za/hubfs/Swift-Sport_Front_5.png"
           alt="Suzuki Swift"
+          className=""
         />
       </figure>
-      <div className="card-body">
+      <div className="card-body border-t-2">
         <h2 className="card-title text-center">{vehicle.veh_name}</h2>
         <p className="text-base">
           <span className="font-bold">Make: </span>

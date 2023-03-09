@@ -66,63 +66,70 @@ const Login = () => {
       {auth ? (
         navigate("/home", { replace: true })
       ) : (
-        <div className="flex justify-center">
-          <div className="w-96 my-32 p-5 border border-stone-500 rounded-lg bg-stone-300">
-            {/* {errors?.username || errors?.password ? (
-            <ErrAlert text="Invalid username or password" />
-          ) : null} */}
-            {error ? <ErrAlert text={error} /> : null}
+        <div className="bg-gray-500 h-screen">
+          <div className="flex justify-center ">
+            <div className="w-96 my-32 p-5 border border-white rounded-lg bg-[#414752] text-white">
+              {/* {errors?.username || errors?.password ? (
+          <ErrAlert text="Invalid username or password" />
+        ) : null} */}
+              {error ? <ErrAlert text={error} /> : null}
 
-            <form
-              className="form-control w-full"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <h1 className="text-3xl font-bold text-center">Login</h1>
-              <div>
-                <div className="mb-2 block">
-                  <label className="label">
-                    <span className="label-text">Username</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Type here"
-                    className="input input-bordered w-full"
-                    {...register("username")}
-                  />
-                  <p className="text-center text-red-600">
-                    {errors.username?.message}
-                  </p>
-                </div>
-                <div className="mb-2 block">
-                  <label className="label">
-                    <span className="label-text">Password</span>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Type here"
-                    className="input input-bordered w-full"
-                    {...register("password")}
-                  />
-                  <p className="text-center text-red-600">
-                    {errors.password?.message}
-                  </p>
-                </div>
-              </div>
-
-              {/* Submit button */}
-              <div className="text-center">
-                <button type="submit" className="btn">
-                  {loading ? <Spinner /> : "Login"}
-                </button>
-              </div>
-            </form>
-            <div className="text-center mt-5">
-              <NavLink
-                className="font-medium text-stone-900 hover:underline animate-pulse"
-                to="/register"
+              <form
+                className="form-control w-full"
+                onSubmit={handleSubmit(onSubmit)}
               >
-                Register
-              </NavLink>
+                <h1 className="text-3xl font-bold text-center animate-pulse">
+                  Login
+                </h1>
+                <div>
+                  <div className="mb-2 block">
+                    <label className="label">
+                      <span className="label-text text-white">Username</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="input input-bordered w-full text-black"
+                      {...register("username")}
+                    />
+                    <p className="text-center text-red-600">
+                      {errors.username?.message}
+                    </p>
+                  </div>
+                  <div className="mb-2 block">
+                    <label className="label">
+                      <span className="label-text text-white">Password</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Type here"
+                      className="input input-bordered w-full text-black"
+                      {...register("password")}
+                    />
+                    <p className="text-center text-red-600">
+                      {errors.password?.message}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Submit button */}
+                <div className="text-center pt-10">
+                  <button
+                    type="submit"
+                    className="btn btn-outline btn-wide text-white"
+                  >
+                    {loading ? <Spinner /> : "Login"}
+                  </button>
+                </div>
+              </form>
+              <div className="text-center mt-5">
+                <NavLink
+                  className="font-medium text-[#523D4F]hover:underline"
+                  to="/register"
+                >
+                  Register
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>
