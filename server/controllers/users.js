@@ -57,6 +57,9 @@ const loginUser = async (req, res) => {
       id: user.rows[0].id,
       email: user.rows[0].email,
       is_Admin: user.rows[0].is_admin,
+      username: user.rows[0].username,
+      is_Admin: user.rows[0].is_admin,
+      user_id: user.rows[0].id,
     };
 
     // create access token
@@ -96,6 +99,8 @@ const refreshToken = async (req, res) => {
       id: decoded.id,
       email: decoded.email,
       is_Admin: decoded.is_Admin,
+      username: decoded.username,
+      user_id: decoded.user_id,
     };
 
     // create access token
@@ -103,7 +108,13 @@ const refreshToken = async (req, res) => {
       expiresIn: "1d",
       jwtid: payload.id,
     });
-    const response = { access }; // don't have to do for refresh, once refresh is created and will be valid for 30 days
+    const response = {
+      access,
+      username: decoded.username,
+      email: decoded.email,
+      is_Admin: decoded.is_Admin,
+      user_id: decoded.user_id,
+    }; // don't have to do for refresh, once refresh is created and will be valid for 30 days
 
     res.json(response);
   } catch (error) {

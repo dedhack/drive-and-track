@@ -8,19 +8,8 @@ const RequireAuth = () => {
   const refToken = localStorage.getItem("refresh");
   const { auth, setAuth, logout } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
 
   console.log("Require Auth Middleware");
-  // const { isExpired } = useJwt(auth);
-  // console.log("access token expired? : ", isExpired);
-
-  // useEffect(() => {
-  //   if (isExpired) {
-  //     console.log("access expired");
-  //   } else {
-  //     console.log("access not expired");
-  //   }
-  // }, []);
 
   return auth ? (
     <Outlet />

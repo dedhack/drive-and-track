@@ -26,9 +26,10 @@ export const loginUser = async (data) => {
 };
 
 // refresh token
-export const refreshToken = async (data) => {
+// expect you to pass the refresh token in the body
+export const refreshToken = async (refresh) => {
   try {
-    const response = await axiosClient.post("users/refresh", data);
+    const response = await axiosClient.post("users/refresh", refresh);
     return [response.data, null];
   } catch (error) {
     return [null, error];

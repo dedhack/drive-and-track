@@ -23,6 +23,7 @@ import Unauthorized from "./pages/Unauthorized";
 import RequireAuth from "./components/RequireAuth";
 import RequireAuthAdmin from "./components/RequireAuthAdmin";
 import { refreshToken } from "./apis/usersAPI";
+import RefreshAuth from "./components/RefreshAuth";
 
 const refToken = localStorage.getItem("refresh");
 const accToken = localStorage.getItem("access");
@@ -44,19 +45,21 @@ const App = () => {
         <Route path="/register" element={<Register />} />
 
         {/* Protected Routes */}
-        <Route element={<RequireAuth />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/vehicles" element={<Vehicles />} />
-          <Route path="/fuel" element={<Fuel />} />
-          <Route path="/maintenance" element={<Maintenance />} />
-          <Route path="/charts" element={<Charts />} />
-          <Route path="/fuel-charts" element={<FuelCharts />} />
-          <Route path="/maintenance-charts" element={<MaintenanceCharts />} />
-          <Route path="/logout" element={<Logout />} />
+        <Route element={<RefreshAuth />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/vehicles" element={<Vehicles />} />
+            <Route path="/fuel" element={<Fuel />} />
+            <Route path="/maintenance" element={<Maintenance />} />
+            <Route path="/charts" element={<Charts />} />
+            <Route path="/fuel-charts" element={<FuelCharts />} />
+            <Route path="/maintenance-charts" element={<MaintenanceCharts />} />
+            <Route path="/logout" element={<Logout />} />
 
-          {/* Admin Protected Route */}
-          <Route element={<RequireAuthAdmin />}>
-            <Route path="/admin" element={<Admin />} />
+            {/* Admin Protected Route */}
+            <Route element={<RequireAuthAdmin />}>
+              <Route path="/admin" element={<Admin />} />
+            </Route>
           </Route>
         </Route>
 
