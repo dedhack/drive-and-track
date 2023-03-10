@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { CategoryScale, Chart, ArcElement } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+
 // https://www.chartjs.org/docs/master/getting-started/integration.html#bundlers-webpack-rollup-etc
 Chart.register(CategoryScale, ArcElement);
 
@@ -70,6 +71,7 @@ const DoChart = () => {
         {chartData ? (
           <Doughnut
             className=""
+            
             data={chartData}
             // width={100}
             options={{

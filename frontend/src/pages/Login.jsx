@@ -52,7 +52,7 @@ const Login = () => {
         setUser_id(data.user_id);
         setIsAdmin(data.is_Admin);
         localStorage.setItem("refresh", data.refresh);
-        localStorage.setItem("access", data.access); // FIXME: temporarily to allow easy access to access token
+        // localStorage.setItem("access", data.access); // FIXME: temporarily to allow easy access to access token
         navigate("/home", { replace: true });
       }
     } catch (error) {

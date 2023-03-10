@@ -26,7 +26,7 @@ import { refreshToken } from "./apis/usersAPI";
 import RefreshAuth from "./components/RefreshAuth";
 
 const refToken = localStorage.getItem("refresh");
-const accToken = localStorage.getItem("access");
+// const accToken = localStorage.getItem("access");
 
 const App = () => {
   // handle tokens

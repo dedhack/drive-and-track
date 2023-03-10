@@ -195,7 +195,7 @@ const TopBar = () => {
           </div>
         ) : null}
 
-        {selectedVehicle ? (
+        {auth ? (
           <>
             <VehicleModal
               visible={vehicleVisible}
