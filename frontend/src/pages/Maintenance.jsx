@@ -146,10 +146,6 @@ const Maintenance = () => {
                         Total spent on Maintenance:
                         <span>$ {totalCost(serviceLogs).toFixed(2)}</span>
                       </p>
-                      <p>
-                        Average Daily Spent on Maintenance:
-                        <span>$ {totalCost(serviceLogs).toFixed(2)}</span>
-                      </p>
                     </>
                   ) : null}
                 </div>
