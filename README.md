@@ -2,6 +2,13 @@
 
 Drive and Track Is a vehicle management app.
 
+Add your vehicles into the app, and keep track of your fuel and maintenance!
+
+![login](screenshots/Garage.png)
+
+Log and see all the data for your vehicles!
+![fuel](screenshots/Fuel.png)
+
 ## Table of Contents
 
 - [Drive-And-Track](#drive-and-track)
@@ -103,11 +110,22 @@ $ npm run dev
 
 Below are the initial wireframes that I had for this project.
 
+![wireframes](/screenshots/wireframe.png)
+[exaclidraw file](https://excalidraw.com/#json=bJG5vwbVfCqLmI0HpS_gE,mNiGo-izi331m7_ArGZ9Fg)
+
 Here's the slide deck for the initial planning of the project as a whole. The main consideration was on the the type of data that I intend to be manipulating and storing in the database. There's definitely more room for improvement here since this is the first time I'm working and designing an SQL database.
 
 ## Unsolved Problems
 
+There are a few problems that are pending to be settle. Firstly, is the logic of some of the data generated. For example, for the list of users, I did not take into consideration on the timing of last login for users using the app. To me, a key consideration on deciding which users to be deleted should be based on the how frequent they use an app, and if they're no longer using then we should it free up the DB storage of their data. There should be a user creation datetime, as well as last user login datetime column.
+
+Another problem was on the calculation for fuel efficiency. I have not decided on what's the best way to do so. Calculating the overall average fuel efficiency was simple, just based on the first and last full tank, and dividing it by the total distance. But to calculate the efficiency between the latest 2 full tanks, it would seem that the best way would be to store the value inside the table. This would mean an additional column to be created to be able to input the efficiency required.
+
+During this project, I've tried to tinker around with the use of state management libraries such as RTK and Zustand as well as data fetching and manipulation libraries like RTK Query and React Query. Ultimately, I didn't manage to integrate and test out these libraries
+
 ## Future Direction
+
+The next step for this project is to translate the app to either be suitable for mobile devices, or branch-off to be a an app for iOS and Android devices. This app is more suitable for mobile, because then it becomes much easier for someone to keep track of the things done when on the go. For example, when we refuel, we want to keep track of it right away. Delaying this process and doing it much later becomes a hassle, and you might forget about it.
 
 ## References
 
