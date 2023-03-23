@@ -26,6 +26,7 @@
     "react-jwt": "^1.1.8",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.9.0",
+    "yup": "^1.0.2",
     "zustand": "^4.3.5"
   },
   "devDependencies": {
