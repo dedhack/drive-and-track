@@ -2,6 +2,8 @@
 
 Drive and Track Is a vehicle management app.
 
+Tried out the app here: https://drive-and-track.vercel.app/
+
 Add your vehicles into the app, and keep track of your fuel and maintenance!
 
 ![login](screenshots/Garage.png)
